@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Model.DAO;
 
 namespace WebComic.Controllers
 {
@@ -11,7 +12,8 @@ namespace WebComic.Controllers
         public ActionResult Index()
         {
             
-            
+            DocumentDAO dao =new DocumentDAO();
+            var list = dao.list();
             
             return View();
         }
