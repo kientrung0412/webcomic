@@ -129,21 +129,6 @@
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
-        <Compile Include="Models\category.cs" />
-        <Compile Include="Models\chapter.cs" />
-        <Compile Include="Models\comic.cs" />
-        <Compile Include="Models\comic_category.cs" />
-        <Compile Include="Models\comment.cs" />
-        <Compile Include="Models\DbContext.cs" />
-        <Compile Include="Models\devolution.cs" />
-        <Compile Include="Models\document.cs" />
-        <Compile Include="Models\FileDownloadInfor.cs" />
-        <Compile Include="Models\image_chapter.cs" />
-        <Compile Include="Models\nation.cs" />
-        <Compile Include="Models\status_comic.cs" />
-        <Compile Include="Models\status_comment.cs" />
-        <Compile Include="Models\status_user.cs" />
-        <Compile Include="Models\user.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
@@ -185,6 +170,7 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="App_Data" />
+        <Folder Include="Models" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -198,6 +184,12 @@
         <None Include="packages.config" />
         <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
         <Content Include="Scripts\jquery-3.3.1.min.map" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Model\Model.csproj">
+        <Project>{042d6f3d-41ec-4882-93f8-8039aaca1308}</Project>
+        <Name>Model</Name>
+      </ProjectReference>
     </ItemGroup>
     <PropertyGroup>
         <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

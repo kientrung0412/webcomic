@@ -10,6 +10,9 @@ namespace WebComic.Controllers
     {
         public ActionResult Index()
         {
+            
+            
+            
             return View();
         }
 
