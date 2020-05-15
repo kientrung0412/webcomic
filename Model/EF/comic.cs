@@ -36,6 +36,9 @@ namespace up_down.Models
         public int? NumRating { get; set; }
 
         public int? StatusComicId { get; set; }
+        
+        [StringLength(256)]
+        public String CommicBanner { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comic_category> comic_category { get; set; }
