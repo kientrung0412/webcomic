@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using up_down.Models;
+using Model.EF;
 
 namespace Model.DAO
 {
@@ -15,13 +15,13 @@ namespace Model.DAO
 
         public List<nation> List()
         {
-            var list = WcDbContext.nation.ToList();
+            var list = WcDbContext.nations.ToList();
             return list;
         }
 
         public int Add(nation nation)
         {
-            var sql = WcDbContext.nation.Add(nation);
+            var sql = WcDbContext.nations.Add(nation);
             var n = WcDbContext.SaveChanges();
             return n;
         }
