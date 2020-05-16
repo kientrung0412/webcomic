@@ -29,7 +29,8 @@ namespace up_down.Models
         [StringLength(100)]
         public string UserMail { get; set; }
 
-        public int? Avatar { get; set; }
+        [StringLength(250)]
+        public string Avatar { get; set; }
 
         public int? StatusUserId { get; set; }
 
