@@ -22,7 +22,8 @@ namespace up_down.Models
         [StringLength(250)]
         public string NameComic { get; set; }
 
-        public int? AuthorComic { get; set; }
+        [StringLength(256)]
+        public string AuthorComic { get; set; }
 
         [Column(TypeName = "datetime2")]
         public DateTime? ReleaseDate { get; set; }
