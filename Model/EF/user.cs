@@ -44,7 +44,7 @@ namespace Model.EF
 
         public int? RoleId { get; set; }
 
-        [StringLength(100)] [Required] public string UserMail { get; set; }
+        [StringLength(100)] [Key] public string UserMail { get; set; }
 
         [StringLength(250)] public string Avatar { get; set; }
 

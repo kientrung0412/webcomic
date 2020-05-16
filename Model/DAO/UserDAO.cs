@@ -16,9 +16,21 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public List<user> List()
+        public List<SelectUserAll> ListUser()
         {
-            var list = WcDbContext.users.ToList();
+            var list = (from user in WcDbContext.users
+                join statusUser in WcDbContext.status_user on user.StatusUserId equals statusUser.StatusUserId
+                join role in WcDbContext.roles on user.RoleId equals role.RoleId
+                select new SelectUserAll()
+                {
+                    UserId = user.UserId,
+                    Username = user.Username,
+                    RoleId = role.RoleId,
+                    RoleName = role.RoleName,
+                    Avatar = user.Avatar,
+                    StatusUserId = statusUser.StatusUserId,
+                    StatusUserName = statusUser.StatusUserName
+                }).ToList();
             return list;
         }
 
