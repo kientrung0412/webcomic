@@ -1,10 +1,8 @@
 namespace Model.EF
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("user")]
     public partial class user
@@ -17,6 +15,27 @@ namespace Model.EF
             comments = new HashSet<comment>();
         }
 
+
+        public user(int userId, string username, int? roleId, int? statusUserId)
+        {
+            UserId = userId;
+            Username = username;
+            RoleId = roleId;
+            StatusUserId = statusUserId;
+        }
+
+        public user(int userId, string username, string userPass, int? roleId, string userMail, string avatar,
+            int? statusUserId)
+        {
+            UserId = userId;
+            Username = username;
+            UserPass = userPass;
+            RoleId = roleId;
+            UserMail = userMail;
+            Avatar = avatar;
+            StatusUserId = statusUserId;
+        }
+
         public int UserId { get; set; }
 
         [StringLength(50)] public string Username { get; set; }
@@ -25,7 +44,7 @@ namespace Model.EF
 
         public int? RoleId { get; set; }
 
-        [StringLength(100)] public string UserMail { get; set; }
+        [StringLength(100)] [Required] public string UserMail { get; set; }
 
         [StringLength(250)] public string Avatar { get; set; }
 

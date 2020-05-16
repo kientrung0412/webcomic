@@ -22,7 +22,7 @@ namespace Model.DAO
 
         public int Add(category category)
         {
-            var sql = WcDbContext.categories.Add(category);
+            WcDbContext.categories.Add(category);
             var n = WcDbContext.SaveChanges();
             return n;
         }

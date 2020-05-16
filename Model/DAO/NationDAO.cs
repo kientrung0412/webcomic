@@ -21,7 +21,7 @@ namespace Model.DAO
 
         public int Add(nation nation)
         {
-            var sql = WcDbContext.nations.Add(nation);
+            WcDbContext.nations.Add(nation);
             var n = WcDbContext.SaveChanges();
             return n;
         }
