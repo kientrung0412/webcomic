@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Model.EF;
 using up_down.Models;
 
 namespace Model.DAO
@@ -15,13 +16,13 @@ namespace Model.DAO
 
         public List<category> List()
         {
-            var list = WcDbContext.category.ToList();
+            var list = WcDbContext.categories.ToList();
             return list;
         }
 
         public int Add(category category)
         {
-            var sql = WcDbContext.category.Add(category);
+            var sql = WcDbContext.categories.Add(category);
             var n = WcDbContext.SaveChanges();
             return n;
         }

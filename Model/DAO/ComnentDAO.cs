@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Model.EF;
 using up_down.Models;
 
 namespace Model.DAO
@@ -15,7 +16,7 @@ namespace Model.DAO
 
         public List<comment> List(int chapterId)
         {
-            var list = WcDbContext.comment.Where(comment => comment.StatusCommentId == 1 && comment.ChapterId == chapterId).ToList();
+            var list = WcDbContext.comments.Where(comment => comment.StatusCommentId == 1 && comment.ChapterId == chapterId).ToList();
             return list;
         }
     }

@@ -1,4 +1,4 @@
-namespace up_down.Models
+namespace Model.EF
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@ namespace up_down.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public class comic_category
+    public partial class comic_category
     {
         [Key]
         public int ComicCategoryId { get; set; }

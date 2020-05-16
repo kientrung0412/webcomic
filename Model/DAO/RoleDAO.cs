@@ -1,22 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Model.EF;
-using up_down.Models;
 
 namespace Model.DAO
 {
-    public class DocumentDAO
+    public class RoleDAO
     {
         public WCDbContext WcDbContext;
 
-        public DocumentDAO()
+        public RoleDAO()
         {
             WcDbContext = new WCDbContext();
         }
 
-        public List<document> list()
+        public List<role> List()
         {
-            var list = WcDbContext.documents.ToList();
+            var list = WcDbContext.roles.ToList();
             return list;
         }
     }

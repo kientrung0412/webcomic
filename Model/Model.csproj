@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
     <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -53,13 +53,14 @@
         <Compile Include="DAO\ComnentDAO.cs" />
         <Compile Include="DAO\DocumentDAO.cs" />
         <Compile Include="DAO\NationDAO.cs" />
+        <Compile Include="DAO\RoleDAO.cs" />
         <Compile Include="EF\category.cs" />
         <Compile Include="EF\chapter.cs" />
         <Compile Include="EF\comic.cs" />
         <Compile Include="EF\comic_category.cs" />
         <Compile Include="EF\comment.cs" />
         <Compile Include="EF\WCDbContext.cs" />
-        <Compile Include="EF\roles.cs" />
+        <Compile Include="EF\role.cs" />
         <Compile Include="EF\document.cs" />
         <Compile Include="EF\FileDownloadInfor.cs" />
         <Compile Include="EF\image_chapter.cs" />

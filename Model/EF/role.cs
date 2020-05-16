@@ -1,4 +1,4 @@
-namespace up_down.Models
+namespace Model.EF
 {
     using System;
     using System.Collections.Generic;
@@ -7,20 +7,21 @@ namespace up_down.Models
     using System.Data.Entity.Spatial;
 
     [Table("roles")]
-    public class devolution
+    public partial class role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public devolution()
+        public role()
         {
-            user = new HashSet<user>();
+            users = new HashSet<user>();
         }
 
-        public int DevolutionId { get; set; }
+        [Key]
+        public int RoleId { get; set; }
 
         [StringLength(50)]
-        public string NameDevolution { get; set; }
+        public string RoleName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<user> user { get; set; }
+        public virtual ICollection<user> users { get; set; }
     }
 }

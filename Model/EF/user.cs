@@ -40,7 +40,7 @@ namespace up_down.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comment> comment { get; set; }
 
-        public virtual devolution devolution { get; set; }
+        public virtual role Role { get; set; }
 
         public virtual status_user status_user { get; set; }
     }

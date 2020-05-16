@@ -1,4 +1,4 @@
-namespace up_down.Models
+namespace Model.EF
 {
     using System;
     using System.Collections.Generic;
@@ -6,12 +6,12 @@ namespace up_down.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public class status_comic
+    public partial class status_comic
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public status_comic()
         {
-            comic = new HashSet<comic>();
+            comics = new HashSet<comic>();
         }
 
         [Key]
@@ -21,6 +21,6 @@ namespace up_down.Models
         public string StatusComicName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<comic> comic { get; set; }
+        public virtual ICollection<comic> comics { get; set; }
     }
 }

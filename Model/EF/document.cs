@@ -1,4 +1,4 @@
-namespace up_down.Models
+namespace Model.EF
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace up_down.Models
     using System.Data.Entity.Spatial;
 
     [Table("document")]
-    public class document
+    public partial class document
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public document()

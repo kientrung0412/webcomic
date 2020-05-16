@@ -1,4 +1,4 @@
-namespace up_down.Models
+namespace Model.EF
 {
     using System;
     using System.Collections.Generic;
@@ -7,13 +7,13 @@ namespace up_down.Models
     using System.Data.Entity.Spatial;
 
     [Table("comic")]
-    public class comic
+    public partial class comic
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public comic()
         {
+            chapters = new HashSet<chapter>();
             comic_category = new HashSet<comic_category>();
-            chapter = new HashSet<chapter>();
         }
 
         public int ComicId { get; set; }
@@ -37,9 +37,15 @@ namespace up_down.Models
         public int? NumRating { get; set; }
 
         public int? StatusComicId { get; set; }
-        
+
         [StringLength(256)]
-        public String CommicBanner { get; set; }
+        public string CommicBanner { get; set; }
+
+        [Column(TypeName = "datetime2")]
+        public DateTime? UpdateAt { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<chapter> chapters { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comic_category> comic_category { get; set; }
@@ -49,8 +55,5 @@ namespace up_down.Models
         public virtual status_comic status_comic { get; set; }
 
         public virtual user user { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<chapter> chapter { get; set; }
     }
 }
