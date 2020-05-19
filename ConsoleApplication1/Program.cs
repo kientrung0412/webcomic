@@ -1,4 +1,6 @@
-﻿using Model.DAO;
+﻿using System;
+using Model.DAO;
+using Model.Models;
 
 namespace ConsoleApplication1
 {
@@ -6,8 +8,10 @@ namespace ConsoleApplication1
     {
         public static void Main(string[] args)
         {
-            CategoryDAO categoryDao =new CategoryDAO();
-            categoryDao.List();
+            UserDAO userDao = new UserDAO();
+            var a = userDao.checkMail("a");
+            
+            Console.Write(a);
         }
     }
 }

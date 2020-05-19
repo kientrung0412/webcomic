@@ -31,6 +31,7 @@ namespace Model.DAO
                     StatusUserId = statusUser.StatusUserId,
                     StatusUserName = statusUser.StatusUserName
                 }).ToList();
+            
             return list;
         }
 
@@ -78,9 +79,28 @@ namespace Model.DAO
 
         public int signUp(user user)
         {
-            var sql = WcDbContext.users.Add(user);
-            var n = WcDbContext.SaveChanges();
-            return n;
+            var a = checkMail(user.UserMail);
+            
+            if (a<0)
+            {
+                var sql = WcDbContext.users.Add(user);
+                var n = WcDbContext.SaveChanges();
+                return n;
+            }
+            else
+            {
+                
+                //email đã tồn tại
+                return -1;
+            }
+           
+        }
+
+
+        public int checkMail(String mail)
+        {
+            var a = WcDbContext.users.Where(user => user.UserMail == mail).Count();
+            return a;
         }
     }
 }

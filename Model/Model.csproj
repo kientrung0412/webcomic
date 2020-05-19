@@ -71,6 +71,8 @@
         <Compile Include="EF\status_user.cs" />
         <Compile Include="EF\user.cs" />
         <Compile Include="Models\ChangePass.cs" />
+        <Compile Include="Models\Pagination.cs" />
+        <Compile Include="Models\PaginationComic.cs" />
         <Compile Include="Models\Rating.cs" />
         <Compile Include="Models\SelectUserAll.cs" />
         <Compile Include="Models\StringToMd5.cs" />

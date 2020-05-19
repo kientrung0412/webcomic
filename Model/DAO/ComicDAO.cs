@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using Model.EF;
 using Model.Models;
 
@@ -32,6 +34,21 @@ namespace Model.DAO
             var n = WcDbContext.SaveChanges();
 
             return n;
+        }
+
+        public PaginationComic ListPg(Pagination pagination)
+        {
+            int page = pagination.Page;
+            int size = pagination.Size;
+
+            int skip = (page - 1) * size;
+
+            int sizePage = WcDbContext.comics.Count();
+
+            var sql = WcDbContext.comics.OrderBy(c => c.ComicId).Skip(skip).ToList();
+
+            PaginationComic paginationComic = new PaginationComic(sizePage, page, sql);
+            return paginationComic;
         }
     }
 }
