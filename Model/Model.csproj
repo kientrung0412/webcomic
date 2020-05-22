@@ -49,6 +49,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="DAO\CategoryDAO.cs" />
+        <Compile Include="DAO\ChapterDAO.cs" />
         <Compile Include="DAO\ComicDAO.cs" />
         <Compile Include="DAO\ComnentDAO.cs" />
         <Compile Include="DAO\DocumentDAO.cs" />
