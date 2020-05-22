@@ -37,9 +37,9 @@ namespace Model.DAO
             return n;
         }
 
-        
-        //Lưu ý cao
-        public PaginationComic ListPg(Pagination pagination)
+
+        //***Lưu ý cao
+        public async Task<PaginationComic> ListPg(Pagination pagination)
         {
             int page = pagination.Page;
             int size = pagination.Size;
@@ -48,7 +48,7 @@ namespace Model.DAO
 
             int sizePage = WcDbContext.comics.Count();
 
-            var sql = WcDbContext.comics.OrderBy(c => c.ComicId).Skip(skip).ToListAsync();
+            var sql = await WcDbContext.comics.OrderBy(c => c.ComicId).Skip(skip).Take(size).ToListAsync();
 
             PaginationComic paginationComic = new PaginationComic(sizePage, page, sql);
             return paginationComic;
