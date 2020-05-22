@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using Model.EF;
 using up_down.Models;
 
@@ -14,9 +16,9 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public List<comment> List(int chapterId)
+        public async Task<List<comment>> ListAs(int chapterId)
         {
-            var list = WcDbContext.comments.Where(comment => comment.StatusCommentId == 1 && comment.ChapterId == chapterId).ToList();
+            var list = await WcDbContext.comments.Where(comment => comment.StatusCommentId == 1 && comment.ChapterId == chapterId).ToListAsync();
             return list;
         }
     }

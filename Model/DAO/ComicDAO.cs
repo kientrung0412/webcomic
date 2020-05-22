@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using Model.EF;
 using Model.Models;
 
@@ -15,27 +16,29 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public int rating(Rating rating)
+        public async Task<int> RatingAs(Rating rating)
         {
-            comic comic = WcDbContext.comics.Single(c => c.ComicId == rating.ComicId);
+            comic comic = await WcDbContext.comics.SingleAsync(c => c.ComicId == rating.ComicId);
             var numRating = comic.NumRating;
 
             comic.Rating = ((comic.Rating * numRating) + rating.Point) / numRating++;
             comic.NumRating = numRating++;
 
-            var n = WcDbContext.SaveChanges();
+            var n = await WcDbContext.SaveChangesAsync();
 
             return n;
         }
 
-        public int Add(comic comic)
+        public async Task<int> AddAs(comic comic)
         {
             var sql = WcDbContext.comics.Add(comic);
-            var n = WcDbContext.SaveChanges();
+            var n = await WcDbContext.SaveChangesAsync();
 
             return n;
         }
 
+        
+        //Lưu ý cao
         public PaginationComic ListPg(Pagination pagination)
         {
             int page = pagination.Page;
@@ -45,7 +48,7 @@ namespace Model.DAO
 
             int sizePage = WcDbContext.comics.Count();
 
-            var sql = WcDbContext.comics.OrderBy(c => c.ComicId).Skip(skip).ToList();
+            var sql = WcDbContext.comics.OrderBy(c => c.ComicId).Skip(skip).ToListAsync();
 
             PaginationComic paginationComic = new PaginationComic(sizePage, page, sql);
             return paginationComic;

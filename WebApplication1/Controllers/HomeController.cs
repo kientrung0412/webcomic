@@ -17,46 +17,15 @@ namespace WebComic.Controllers
         }
 
         [HttpPost]
-
-        // public ActionResult Index(HttpPostedFileBase file )
-        // {
-        //     if (file.ContentLength > 0)
-        //     {
-        //         var a = file.InputStream.Position;
-        //         
-        //         String fileName = String.Format("{0}.jpg", DateTime.Now.ToString("ddMMyy_hhmmss"));
-        //         String filePath = Server.MapPath("~/Upload");
-        //
-        //         if (!Directory.Exists(filePath))
-        //         {
-        //             Directory.CreateDirectory(filePath);
-        //         }
-        //
-        //         try
-        //         {
-        //             file.SaveAs(Path.Combine(filePath, fileName));
-        //             ViewBag.Message = "Tải lên thành công!";
-        //             return View();
-        //         }
-        //         catch (Exception e)
-        //         {
-        //             ViewBag.Message = String.Format("Tải lên thất bại!, {0}", e);
-        //             return View();
-        //         }
-        //     }
-        //     else
-        //     {
-        //         ViewBag.Message = String.Format("Có lỗi tải lên");
-        //         return View();
-        //     }
-        // } 
         public ActionResult Index(HttpPostedFileBase[] files)
         {
+            var p = files.Rank;
+            
             UploadFile uploadFile = new UploadFile();
+            //đường dẫn lưu file
             String filePath = Server.MapPath("~/Upload");
 
             int count = files.Length;
-            
             int n = 0;
             
             foreach (HttpPostedFileBase file in files)

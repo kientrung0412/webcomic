@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Model.EF;
 using Model.Models;
 
@@ -16,9 +18,9 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public List<SelectUserAll> ListUser()
+        public async Task<List<SelectUserAll>> ListUser()
         {
-            var list = (from user in WcDbContext.users
+            var list = await (from user in WcDbContext.users
                 join statusUser in WcDbContext.status_user on user.StatusUserId equals statusUser.StatusUserId
                 join role in WcDbContext.roles on user.RoleId equals role.RoleId
                 select new SelectUserAll()
@@ -30,7 +32,7 @@ namespace Model.DAO
                     Avatar = user.Avatar,
                     StatusUserId = statusUser.StatusUserId,
                     StatusUserName = statusUser.StatusUserName
-                }).ToList();
+                }).ToListAsync();
             
             return list;
         }

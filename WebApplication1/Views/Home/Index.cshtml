@@ -10,14 +10,9 @@
 </head>
 <body>
 <div>
-    @*     @using (Html.BeginForm("Index", "Home", FormMethod.Post, new {enctype = "multipart/form-data"})) *@
-    @*     { *@
-    @*         <input type="file" name="files" multiple> *@
-    @*         <input type="submit" value="dăng"> *@
-    @*     } *@
 
     <form action="@Url.Action("Index", "Home")" method="post" enctype="multipart/form-data">
-        <input type="file" name="files" multiple>
+        <input type="file" name="files" accept="image/*" multiple>
         <input type="submit" value="dăng">
     </form>
 

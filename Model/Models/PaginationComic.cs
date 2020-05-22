@@ -1,4 +1,5 @@
 ﻿﻿using System.Collections.Generic;
+ using System.Threading.Tasks;
  using Model.EF;
 
 namespace Model.Models
@@ -8,9 +9,9 @@ namespace Model.Models
         
         private int pageSize;
         private int page;
-        private List<comic> _comics;
+        private Task<List<comic>> _comics;
 
-        public PaginationComic(int pageSize, int page, List<comic> comics)
+        public PaginationComic(int pageSize, int page, Task<List<comic>> comics)
         {
             this.pageSize = pageSize;
             this.page = page;
@@ -29,7 +30,7 @@ namespace Model.Models
             set => page = value;
         }
 
-        public List<comic> Comics
+        public Task<List<comic>> Comics
         {
             get => _comics;
             set => _comics = value;

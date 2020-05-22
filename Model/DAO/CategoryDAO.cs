@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using Model.EF;
 using up_down.Models;
 
@@ -14,16 +16,16 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public List<category> List()
+        public async Task<List<category>> ListAs()
         {
-            var list = WcDbContext.categories.ToList();
+            var list = await WcDbContext.categories.ToListAsync();
             return list;
         }
 
-        public int Add(category category)
+        public async Task<int> AddAs(category category)
         {
             WcDbContext.categories.Add(category);
-            var n = WcDbContext.SaveChanges();
+            var n = await WcDbContext.SaveChangesAsync();
             return n;
         }
     }

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using Model.EF;
 
 namespace Model.DAO
@@ -13,9 +15,9 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public List<role> List()
+        public async Task<List<role>> List()
         {
-            var list = WcDbContext.roles.ToList();
+            var list = await WcDbContext.roles.ToListAsync();
             return list;
         }
     }
