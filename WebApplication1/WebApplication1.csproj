@@ -126,6 +126,7 @@
         <Compile Include="App_Start\FilterConfig.cs" />
         <Compile Include="App_Start\RouteConfig.cs" />
         <Compile Include="Controllers\HomeController.cs" />
+        <Compile Include="Controllers\UploadFileController.cs" />
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
@@ -136,7 +137,11 @@
     <ItemGroup>
         <Content Include="favicon.ico" />
         <Content Include="Global.asax" />
-        <Content Include="Content\Site.css" />
+        <Content Include="Scripts\jquery-3.5.1.js" />
+        <Content Include="Scripts\jquery-3.5.1.min.js" />
+        <Content Include="Scripts\jquery-3.5.1.min.map" />
+        <Content Include="Scripts\table.js" />
+        <Content Include="Views\UploadFile\Index.cshtml" />
         <Content Include="Web.config" />
         <Content Include="Web.Debug.config">
             <DependentUpon>Web.config</DependentUpon>
@@ -152,7 +157,7 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="App_Data" />
-        <Folder Include="Scripts" />
+        <Folder Include="Content" />
         <Folder Include="Upload" />
     </ItemGroup>
     <ItemGroup>

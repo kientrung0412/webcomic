@@ -38,8 +38,8 @@ namespace Model.DAO
         }
 
 
-        //***Lưu ý cao
-        public async Task<PaginationComic> ListPg(Pagination pagination)
+        
+        public async Task<PaginationComic> ListPageAs(Pagination pagination)
         {
             int page = pagination.Page;
             int size = pagination.Size;

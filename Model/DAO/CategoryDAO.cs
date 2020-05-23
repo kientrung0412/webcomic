@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,11 +23,30 @@ namespace Model.DAO
             return list;
         }
 
-        public async Task<int> AddAs(category category)
+        public async Task<int> AddAs(String name)
         {
+            category category = new category();
             WcDbContext.categories.Add(category);
             var n = await WcDbContext.SaveChangesAsync();
             return n;
+        }
+
+
+        //Sử lý datatable
+        public List<category> List()
+        {
+            var list = WcDbContext.categories.OrderBy(c => c.CategoryId).ToList();
+            return list;
+        }
+
+        public List<category> ListSearch(String s)
+        {
+            var list = WcDbContext.categories
+                .Where(c => c.NameCategory.ToLower().Contains(s.ToLower()) || c.CategoryId.ToString().Contains(s))
+                .OrderBy(c => c.CategoryId)
+                .ToList();
+
+            return list;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +20,30 @@ namespace Model.DAO
         public async Task<List<document>> ListAs()
         {
             var list = await WcDbContext.documents.ToListAsync();
+
             return list;
+        }
+
+        public async Task<int> AddAs(String part)
+        {
+            document document = new document();
+            document.DocumentPart = part;
+            var sql = WcDbContext.documents.Add(document);
+            var n = await WcDbContext.SaveChangesAsync();
+
+            return n;
+        }
+        
+        public async Task<int> DeleteAs(int id)
+        {
+
+            var select = await WcDbContext.documents.FindAsync(id);
+            
+            var sql = WcDbContext.documents.Remove(select);
+
+            var n = await WcDbContext.SaveChangesAsync();
+
+            return n;
         }
     }
 }

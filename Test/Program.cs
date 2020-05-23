@@ -1,5 +1,6 @@
 ﻿using System;
 using Model.DAO;
+using Model.EF;
 using Model.Models;
 
 namespace Test
@@ -8,9 +9,10 @@ namespace Test
     {
         public static void Main(string[] args)
         {
-            
-            ComicDAO comicDao = new ComicDAO();
-           var a = comicDao.ListPg(new Pagination(1, 1));
+            DocumentDAO documentDao = new DocumentDAO();
+
+
+            Console.WriteLine(documentDao.DeleteAs(1374).Result);
         }
     }
 }

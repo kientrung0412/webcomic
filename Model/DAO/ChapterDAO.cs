@@ -18,5 +18,17 @@ namespace Model.DAO
             var n = await WcDbContext.SaveChangesAsync();
             return n;
         }
+        public async Task<int> DeleteAs(int id)
+        {
+
+            var select = await WcDbContext.chapters.FindAsync(id);
+            
+            var sql = WcDbContext.chapters.Remove(select);
+
+            var n = await WcDbContext.SaveChangesAsync();
+
+            return n;
+        }
+        
     }
 }

@@ -15,7 +15,7 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public async Task<List<role>> List()
+        public async Task<List<role>> ListAs()
         {
             var list = await WcDbContext.roles.ToListAsync();
             return list;

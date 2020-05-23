@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Model.DAO;
+using Model.EF;
 using Model.Models;
+using Newtonsoft.Json;
 
 namespace WebComic.Controllers
 {
@@ -16,34 +19,44 @@ namespace WebComic.Controllers
             return View();
         }
 
+        
         [HttpPost]
-        public ActionResult Index(HttpPostedFileBase[] files)
+        public ActionResult GetList()
         {
-            var p = files.Rank;
-            
-            UploadFile uploadFile = new UploadFile();
-            //đường dẫn lưu file
-            String filePath = Server.MapPath("~/Upload");
+            int start = Convert.ToInt32(Request["start"]);
+            int length = Convert.ToInt32(Request["length"]);
+            string searchValue = Request["search[value]"];
+            string sortColumnName = Request["columns[" + Request["order[0][column]"] + "][name]"];
+            string sortDirection = Request["order[0][dir]"];
 
-            int count = files.Length;
-            int n = 0;
-            
-            foreach (HttpPostedFileBase file in files)
+            Console.WriteLine(sortColumnName);
+
+            CategoryDAO categoryDao = new CategoryDAO();
+
+            List<category> list = categoryDao.List();
+
+            int totalRow = list.Count;
+
+            //Tìm kiếm
+
+            if (!String.IsNullOrEmpty(searchValue))
             {
-                var upload = uploadFile.Upload(file, filePath);
-                if (upload.Code == 1)
-                {
-                    n++;
-                }
+                list = categoryDao.ListSearch(searchValue);
             }
-            
-            var a = n;
-            
-            String mss = String.Format("thành công {0}, thất bại {1}", n, (count - n));
-            ViewBag.Message = mss;
-            
-            
-            return View();
+
+            int filterRow = list.Count;
+
+            //Sắp xếp
+
+            // list = list.OrderBy().ToList();
+
+            //Phân trang
+
+            list = list.Skip(start).Take(length).ToList();
+
+            return Json(
+                new {data = list, draw = Request["draw"], recordsTotal = totalRow, recordsFiltered = filterRow},
+                JsonRequestBehavior.AllowGet);
         }
     }
 }

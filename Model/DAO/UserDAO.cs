@@ -37,39 +37,36 @@ namespace Model.DAO
             return list;
         }
 
-        public user oneUser(int userId)
+        public async Task<user> OneUserAs(int userId)
         {
-            user sql = WcDbContext.users.Single(u => u.UserId == userId);
+            user sql = await WcDbContext.users.SingleAsync(u => u.UserId == userId);
             return sql;
         }
 
-        public int update(user user)
+        public async Task<int> UpdateAS(user user)
         {
-            // String sql = String.Format("exec UpdateSttUser @UserId = {0}, @Username = {1}, @SttId = {2}, @RoleId = {3}",
-            //     user.UserId, user.Username, user.StatusUserId, user.RoleId);
-            // var n = WcDbContext.Database.ExecuteSqlCommand(sql);
 
-            user sql = WcDbContext.users.Single(u => u.UserId == user.UserId);
+            user sql = await WcDbContext.users.SingleAsync(u => u.UserId == user.UserId);
 
             sql.Username = user.Username;
             sql.RoleId = user.RoleId;
             sql.StatusUserId = user.StatusUserId;
 
-            var n = WcDbContext.SaveChanges();
+            var n = await WcDbContext.SaveChangesAsync();
 
             return n;
         }
 
 
-        public int changePass(ChangePass changePass)
+        public async Task<int> ChangePassAs(ChangePass changePass)
         {
-            user user = oneUser(changePass.UserId);
+            user user = OneUserAs(changePass.UserId).Result;
             String oldPass = StringToMd5.GetMd5Hash(changePass.OldPass);
 
             if (user.UserPass == oldPass)
             {
                 user.UserPass = StringToMd5.GetMd5Hash(changePass.NewPass);
-                var n = WcDbContext.SaveChanges();
+                var n = await WcDbContext.SaveChangesAsync();
                 return n;
             }
             else
@@ -79,14 +76,14 @@ namespace Model.DAO
             }
         }
 
-        public int signUp(user user)
+        public async Task<int> SignUpAs(user user)
         {
-            var a = checkMail(user.UserMail);
+            var a = CheckMail(user.UserMail);
             
-            if (a<0)
+            if (a == 0)
             {
                 var sql = WcDbContext.users.Add(user);
-                var n = WcDbContext.SaveChanges();
+                var n = await WcDbContext.SaveChangesAsync();
                 return n;
             }
             else
@@ -99,7 +96,7 @@ namespace Model.DAO
         }
 
 
-        public int checkMail(String mail)
+        public int CheckMail(String mail)
         {
             var a = WcDbContext.users.Where(user => user.UserMail == mail).Count();
             return a;

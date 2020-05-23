@@ -2,23 +2,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
+<a href="@Url.Action("Index","UploadFile")">Upload</a>
 
-    <form action="@Url.Action("Index", "Home")" method="post" enctype="multipart/form-data">
-        <input type="file" name="files" accept="image/*" multiple>
-        <input type="submit" value="dăng">
-    </form>
-
-
-    @ViewBag.Message
-
-</div>
-</body>
-</html>
+@* <table id="data" class="table table-hover " style="width:100%"> *@
+@* *@
+@* <thead> *@
+@* <tr> *@
+@*     <th>Id thể loại</th> *@
+@*     <th>Tên thể loại</th> *@
+@* </tr> *@
+@* </thead> *@
+@* <tbody> *@
+@* <tr> *@
+@*     <th></th> *@
+@*     <th></th> *@
+@* </tr> *@
+@* </tbody> *@
+@* <tfoot> *@
+@* <tr> *@
+@*     <th>Id thể loại</th> *@
+@*     <th>Tên thể loại</th> *@
+@* </tr> *@
+@* </tfoot> *@
+@* </table> *@
