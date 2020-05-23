@@ -135,11 +135,15 @@
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
+        <Content Include="Content\owl.carousel.min.css" />
+        <Content Include="Content\owl.theme.default.min.css" />
         <Content Include="favicon.ico" />
         <Content Include="Global.asax" />
         <Content Include="Scripts\jquery-3.5.1.js" />
         <Content Include="Scripts\jquery-3.5.1.min.js" />
         <Content Include="Scripts\jquery-3.5.1.min.map" />
+        <Content Include="Scripts\owl.carousel.min.js" />
+        <Content Include="Scripts\slide.js" />
         <Content Include="Scripts\table.js" />
         <Content Include="Views\UploadFile\Index.cshtml" />
         <Content Include="Web.config" />
@@ -157,7 +161,6 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="App_Data" />
-        <Folder Include="Content" />
         <Folder Include="Upload" />
     </ItemGroup>
     <ItemGroup>
