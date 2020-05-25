@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Linq.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Model.EF;
@@ -41,11 +42,14 @@ namespace Model.DAO
 
         public List<category> ListSearch(String s)
         {
+            var stringSearch = String.Format("%{0}%", s.ToLower());
+
+
             var list = WcDbContext.categories
-                .Where(c => c.NameCategory.ToLower().Contains(s.ToLower()) || c.CategoryId.ToString().Contains(s))
+                .Where(c => DbFunctions.Like(c.NameCategory, stringSearch))
                 .OrderBy(c => c.CategoryId)
                 .ToList();
-
+            
             return list;
         }
     }

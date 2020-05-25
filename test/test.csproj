@@ -5,11 +5,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{042D6F3D-41EC-4882-93F8-8039AACA1308}</ProjectGuid>
-        <OutputType>Library</OutputType>
+        <ProjectGuid>{FAD3F29B-784E-417D-B06A-D1764E9B147A}</ProjectGuid>
+        <OutputType>Exe</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Model</RootNamespace>
-        <AssemblyName>Model</AssemblyName>
+        <RootNamespace>test</RootNamespace>
+        <AssemblyName>test</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -45,45 +45,21 @@
         <Reference Include="System.ComponentModel.DataAnnotations" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
-        <Reference Include="System.Data.Linq" />
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="DAO\CategoryDAO.cs" />
-        <Compile Include="DAO\ChapterDAO.cs" />
-        <Compile Include="DAO\ComicDAO.cs" />
-        <Compile Include="DAO\ComnentDAO.cs" />
-        <Compile Include="DAO\DocumentDAO.cs" />
-        <Compile Include="DAO\NationDAO.cs" />
-        <Compile Include="DAO\RoleDAO.cs" />
-        <Compile Include="DAO\UserDAO.cs" />
-        <Compile Include="EF\category.cs" />
-        <Compile Include="EF\chapter.cs" />
-        <Compile Include="EF\comic.cs" />
-        <Compile Include="EF\comic_category.cs" />
-        <Compile Include="EF\comment.cs" />
-        <Compile Include="EF\WCDbContext.cs" />
-        <Compile Include="EF\role.cs" />
-        <Compile Include="EF\document.cs" />
-        <Compile Include="EF\FileDownloadInfor.cs" />
-        <Compile Include="EF\image_chapter.cs" />
-        <Compile Include="EF\nation.cs" />
-        <Compile Include="EF\status_comic.cs" />
-        <Compile Include="EF\status_comment.cs" />
-        <Compile Include="EF\status_user.cs" />
-        <Compile Include="EF\user.cs" />
-        <Compile Include="Models\ChangePass.cs" />
-        <Compile Include="Models\Pagination.cs" />
-        <Compile Include="Models\PaginationComic.cs" />
-        <Compile Include="Models\Rating.cs" />
-        <Compile Include="Models\RemoveUnicode.cs" />
-        <Compile Include="Models\SelectUserAll.cs" />
-        <Compile Include="Models\StringToMd5.cs" />
+        <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="App.config" />
       <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Model\Model.csproj">
+        <Project>{042d6f3d-41ec-4882-93f8-8039aaca1308}</Project>
+        <Name>Model</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

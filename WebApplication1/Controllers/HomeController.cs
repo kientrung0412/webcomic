@@ -19,17 +19,17 @@ namespace WebComic.Controllers
             return View();
         }
 
-        
+
         [HttpPost]
         public ActionResult GetList()
         {
             int start = Convert.ToInt32(Request["start"]);
             int length = Convert.ToInt32(Request["length"]);
-            string searchValue = Request["search[value]"];
-            string sortColumnName = Request["columns[" + Request["order[0][column]"] + "][name]"];
-            string sortDirection = Request["order[0][dir]"];
+            String searchValue = Request["search[value]"];
+            String sortColumnName = Request["columns[" + Request["order[0][column]"] + "][data]"];
+            String sortDirection = Request["order[0][dir]"];
 
-            Console.WriteLine(sortColumnName);
+            
 
             CategoryDAO categoryDao = new CategoryDAO();
 
@@ -38,6 +38,7 @@ namespace WebComic.Controllers
             int totalRow = list.Count;
 
             //Tìm kiếm
+
 
             if (!String.IsNullOrEmpty(searchValue))
             {
@@ -48,7 +49,8 @@ namespace WebComic.Controllers
 
             //Sắp xếp
 
-            // list = list.OrderBy().ToList();
+
+            // list = list.(order )
 
             //Phân trang
 
