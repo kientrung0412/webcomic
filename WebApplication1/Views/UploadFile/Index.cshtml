@@ -1,27 +1,13 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-    @{
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
 
-    <form action="@Url.Action("UploadChapterImage", "UploadFile")" method="post" enctype="multipart/form-data">
-        
-        <input type="file" name="files" multiple>
-        <input type="submit" value="dăng">
-        
-    </form>
-    
-    
-</div>
-</body>
-</html>
+@ViewBag.Mss
+<form action="@Url.Action("UploadChapterImage", "UploadFile")" method="post" enctype="multipart/form-data">
+
+    <input type="file" name="files" multiple>
+    <input type="submit" value="dăng">
+
+</form>

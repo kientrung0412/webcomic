@@ -1,0 +1,111 @@
+﻿/*add font*/
+@font-face {
+    font-family: Annual;
+    src: url(Font/Annual.ttf);
+}
+
+@font-face {
+    font-family: AnnualBold;
+    src: url(Font/Annual_Bold.ttf);
+}
+
+/*all*/
+
+* {
+    margin: 0 auto;
+    padding: 0;
+    padding: 0;
+}
+
+body {
+    /*background-image: url("../Upload/Backgroup/bg.jpg");*/
+}
+
+h1, h2, h3, h4, h5, h6, p, a {
+    font-size: 16px;
+}
+
+a {
+    color: #f0f0f0;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #f0f0f0;
+}
+
+
+/*   Css home/index   */
+
+
+.item-main {
+    position: relative;
+    margin-top: 15px;
+    height: 240px;
+    overflow: hidden;
+}
+
+.item-main img {
+    height: 100%;
+}
+
+.new-chapter {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    padding: 5px;
+
+}
+
+.new-chapter a {
+    color: #f0f0f0;
+    font-weight: bold;
+}
+
+.name-comic {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+
+/*slide*/
+
+.slide-main .item-slide .item-main {
+    overflow: hidden;
+    height: 290px;
+
+
+}
+
+.slide-main .item-slide .item-main img {
+    height: 100%;
+}
+
+/*responsive*/
+
+
+@media (max-width: 756px) {
+    .item-main {
+        height: 210px;
+    }
+
+    .slide-main .item-slide .item-main {
+        height: 235px;
+
+    }
+}
+
+@media (max-width: 576px) {
+    .item-main {
+        height: 185px;
+    }
+
+    .slide-main .item-slide .item-main {
+        height: 210px;
+
+    }
+}

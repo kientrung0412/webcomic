@@ -16,12 +16,9 @@ namespace WebComic.Controllers
         [HttpPost]
         public ActionResult UploadAvatar(HttpPostedFileBase file)
         {
-            
             String path = Server.MapPath("~/Upload/Avatar");
             UploadFile uploadFile = new UploadFile();
 
-            var a = file;
-            
             var fileUpload = uploadFile.Upload(file, path);
             if (fileUpload.Code == 1)
             {
@@ -38,25 +35,32 @@ namespace WebComic.Controllers
         [HttpPost]
         public ActionResult UploadChapterImage(HttpPostedFileBase[] files)
         {
-            String path = Server.MapPath("~/Upload/Truyen");
-            UploadFile uploadFile = new UploadFile();
-
-            int numFile = files.Length;
-            int numDone = 0;
-
-
-            foreach (HttpPostedFileBase file in files)
+            
+            if (files[0]  != null)
             {
-                var fileUpload = uploadFile.Upload(file, path);
-                if (fileUpload.Code == 1)
+                int numFile = files.Length;
+                int numDone = 0;
+                
+                String path = Server.MapPath("~/Upload/Truyen");
+                UploadFile uploadFile = new UploadFile();
+
+                foreach (HttpPostedFileBase file in files)
                 {
-                    numDone++;
+                    var fileUpload = uploadFile.Upload(file, path);
+                    if (fileUpload.Code == 1)
+                    {
+                        numDone++;
+                    }
                 }
+
+                int numFall = numFile - numDone;
+
+                return Content(String.Format("Thành công {0}, thất bại {1}", numDone, numFall));
             }
-
-            int numFall = numFile - numDone;
-
-            return Content(String.Format("Thành công {0}, thất bại {1}", numDone, numFall));
+            else
+            {
+                return Content("Không có file nào được trọn");
+            }
         }
     }
 }

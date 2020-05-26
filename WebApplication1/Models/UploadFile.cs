@@ -15,7 +15,7 @@ namespace Model.Models
         {
             FileUpload fileUpload = new FileUpload();
             
-            if (file.ContentLength > 0)
+            if (file.ContentLength > 0 )
             {
                 String fileName = String.Format("{0}_{1}", DateTime.Now.ToString("ddMMyy_hhmmss"), file.FileName);
 

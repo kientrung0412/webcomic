@@ -38,7 +38,6 @@ namespace Model.DAO
         }
 
 
-        
         public async Task<PaginationComic> ListPageAs(Pagination pagination)
         {
             int page = pagination.Page;
@@ -47,6 +46,15 @@ namespace Model.DAO
             int skip = (page - 1) * size;
 
             int sizePage = WcDbContext.comics.Count();
+
+            if (sizePage % size > 0)
+            {
+                sizePage = sizePage / size + 1;
+            }
+            else
+            {
+                sizePage = sizePage / size;
+            }
 
             var sql = await WcDbContext.comics.OrderBy(c => c.ComicId).Skip(skip).Take(size).ToListAsync();
 

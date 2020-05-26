@@ -13,7 +13,7 @@ namespace WebComic.Controllers
         }
 
         [HttpPost]
-        public ActionResult Updeta()
+        public ActionResult Delete()
         {
             category category = new category();
             category.CategoryId = Convert.ToInt32(Request["id"]);

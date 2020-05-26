@@ -3,8 +3,7 @@
         loop: true,
         autoplay: true,
         margin: 10,
-        autoWidth: true,
-        autoHeight: true,
+        autohide: true,
         responsive: {
             0: {
                 items: 2
