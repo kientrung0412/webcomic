@@ -136,30 +136,13 @@
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include="Content\960.css" />
-        <Content Include="Content\base.css" />
-        <Content Include="Content\devices\1000.css" />
-        <Content Include="Content\devices\479.css" />
-        <Content Include="Content\devices\767.css" />
-        <Content Include="Content\fontello\Descr.WD3" />
-        <Content Include="Content\fontello\fontello.css" />
-        <Content Include="Content\fontello\font\Descr.WD3" />
-        <Content Include="Content\fontello\font\fontello.eot@10873057" />
-        <Content Include="Content\fontello\font\fontello.svg@10873057" />
-        <Content Include="Content\fontello\font\fontello.ttf@10873057" />
-        <Content Include="Content\fontello\font\fontello.woff@10873057" />
-        <Content Include="Content\fontello\font\fontello0792.svg" />
         <Content Include="Content\Font\Annual_Bold.ttf" />
         <Content Include="Content\Font\Annual_Bold_Italic.ttf" />
         <Content Include="Content\Font\Annual_Italic.ttf" />
         <Content Include="Content\Font\Annual.ttf" />
-        <Content Include="Content\images\animated-overlay.html" />
         <Content Include="Content\mystyle.css" />
         <Content Include="Content\owl.carousel.min.css" />
         <Content Include="Content\owl.theme.default.min.css" />
-        <Content Include="Content\style.css" />
-        <Content Include="Content\superfish.css" />
-        <Content Include="Content\ui.css" />
         <Content Include="favicon.ico" />
         <Content Include="Global.asax" />
         <Content Include="Scripts\alert.js" />
@@ -169,6 +152,7 @@
         <Content Include="Scripts\owl.carousel.min.js" />
         <Content Include="Scripts\slide.js" />
         <Content Include="Scripts\table.js" />
+        <Content Include="Upload\background\bg.jpg" />
         <Content Include="Views\Category\Index.cshtml" />
         <Content Include="Views\Shared\HistoryRead.cshtml" />
         <Content Include="Views\Shared\SlideMain.cshtml" />
@@ -188,7 +172,6 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="App_Data" />
-        <Folder Include="Upload\Backgroup" />
     </ItemGroup>
     <ItemGroup>
         <None Include="packages.config" />
