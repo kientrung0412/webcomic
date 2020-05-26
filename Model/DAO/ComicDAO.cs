@@ -61,5 +61,11 @@ namespace Model.DAO
             PaginationComic paginationComic = new PaginationComic(sizePage, page, sql);
             return paginationComic;
         }
+
+        public async Task<comic> GetComicAs(int comicId)
+        {
+            var comic = WcDbContext.comics.Single(c => c.ComicId == comicId);
+            return comic;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    
     $('#data').dataTable({
         "lengthMenu": [[2, 16, 32], [2, 16, 32]],
         "language": {
@@ -26,7 +27,7 @@
             "type": "post",
             "datatype": "json"
         },
-        "columns": [
+        "columns": [ 
             {data: 'CategoryId'},
             {data: 'NameCategory'}
         ]

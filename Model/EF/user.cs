@@ -15,7 +15,7 @@ namespace Model.EF
             comments = new HashSet<comment>();
         }
 
-
+        //thêm mới
         public user(int userId, string username, int? roleId, int? statusUserId)
         {
             UserId = userId;
@@ -24,6 +24,7 @@ namespace Model.EF
             StatusUserId = statusUserId;
         }
 
+        //thêm mới
         public user(int userId, string username, string userPass, int? roleId, string userMail, string avatar,
             int? statusUserId)
         {

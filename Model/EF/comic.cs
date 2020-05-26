@@ -15,6 +15,7 @@ namespace Model.EF
         {
             chapters = new HashSet<chapter>();
             comic_category = new HashSet<comic_category>();
+            StatusComicId = 4;
         }
 
         public int ComicId { get; set; }

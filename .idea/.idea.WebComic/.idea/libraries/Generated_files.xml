@@ -1,0 +1,21 @@
+﻿<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/WebApplication1/Scripts/alert.min.js" />
+        <item url="file://$PROJECT_DIR$/WebApplication1/Scripts/boostrap.min.min.js" />
+        <item url="file://$PROJECT_DIR$/WebApplication1/Scripts/font.min.min.js" />
+        <item url="file://$PROJECT_DIR$/WebApplication1/Scripts/popper.min.min.js" />
+        <item url="file://$PROJECT_DIR$/WebApplication1/Scripts/slide.min.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/WebApplication1/Scripts/alert.min.js" />
+      <root url="file://$PROJECT_DIR$/WebApplication1/Scripts/boostrap.min.min.js" />
+      <root url="file://$PROJECT_DIR$/WebApplication1/Scripts/font.min.min.js" />
+      <root url="file://$PROJECT_DIR$/WebApplication1/Scripts/popper.min.min.js" />
+      <root url="file://$PROJECT_DIR$/WebApplication1/Scripts/slide.min.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

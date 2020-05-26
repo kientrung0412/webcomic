@@ -1,11 +1,8 @@
 ﻿// Hàm xóa
 
 function BtnDelete(classBtn, urlPost) {
-
     classBtn.on('click', function () {
-
         var id = $(this).attr('row-id');
-
         $.confirm({
             icon: 'fas fa-exclamation-triangle',
             boxWidth: '20%',
@@ -59,12 +56,10 @@ function BtnDelete(classBtn, urlPost) {
 
                 },
                 no: {
-
                     keys: ['n'],
                     text: "Không",
                     btnClass: 'btn-red',
                     action: function () {
-
                     }
                 }
             }
@@ -72,9 +67,5 @@ function BtnDelete(classBtn, urlPost) {
 
     });
 }
-
-var a = $('.a');
-
-BtnDelete(a, "/Category/Delete");
 
 
