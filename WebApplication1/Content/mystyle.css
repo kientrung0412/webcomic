@@ -159,9 +159,7 @@ ul.pagination.justify-content-end {
     bottom: 0;
     right: 0;
     left: 0;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: 50%;
+
 }
 
 
@@ -179,5 +177,9 @@ button.owl-dot {
     outline: none;
 }
 
-
+.bg-img-full {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
 
