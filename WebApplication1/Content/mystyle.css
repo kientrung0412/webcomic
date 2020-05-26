@@ -79,16 +79,6 @@ h2:after {
     margin-top: 25px;
 }
 
-.item-main {
-    position: relative;
-    margin-top: 20px;
-    height: 240px;
-    overflow: hidden;
-}
-
-.item-main img {
-    height: 100%;
-}
 
 .new-chapter {
     position: absolute;
@@ -112,7 +102,10 @@ h2:after {
     -webkit-box-orient: vertical;
     font-weight: bold;
 }
-a.page-link {color: #212529;}
+
+a.page-link {
+    color: #212529;
+}
 
 a.page-link.active {
     color: #01dfff;
@@ -125,9 +118,11 @@ nav.page {
 ul.pagination.justify-content-end {
     outline: none;
 }
-.page-link:hover{
+
+.page-link:hover {
     color: #01dfff;
 }
+
 .chpter-hot {
     position: absolute;
     top: 0px;
@@ -139,21 +134,42 @@ ul.pagination.justify-content-end {
     border-radius: 5px;
     font-weight: bold;
 }
+
+.item-main {
+    margin-top: 20px;
+    position: relative;
+}
+
+.img-cover {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-cover:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: 140%;
+}
+
+.img-bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+
 /*slide*/
 .slide.bg-main {
     padding: 30px 20px 25px 20px;
 }
 
-.slide-main .item-slide .item-main {
-    overflow: hidden;
-    height: 290px;
-
-
-}
-
-.slide-main .item-slide .item-main img {
-    height: 100%;
-}
 
 .slide-main {
     margin-top: 20px;
@@ -162,27 +178,6 @@ ul.pagination.justify-content-end {
 button.owl-dot {
     outline: none;
 }
-/*responsive*/
 
 
-@media (max-width: 756px) {
-    .item-main {
-        height: 210px;
-    }
 
-    .slide-main .item-slide .item-main {
-        height: 235px;
-
-    }
-}
-
-@media (max-width: 576px) {
-    .item-main {
-        height: 185px;
-    }
-
-    .slide-main .item-slide .item-main {
-        height: 210px;
-
-    }
-}
