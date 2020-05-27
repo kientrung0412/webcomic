@@ -9,6 +9,9 @@ namespace WebComic.Controllers
         // GET
         public ActionResult Index(int chapterId)
         {
+            var cookie = new HttpCookie("comicId", chapterId.ToString());
+            cookie.Expires = DateTime.Now.AddDays(30);
+            Response.AppendCookie(cookie);
             return View();
         }
     }

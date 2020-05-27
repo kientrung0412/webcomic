@@ -16,6 +16,13 @@ namespace WebComic.Controllers
     {
         public ActionResult Index()
         {
+            ComicDAO comicDao = new ComicDAO();
+            var list = comicDao.ListPageAs(new Pagination(12, 1)).Result;
+
+            //truyện mới cpaaj nhật
+            var comics = list.Comics;
+            ViewBag.ComicsMain = comics;
+
             return View();
         }
 
@@ -29,7 +36,6 @@ namespace WebComic.Controllers
             String sortColumnName = Request["columns[" + Request["order[0][column]"] + "][data]"];
             String sortDirection = Request["order[0][dir]"];
 
-            
 
             CategoryDAO categoryDao = new CategoryDAO();
 

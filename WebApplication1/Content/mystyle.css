@@ -1,40 +1,47 @@
 ﻿/*add font*/
-@font-face {
-    font-family: Annual;
-    src: url(Font/Annual.ttf);
-}
+/*@font-face {*/
+/*    font-family: Annual;*/
+/*    src: url(Font/Annual.ttf);*/
+/*}*/
 
-@font-face {
-    font-family: AnnualBold;
-    font-weight: bold;
-    src: url(Font/Annual_Bold.ttf);
-}
+/*@font-face {*/
+/*    font-family: AnnualBold;*/
+/*    font-weight: bold;*/
+/*    src: url(Font/Annual_Bold.ttf);*/
+/*}*/
 
-@font-face {
-    font-family: NunitoSansBold;
-    src: url(Font/NunitoSans-Bold.ttf);
-    font-weight: bold;
-}
+/*@font-face {*/
+/*    font-family: NunitoSansBold;*/
+/*    src: url(Font/NunitoSans-Bold.ttf);*/
+/*    font-weight: bold;*/
+/*}*/
 
 
 /*all*/
 
-/** {*/
-/*    margin: 0 auto;*/
-/*    padding: 0;*/
-/*}*/
+* {
+    margin: 0 ;
+    padding: 0;
+}
 
 body {
     background-image: url("../Upload/background/bg.jpg");
     background-repeat: repeat;
+    
 }
 
-h1, h2, h3, h4, h5, h6, p, a {
+h1, h2, h3, h4, h5, h6, p, a, span {
     font-size: 16px;
+    font-family: "Open Sans";
+
 }
 
 a {
     color: #f0f0f0;
+}
+
+.p-fix {
+    position: fixed;
 }
 
 a:hover {
@@ -45,7 +52,6 @@ a:hover {
 h2 {
     color: #f0f0f0;
     font-size: 34px;
-    font-family: Annual, 'Merriweather Sans', Arial, Helvetica, sans-serif;
 }
 
 h2:after {
@@ -99,7 +105,6 @@ h2:after {
     display: -webkit-box;
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
-    font-weight: bold;
 }
 
 a.page-link {
@@ -164,6 +169,7 @@ ul.pagination.justify-content-end {
 
 /*slide*/
 .slide.bg-main {
+    margin-top: 25px;
     padding: 30px 20px 25px 20px;
 }
 
@@ -181,4 +187,90 @@ button.owl-dot {
     background-repeat: no-repeat;
     background-position: 50%;
 }
+
+/*nav*/
+nav.navbar.navbar-expand-lg.navbar-light.container-fluid.bg-nav .container {
+    position: relative;
+}
+
+p.nav-link {
+    margin: 0;
+    color: #FFFFFF !important;
+}
+
+.container-fluid.bg-nav {
+    background-color: #007f8d;
+    z-index: 60;
+    top: 0;
+}
+
+a.nav-link {
+    color: #f1f1f1 !important;
+}
+
+input.form-control.ip-search, button.btn.btn-white.my-2 {
+    overflow: hidden;
+    border: none;
+    box-shadow: none;
+}
+
+button.btn.btn-white.my-2 {
+    margin: 0 !important;
+    position: absolute;
+    right: 0;
+    background: #fff;
+    z-index: 99;
+    border-radius: 5px;
+}
+
+form.form-inline.my-2.my-lg-0 {
+    position: relative;
+}
+
+input.form-control.ip-search {
+    position: relative;
+    width: 100%;
+}
+
+.list-category {
+    position: absolute;
+    background: azure;
+    width: 100%;
+    z-index: 30;
+    overflow: hidden;
+    display: none;
+}
+
+.menu-category {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -25px;
+}
+
+.item-category {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.item-category a:after {
+    display: block;
+    height: 80%;
+    content: "";
+    top: 10%;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    position: absolute;
+    background: #01dfff;
+}
+
+.item-category a {
+    color: black;
+}
+.item-category a:hover{
+    color: rgba(29,57,255);
+    transition: all 0.3s;
+}
+
 

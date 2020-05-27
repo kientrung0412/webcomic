@@ -60,6 +60,9 @@
         <Reference Include="System.ComponentModel.DataAnnotations" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data.DataSetExtensions" />
+        <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+          <HintPath>..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Web.Mvc\v4.0_5.0.0.0__31bf3856ad364e35\System.Web.Mvc.dll</HintPath>
+        </Reference>
         <Reference Include="System.Xml.Linq" />
         <Reference Include="System.Web" />
         <Reference Include="System.Web.Extensions" />
@@ -139,6 +142,8 @@
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
+        <Content Include="Content\all.css" />
+        <Content Include="Content\all.min.css" />
         <Content Include="Content\bootstrap.min.css" />
         <Content Include="Content\font.min.css" />
         <Content Include="Content\Font\Annual_Bold.ttf" />
@@ -149,13 +154,11 @@
         <Content Include="Content\Font\NunitoSans-Bold.ttf" />
         <Content Include="Content\jquery-confirm.min.css" />
         <Content Include="Content\mystyle.css" />
-        <Content Include="Content\mystyle.min.css" />
         <Content Include="Content\owl.carousel.min.css" />
         <Content Include="Content\owl.theme.default.min.css" />
         <Content Include="favicon.ico" />
         <Content Include="Global.asax" />
         <Content Include="Scripts\alert.js" />
-        <Content Include="Scripts\alert.min.js" />
         <Content Include="Scripts\all.js" />
         <Content Include="Scripts\all.min.js" />
         <Content Include="Scripts\boostrap.min.js" />
@@ -165,16 +168,16 @@
         <Content Include="Scripts\jquery-3.5.1.min.map" />
         <Content Include="Scripts\load-bg.js" />
         <Content Include="Scripts\owl.carousel.min.js" />
+        <Content Include="Scripts\popper.min.js" />
         <Content Include="Scripts\slide.js" />
-        <Content Include="Scripts\slide.min.js" />
         <Content Include="Scripts\table.js" />
-        <Content Include="Scripts\umd\popper-utils.min.js" />
-        <Content Include="Scripts\umd\popper.min.js" />
         <Content Include="Upload\background\bg.jpg" />
+        <Content Include="Upload\Logo\logo.png" />
         <Content Include="Views\Category\Index.cshtml" />
         <Content Include="Views\Chapter\Index.cshtml" />
+        <Content Include="Views\Comic\ComicCategory.cshtml" />
         <Content Include="Views\Comic\Index.cshtml" />
-        <Content Include="Views\Shared\SlideMain.cshtml" />
+        <Content Include="Views\Shared\_Navbar.cshtml" />
         <Content Include="Views\UploadFile\Index.cshtml" />
         <Content Include="Web.config" />
         <Content Include="Web.Debug.config">
@@ -188,9 +191,6 @@
         <Content Include="Views\Shared\Error.cshtml" />
         <Content Include="Views\Shared\_Layout.cshtml" />
         <Content Include="Views\Home\Index.cshtml" />
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="App_Data" />
     </ItemGroup>
     <ItemGroup>
         <None Include="packages.config" />

@@ -56,16 +56,27 @@ namespace Model.DAO
                 sizePage = sizePage / size;
             }
 
-            var sql = await WcDbContext.comics.OrderBy(c => c.ComicId).Skip(skip).Take(size).ToListAsync();
+            var sql = await WcDbContext.comics.OrderBy(c => c.UpdateAt).Skip(skip).Take(size).ToListAsync();
 
             PaginationComic paginationComic = new PaginationComic(sizePage, page, sql);
             return paginationComic;
         }
 
+
+#pragma warning disable 1998
         public async Task<comic> GetComicAs(int comicId)
+#pragma warning restore 1998
         {
             var comic = WcDbContext.comics.Single(c => c.ComicId == comicId);
             return comic;
+        }
+
+        public List<comic> SearchAdvanced()
+        {
+            var list = WcDbContext.comics.SqlQuery(
+                    " select comic.ComicId, NameComic, CommicBanner from comic join (select ComicId from comic_category where CategoryId in (1, 4) group by ComicId having COUNT(CategoryId) = 2 EXCEPT select ComicId from comic_category where CategoryId in (3) group by ComicId having COUNT(CategoryId) = 1) t1 on comic.ComicId = t1.ComicId where StatusComicId < 4 ")
+                .ToList();
+            return list;
         }
     }
 }

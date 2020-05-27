@@ -17,17 +17,26 @@ namespace WebComic.Controllers
             comic comic = comicDao.GetComicAs(comicId).Result;
 
             var list = comic.comic_category.ToList();
-
+            var a = comicDao.SearchAdvanced();
+            
             
             ViewBag.Title = comic.NameComic;
             ViewBag.Data = comic;
 
-
-            var cookie = new HttpCookie("comicId", comic.ComicId.ToString());
-            cookie.Expires = DateTime.Now.AddDays(30);
-            Response.AppendCookie(cookie);
-
             return View();
         }
+
+        public ActionResult ComicCategory()
+        {
+            return View();
+        }
+
+
+        
+        // [HttpPost]
+        // public ActionResult SearchAdvanced()
+        // {
+        //     
+        // }
     }
 }

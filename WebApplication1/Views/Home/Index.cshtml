@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Model.EF
+@{
+    ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,21 +13,23 @@
         <div class="owl-carousel owl-theme">
 
             <div class="item-slide">
-                <div class="item-main">
-                    <a href="#">
-                        <div class="img-cover">
-                            <div class="img-bg bg-img-full" url-bg="https://truyentranhlh.net/storage/images/raw/e660b55d-bf01-4d0b-85be-de4b7e54acb0.jpg"></div>
-                        </div>
-                        <div class="new-chapter">
-                            <a href="ádvghasd"> Chap 14</a>
-                        </div>
-                        <div class="chpter-hot">
-                            Hot
-                        </div>
-                    </a>
-                </div>
-                <div class="name-comic text-light">
-                    <a href="qqq">Sẽ Chết, Nếu Không Nói Lời Yêu</a>
+                <div class="comic-item">
+                    <div class="item-main">
+                        <a href="#">
+                            <div class="img-cover">
+                                <div class="img-bg bg-img-full" url-bg="https://truyentranhlh.net/storage/images/raw/e660b55d-bf01-4d0b-85be-de4b7e54acb0.jpg"></div>
+                            </div>
+                            <div class="new-chapter">
+                                <a href="ádvghasd"> Chap 14</a>
+                            </div>
+                            <div class="chpter-hot">
+                                Hot
+                            </div>
+                        </a>
+                    </div>
+                    <div class="name-comic text-light">
+                        <a href="qqq">Sẽ Chết, Nếu Không Nói Lời Yêu</a>
+                    </div>
                 </div>
             </div>
 
@@ -40,25 +44,33 @@
     <h2>Truyện mới cập nhật</h2>
 
     <div class="row">
+        @foreach (comic comic in ViewBag.ComicsMain)
+        {
+            <div class="col-lg-2 col-sm-3 col-6">
 
-        <div class="col-lg-2 col-sm-3 col-6">
-            <a href="@Url.Action("Index", "Comic", new {comicId = 1})">
-                <div class="item-main">
-                    <div class="img-cover">
-                        <div class="img-bg bg-img-full" url-bg="https://cdn.myanimelist.net/images/manga/2/183208l.jpg"></div>
-                    </div>
-                    <div class="new-chapter">
-                        <a href="@Url.Action("Index", "Chapter", new {chapterId = 99})"> Chap 14</a>
-                    </div>
-                    <div class="chpter-hot">
-                        Hot
+                <div class="comic-item">
+                    <a href="@Url.Action("Index", "Comic", new {comicId = comic.ComicId})">
+                        <div class="item-main">
+                            <div class="img-cover">
+                                <div class="img-bg bg-img-full" url-bg="@comic.CommicBanner"></div>
+                            </div>
+                            <div class="new-chapter">
+                                <a href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Max().ChapterId})">@comic.chapters.Max().NameChapter</a>
+                            </div>
+                            @* <div class="chpter-hot"> *@
+                            @*     Hot *@
+                            @* </div> *@
+                        </div>
+                    </a>
+
+                    <div class="name-comic text-light">
+                        <a href="@Url.Action("Index", "Comic", new {comicId = comic.ComicId})">@comic.NameComic</a>
                     </div>
                 </div>
-            </a>
-            <div class="name-comic text-light">
-                <a href="@Url.Action("Index", "Comic", new {comicId = 1})">Sẽ Chết, Nếu Không Nói Lời Yêu</a>
+
             </div>
-        </div>
+        }
+
 
     </div>
 
@@ -86,5 +98,62 @@
             </li>
         </ul>
     </nav>
+
+</div>
+
+<div class="main bg-main">
+
+    <h2>Truyện mới</h2>
+
+    <div class="row">
+
+        <div class="col-lg-2 col-sm-3 col-6">
+
+            <div class="comic-item">
+                <a href="@Url.Action("Index", "Comic", new {comicId = 1})">
+                    <div class="item-main">
+                        <div class="img-cover">
+                            <div class="img-bg bg-img-full" url-bg="https://cdn.myanimelist.net/images/manga/2/183208l.jpg"></div>
+                        </div>
+                        <div class="new-chapter">
+                            <a href="@Url.Action("Index", "Chapter", new {chapterId = 99})"> Chap 14</a>
+                        </div>
+                        <div class="chpter-hot">
+                            Hot
+                        </div>
+                    </div>
+                </a>
+
+                <div class="name-comic text-light">
+                    <a href="@Url.Action("Index", "Comic", new {comicId = 1})">Sẽ Chết, Nếu Không Nói Lời Yêu</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-2 col-sm-3 col-6">
+
+            <div class="comic-item">
+                <a href="@Url.Action("Index", "Comic", new {comicId = 1})">
+                    <div class="item-main">
+                        <div class="img-cover">
+                            <div class="img-bg bg-img-full" url-bg="https://images.alphacoders.com/605/thumb-1920-605592.png"></div>
+                        </div>
+                        <div class="new-chapter">
+                            <a href="@Url.Action("Index", "Chapter", new {chapterId = 99})"> Chap 14</a>
+                        </div>
+                        <div class="chpter-hot">
+                            Hot
+                        </div>
+                    </div>
+                </a>
+
+                <div class="name-comic text-light">
+                    <a href="@Url.Action("Index", "Comic", new {comicId = 1})">Sẽ Chết, Nếu Không Nói Lời Yêu</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
