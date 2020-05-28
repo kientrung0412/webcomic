@@ -293,7 +293,7 @@ h3 {
     font-size: 20px;
 }
 
-.detail-comic, .content-comic {
+.detail-comic, .content-comic, .store-comic, .list-chapter {
     padding: 20px 20px;
 }
 
@@ -311,6 +311,7 @@ button.last-chapter {
 
 button.last-chapter a {
     font-size: 18px;
+    margin-bottom: 5px;
 }
 
 button.last-chapter:hover {
@@ -338,11 +339,59 @@ h4 {
 
 a .type-comic:hover {
     background: rgba(255, 39, 7, 0.6);
-  
+
 }
 
 .properti-comic {
     font-weight: bold;
     display: block;
     margin-bottom: 10px;
+}
+
+.comic {
+    position: relative;
+}
+
+.extra-comic:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: rgba(253, 126, 20, 0.67);
+    height: 2px;
+    width: 100%;
+}
+
+.extra-comic:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(253, 126, 20, 0.67);
+    height: 2px;
+    width: 100%;
+}
+
+.name-extra {
+    padding: 10px 0;
+    color: #a0a0a0;
+}
+
+.content-extra {
+    padding-bottom: 15px;
+    color: #f1f1f1;
+}
+
+.extra-comic {
+    position: relative;
+    text-align: center;
+}
+
+.store-comic {
+    margin-top: 25px;
+}
+.list-chapter{
+    mt25
 }
