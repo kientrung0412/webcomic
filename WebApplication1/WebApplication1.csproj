@@ -177,7 +177,9 @@
         <Content Include="Views\Chapter\Index.cshtml" />
         <Content Include="Views\Comic\ComicCategory.cshtml" />
         <Content Include="Views\Comic\Index.cshtml" />
+        <Content Include="Views\Shared\_ComicNew.cshtml" />
         <Content Include="Views\Shared\_Navbar.cshtml" />
+        <Content Include="Views\Shared\_Slide.cshtml" />
         <Content Include="Views\UploadFile\Index.cshtml" />
         <Content Include="Web.config" />
         <Content Include="Web.Debug.config">

@@ -1,5 +1,4 @@
-﻿@using Model.EF
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,12 +21,13 @@
 </head>
 <body >
 @{
-    Html.RenderPartial("_Navbar");
+    Html.RenderAction("_Navbar","Category");
 }
 
 <div class="container">
-    
+
     @RenderBody()
+    
 </div>
 
 

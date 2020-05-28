@@ -33,18 +33,18 @@
     });
 
     //cuộn
-    // var nav = $('.navbar');
+    var nav = $('.navbar');
 
-    // $(document).scroll(function () {
-    //     var scrollTop = $(window).scrollTop();
-    //
-    //     if (scrollTop > 0) {
-    //         nav.addClass("p-fix");
-    //     } else {
-    //         nav.removeClass("p-fix");
-    //     }
-    //
-    // })
+    $(document).scroll(function () {
+        var scrollTop = $(window).scrollTop();
+
+        if (scrollTop > 0) {
+            nav.addClass("p-fix").delay("slow");
+        } else {
+            nav.removeClass("p-fix").delay("slow");
+        }
+
+    })
 
 });
 

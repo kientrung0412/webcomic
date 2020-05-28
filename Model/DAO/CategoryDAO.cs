@@ -17,13 +17,7 @@ namespace Model.DAO
         {
             WcDbContext = new WCDbContext();
         }
-
-        public async Task<List<category>> ListAs()
-        {
-            var list = await WcDbContext.categories.ToListAsync();
-            return list;
-        }
-
+        
         public async Task<int> AddAs(String name)
         {
             category category = new category();

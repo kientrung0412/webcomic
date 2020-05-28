@@ -17,15 +17,15 @@ namespace WebComic.Controllers
         public ActionResult Index()
         {
             ComicDAO comicDao = new ComicDAO();
-            var list = comicDao.ListPageAs(new Pagination(12, 1)).Result;
+            var list = comicDao.ListPage(new Pagination(12, 1));
 
-            //truyện mới cpaaj nhật
-            var comics = list.Comics;
+            // new comic
+            List<comic> comics = list.Comics;
             ViewBag.ComicsMain = comics;
 
             return View();
         }
-
+        
 
         [HttpPost]
         public ActionResult GetList()

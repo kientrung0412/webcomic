@@ -38,7 +38,7 @@ namespace Model.DAO
         }
 
 
-        public async Task<PaginationComic> ListPageAs(Pagination pagination)
+        public PaginationComic ListPage(Pagination pagination)
         {
             int page = pagination.Page;
             int size = pagination.Size;
@@ -56,7 +56,7 @@ namespace Model.DAO
                 sizePage = sizePage / size;
             }
 
-            var sql = await WcDbContext.comics.OrderBy(c => c.UpdateAt).Skip(skip).Take(size).ToListAsync();
+            var sql = WcDbContext.comics.OrderBy(c => c.UpdateAt).Skip(skip).Take(size).ToList();
 
             PaginationComic paginationComic = new PaginationComic(sizePage, page, sql);
             return paginationComic;
@@ -78,5 +78,18 @@ namespace Model.DAO
                 .ToList();
             return list;
         }
+
+        public List<comic> SlideComic()
+        {
+            var list = WcDbContext.comics.OrderBy(comic => comic.ComicId).Take(10).ToList();
+            return list;
+        } 
+        
+        public List<comic> NewComic()
+        {
+            var list = WcDbContext.comics.OrderBy(comic => comic.ReleaseDate).Take(12).ToList();
+            return list;
+        }
+        
     }
 }

@@ -10,6 +10,10 @@ namespace WebComic.Controllers
         // GET
         public ActionResult Index()
         {
+            CategoryDAO categoryDao = new CategoryDAO();
+
+            var list = categoryDao.List();
+            ViewBag.ListCategory = list;
             return View();
         }
 
@@ -21,13 +25,11 @@ namespace WebComic.Controllers
             return Content("true");
         }
 
+
         public ActionResult _Navbar()
         {
             CategoryDAO categoryDao = new CategoryDAO();
-            var list = categoryDao.ListAs().Result;
-            
-            ViewBag.DataCategory = list;
-
+            ViewBag.Data = categoryDao.List();
 
             return PartialView("_Navbar");
         }

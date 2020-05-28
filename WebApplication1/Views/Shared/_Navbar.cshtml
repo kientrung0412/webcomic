@@ -1,7 +1,7 @@
 ﻿@using Model.EF
-<nav class="navbar navbar-expand-lg navbar-light  container-fluid bg-nav ">
+<nav class="navbar navbar-expand-lg navbar-light  container-fluid bg-nav">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="~/Home">
             <img src="~/Upload/Logo/logo.png" height="50px">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,19 +11,30 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" id="show-category" href="#">Thể loại</a>
+                    <a class="nav-link" id="show-category">Thể loại</a>
                     <div class="menu-category">
                         <div class="list-category">
                             <div class="row">
-                                @foreach (category c in ViewBag.DataCategory)
+
+                                @foreach (category c in ViewBag.Data)
                                 {
                                     <div class="col-md-2 col-6 item-category">
                                         <a href="">@c.NameCategory</a>
                                     </div>
                                 }
+
                             </div>
                         </div>
                     </div>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="@Url.Action("Index", "Category")">Lọc nâng cao</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="@Url.Action("Index", "Category")">Đăng nhập</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="@Url.Action("Index", "Category")">Đăng ký</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0" action="">

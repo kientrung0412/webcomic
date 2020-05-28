@@ -20,19 +20,20 @@
 /*all*/
 
 * {
-    margin: 0 ;
+    margin: 0;
     padding: 0;
 }
 
 body {
     background-image: url("../Upload/background/bg.jpg");
     background-repeat: repeat;
-    
+
 }
 
 h1, h2, h3, h4, h5, h6, p, a, span {
     font-size: 16px;
     font-family: "Open Sans";
+    color: #f1f1f1;
 
 }
 
@@ -189,11 +190,13 @@ button.owl-dot {
 }
 
 /*nav*/
+
+
 nav.navbar.navbar-expand-lg.navbar-light.container-fluid.bg-nav .container {
     position: relative;
 }
 
-p.nav-link {
+.nav-link a {
     margin: 0;
     color: #FFFFFF !important;
 }
@@ -206,7 +209,13 @@ p.nav-link {
 
 a.nav-link {
     color: #f1f1f1 !important;
+    cursor: pointer;
 }
+
+.nav-item .nav-link {
+    padding: 8px 15px !important;
+}
+
 
 input.form-control.ip-search, button.btn.btn-white.my-2 {
     overflow: hidden;
@@ -268,9 +277,59 @@ input.form-control.ip-search {
 .item-category a {
     color: black;
 }
-.item-category a:hover{
-    color: rgba(29,57,255);
+
+.item-category a:hover {
+    color: rgba(29, 57, 255, 0.7);
     transition: all 0.3s;
 }
 
 
+/*detail comic*/
+.comic-cover {
+    margin-top: 25px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.detail-comic, .content-comic {
+    padding: 20px 20px;
+}
+
+button.last-chapter {
+    box-shadow: none;
+    background: #007f8d;
+    border-radius: 5px;
+    height: 10%;
+    margin-top: 15px;
+    position: relative;
+    width: 100%;
+    padding: 5px;
+    transition: all 0.3s;
+}
+
+button.last-chapter a {
+    font-size: 18px;
+}
+
+button.last-chapter:hover {
+    background: rgba(255, 39, 7, 0.6);
+}
+
+h4 {
+    font-size: 28px;
+    color: aliceblue;
+}
+
+.cover-type {
+    display: inline-flex;
+    margin: 10px;
+}
+
+.type-comic {
+    margin: 0px 13px;
+    background: cadetblue;
+    padding: 2px 5px;
+    border-radius: 5px;
+}

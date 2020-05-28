@@ -16,10 +16,7 @@ namespace WebComic.Controllers
             ComicDAO comicDao = new ComicDAO();
             comic comic = comicDao.GetComicAs(comicId).Result;
 
-            var list = comic.comic_category.ToList();
-            var a = comicDao.SearchAdvanced();
-            
-            
+
             ViewBag.Title = comic.NameComic;
             ViewBag.Data = comic;
 
@@ -31,6 +28,20 @@ namespace WebComic.Controllers
             return View();
         }
 
+        public ActionResult _Slide()
+        {
+            ComicDAO comicDao = new ComicDAO();
+            ViewBag.Data = comicDao.SlideComic();
+
+            return PartialView("_Slide");
+        }
+        public ActionResult _ComicNew()
+        {
+            ComicDAO comicDao = new ComicDAO();
+            ViewBag.Data = comicDao.NewComic();
+
+            return PartialView("_ComicNew");
+        }
 
         
         // [HttpPost]
