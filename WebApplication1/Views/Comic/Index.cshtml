@@ -1,5 +1,8 @@
-﻿@{
+﻿@using Model.EF
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    comic comic = ViewBag.Data;
+    var dateAt = String.Format("{0:dd/MM/yyyy h:mm}", comic.UpdateAt);
 }
 <div class="comic-cover">
     <div class="row">
@@ -10,54 +13,38 @@
                 <div class="row detail-comic">
                     <div class="col-md-3">
                         <div class="comic-item">
-                            <a href="">
+                            <a href="@Url.Action("Index", "Comic", new {comicId = @comic.ComicId})">
                                 <div class="item-main">
                                     <div class="img-cover">
-                                        <div class="img-bg bg-img-full" url-bg="https://upload.wikimedia.org/wikipedia/vi/6/6b/B%C3%ACa_truy%E1%BB%87n_Doraemon_t%E1%BA%ADp_1_1992-2009_VN.jpg" style="background-image: url(&quot;https://upload.wikimedia.org/wikipedia/vi/6/6b/B%C3%ACa_truy%E1%BB%87n_Doraemon_t%E1%BA%ADp_1_1992-2009_VN.jpg&quot;);"></div>
-                                    </div>
-                                    <div class="chpter-hot">
-                                        Hot
+                                        <div class="img-bg bg-img-full" url-bg="@comic.CommicBanner"></div>
                                     </div>
                                 </div>
                             </a>
                         </div>
+
                         <button type="button" class="last-chapter">
-                            <a href="">Chap mới nhất</a>
+                            <a href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Min(chapter => chapter.ChapterId)})">Đọc từ đầu</a>
                         </button>
                     </div>
                     <div class="col-md-9">
                         <div class="content-comic">
                             <h4>
-                                Doremon
+                                @comic.NameComic
                             </h4>
                             <span class="properti-comic">Thể loại: </span>
 
                             <div class="cover-type">
+                                @* @foreach( category category in comic.comic_category.ToList() ) *@
+                                <a href="">
+                                    <span class="type-comic">Hanh động</span>
+                                </a>
 
-                                <a href="">
-                                    <span class="type-comic">Hanh động</span>
-                                </a>
-                                <a href="">
-                                    <span class="type-comic">Hanh động</span>
-                                </a>
-                                <a href="">
-                                    <span class="type-comic">Hanh động</span>
-                                </a>
-                                <a href="">
-                                    <span class="type-comic">Hanh động</span>
-                                </a>
-                                <a href="">
-                                    <span class="type-comic">Hanh động</span>
-                                </a>
-                                <a href="">
-                                    <span class="type-comic">Hanh động</span>
-                                </a>
 
                             </div>
 
-                            <span class="properti-comic">Tác giả:</span>
+                            <span class="properti-comic">Tác giả: @comic.AuthorComic</span>
 
-                            <span class="properti-comic">Trạng thái:</span>
+                            <span class="properti-comic">Trạng thái: @comic.status_comic.StatusComicName</span>
 
                         </div>
                         <div class="cover-rating">
@@ -70,19 +57,19 @@
                         <div class="col-4">
                             <div class="row">
                                 <div class="col-12 name-extra">Cập nhật</div>
-                                <div class="col-12 content-extra ">12adasd</div>
+                                <div class="col-12 content-extra ">@dateAt </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="row">
                                 <div class="col-12 name-extra">Đánh giá</div>
-                                <div class="col-12 content-extra ">12adasd</div>
+                                <div class="col-12 content-extra ">@comic.Rating/100</div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="row">
                                 <div class="col-12 name-extra">Lượt xem</div>
-                                <div class="col-12 content-extra ">12adasd</div>
+                                <div class="col-12 content-extra ">@comic.chapters.Sum(chapter => chapter.View)</div>
                             </div>
                         </div>
                     </div>
@@ -91,7 +78,7 @@
                     <div class="row">
                         <div class="col-12">
                             <h4>Tóm tắt</h4>
-                            <p>ahsdjhajhdjkahdjkahdjkahjkdhajkhdhajkhd</p>
+                            <p>@comic.NameComic</p>
                         </div>
                     </div>
                 </div>
@@ -101,7 +88,19 @@
                 <div class="row">
                     <div class="col-12">
                         <h4>Danh sách chương</h4>
-
+                        <div class="show-list-chapter">
+                            <ul class="list-chapters">
+                                @foreach (chapter chapter in comic.chapters.ToList())
+                                {
+                                    <a href="@Url.Action("Index", "Chapter", new {chapterId = chapter.ChapterId})">
+                                        <li>
+                                            <p class="name-chapter">@chapter.NameChapter</p>
+                                            <p class="time-at-chapter">@chapter.View</p>
+                                        </li>
+                                    </a>
+                                }
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

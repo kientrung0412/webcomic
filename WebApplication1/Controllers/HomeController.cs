@@ -19,10 +19,17 @@ namespace WebComic.Controllers
             ComicDAO comicDao = new ComicDAO();
             var list = comicDao.ListPage(new Pagination(12, 1));
 
-            // new comic
+            // news comic
             List<comic> comics = list.Comics;
             ViewBag.ComicsMain = comics;
 
+            //phan trang
+            int numPage = list.PageSize;
+            ViewBag.Numpage = numPage;
+
+            int page = list.Page;
+            ViewBag.Page =page;
+            
             return View();
         }
         

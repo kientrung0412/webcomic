@@ -363,7 +363,7 @@ a .type-comic:hover {
     width: 100%;
 }
 
-.extra-comic:before {
+.extra-comic:before, .list-chapter h4:before {
     content: "";
     position: absolute;
     left: 0;
@@ -390,8 +390,61 @@ a .type-comic:hover {
 }
 
 .store-comic {
+    /*margin-top: 25px;*/
+}
+
+.list-chapter {
     margin-top: 25px;
 }
-.list-chapter{
-    mt25
+
+.list-chapter h4 {
+    position: relative;
+    padding-bottom: 15px;
 }
+
+.show-list-chapter{
+    padding: 0;
+    margin: 0;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/*luu y*/
+
+ul.list-chapters {
+
+    list-style-type: none;
+}
+
+ul.list-chapters li {
+    position: relative;
+    transition: all 0.3s;
+    border-radius: 5px;
+    margin: 12px 0;
+    padding: 12px;
+}
+
+
+ul.list-chapters li:hover {
+    background: #007f8d;
+}
+
+
+.name-chapter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.time-at-chapter {
+    position: absolute;
+    top: 0;
+    display: inline-block;
+    right: 0;
+    padding-right: 10px;
+}
+
+/*het luu y*/
+

@@ -56,7 +56,7 @@ namespace Model.DAO
                 sizePage = sizePage / size;
             }
 
-            var sql = WcDbContext.comics.OrderBy(c => c.UpdateAt).Skip(skip).Take(size).ToList();
+            var sql = WcDbContext.comics.OrderByDescending(c => c.UpdateAt).Skip(skip).Take(size).ToList();
 
             PaginationComic paginationComic = new PaginationComic(sizePage, page, sql);
             return paginationComic;

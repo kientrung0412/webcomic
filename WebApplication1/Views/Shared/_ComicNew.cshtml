@@ -4,11 +4,11 @@
     <h2>Truyện mới</h2>
 
     <div class="row">
-    
+
         @foreach (comic comic in  ViewBag.Data)
         {
             <div class="col-lg-2 col-sm-3 col-6">
-    
+
                 <div class="comic-item">
                     <a href="@Url.Action("Index", "Comic", new {comicId = @comic.ComicId})">
                         <div class="item-main">
@@ -16,23 +16,27 @@
                                 <div class="img-bg bg-img-full" url-bg="@comic.CommicBanner"></div>
                             </div>
                             <div class="new-chapter">
-                                @* <a href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Max(chapter => chapter.ChapterId)})">@comic.chapters.Max(chapter => chapter.ChapterId)</a> *@
+                                <a href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Max(chapter => chapter.ChapterId)})">@comic.chapters.Max(chapter => chapter.NameChapter)</a>
                             </div>
-                            <div class="chpter-hot">
-                                Hot
-                            </div>
+                            @if (comic.chapters.ToList().Sum(chapter => chapter.View) / comic.chapters.Count > 2000)
+                            {
+                                <div class="chpter-hot">
+                                    Hot
+                                </div>
+                            }
                         </div>
                     </a>
-    
+
                     <div class="name-comic text-light">
                         <a href="@Url.Action("Index", "Comic", new {comicId = @comic.ComicId})">@comic.NameComic</a>
                     </div>
                 </div>
-    
+
             </div>
         }
-    
-    
+
+
+
     </div>
 
 </div>

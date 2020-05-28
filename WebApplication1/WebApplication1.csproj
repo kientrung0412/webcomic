@@ -176,6 +176,7 @@
         <Content Include="Views\Category\Index.cshtml" />
         <Content Include="Views\Chapter\Index.cshtml" />
         <Content Include="Views\Comic\ComicCategory.cshtml" />
+        <Content Include="Views\Comic\Home.cshtml" />
         <Content Include="Views\Comic\Index.cshtml" />
         <Content Include="Views\Shared\_ComicNew.cshtml" />
         <Content Include="Views\Shared\_Navbar.cshtml" />
