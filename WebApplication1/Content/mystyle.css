@@ -323,13 +323,26 @@ h4 {
 }
 
 .cover-type {
-    display: inline-flex;
-    margin: 10px;
+    display: inline-block;
 }
 
 .type-comic {
-    margin: 0px 13px;
+    margin: 0 5px 10px 5px;
+    display: inline-block;
     background: cadetblue;
     padding: 2px 5px;
     border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+a .type-comic:hover {
+    background: rgba(255, 39, 7, 0.6);
+  
+}
+
+.properti-comic {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
 }
