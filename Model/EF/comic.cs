@@ -15,7 +15,9 @@ namespace Model.EF
         {
             chapters = new HashSet<chapter>();
             comic_category = new HashSet<comic_category>();
+            //thêm mới
             StatusComicId = 4;
+            ReleaseDate = DateTime.Now;
         }
 
         public int ComicId { get; set; }

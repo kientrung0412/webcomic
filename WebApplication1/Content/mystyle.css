@@ -309,7 +309,7 @@ button.last-chapter {
     transition: all 0.3s;
 }
 
-button.last-chapter a {
+button.last-chapter {
     font-size: 18px;
     margin-bottom: 5px;
 }

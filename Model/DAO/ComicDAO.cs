@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -71,11 +72,72 @@ namespace Model.DAO
             return comic;
         }
 
-        public List<comic> SearchAdvanced()
+        public List<comic> SearchAdvanced(SuperSearch search)
         {
-            var list = WcDbContext.comics.SqlQuery(
-                    " select comic.ComicId, NameComic, CommicBanner from comic join (select ComicId from comic_category where CategoryId in (1, 4) group by ComicId having COUNT(CategoryId) = 2 EXCEPT select ComicId from comic_category where CategoryId in (3) group by ComicId having COUNT(CategoryId) = 1) t1 on comic.ComicId = t1.ComicId where StatusComicId < 4 ")
-                .ToList();
+            char c = ',';
+            String strIn = "''";
+            String strNotIn = "''";
+            String sqlJoin;
+
+            int countListIn = search.ListIn.Count;
+
+            if (countListIn != 0)
+            {
+                strIn = search.ListIn.Aggregate((s, s1) => s + c + s1);
+            }
+
+
+            int countListNotIn = search.ListNotIn.Count;
+            if (countListNotIn != 0)
+            {
+                strNotIn = search.ListNotIn.Aggregate((s, s1) => s + c + s1);
+            }
+
+            if (countListIn > 0)
+            {
+                sqlJoin = String.Format(
+                    "join (select ComicId from comic_category where CategoryId in ({0}) group by ComicId having COUNT(CategoryId) = {1} EXCEPT select ComicId from comic_category where CategoryId in ({2}) group by ComicId having COUNT(CategoryId) = {3}) t1 on comic.ComicId = t1.ComicId",
+                    strIn, countListIn,
+                    strNotIn, countListNotIn
+                );
+            }
+            else
+            {
+                sqlJoin = String.Format(
+                    "join (select ComicId from comic_category where CategoryId in ({0}) group by ComicId having COUNT(CategoryId) = {1}) t1 on comic.ComicId = t1.ComicId",
+                    strNotIn, countListNotIn
+                );
+            }
+
+            if (countListIn ==0 && countListNotIn ==0)
+            {
+                sqlJoin = "";
+            }
+            
+
+
+            String sql = String.Format(
+                " select * from comic {0} where StatusComicId < 4 ",
+                sqlJoin
+            );
+
+            if (search.StatusId > 0)
+            {
+                sql = sql + String.Format(" AND StatusComicId = {0} ", search.StatusId);
+            }
+
+            if (search.NationId > 0)
+            {
+                sql = sql + String.Format(" AND NationId = {0} ", search.NationId);
+            }
+
+            if (search.NameComic != null || !search.NameComic.Trim().Equals(""))
+            {
+                sql = sql + String.Format(" AND NameComic LIKE '{0}'", search.NameComic);
+            }
+            
+            var list = WcDbContext.comics.SqlQuery(sql).ToList();
+
             return list;
         }
 
@@ -83,13 +145,12 @@ namespace Model.DAO
         {
             var list = WcDbContext.comics.OrderBy(comic => comic.ComicId).Take(10).ToList();
             return list;
-        } 
-        
+        }
+
         public List<comic> NewComic()
         {
             var list = WcDbContext.comics.OrderBy(comic => comic.ReleaseDate).Take(12).ToList();
             return list;
         }
-        
     }
 }

@@ -46,5 +46,27 @@
 
     })
 
+    //tooltip
+    var item = $('.comic-item');
+
+    // item.hover(function () {
+    //
+    //     var id = $(this).attr("id-comic");
+    //
+    //     tippy('.comic-item', {
+    //         content: $(this).attr("id-comic"),
+    //         arrowStyles: 'narrow',
+    //         placement: "right",
+    //         allowHTML: true,
+    //         maxWidth: 240,
+    //     })
+    //
+    //    
+    // })
+
+
+    
+    
+    
 });
 

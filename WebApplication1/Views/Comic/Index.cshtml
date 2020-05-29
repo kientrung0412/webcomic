@@ -2,7 +2,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     comic comic = ViewBag.Data;
-    var dateAt = String.Format("{0:dd/MM/yyyy h:mm}", comic.UpdateAt);
+    var dateAt = String.Format("{0:dd/MM/yyyy hh:mm}", comic.UpdateAt);
 }
 <div class="comic-cover">
     <div class="row">
@@ -22,9 +22,11 @@
                             </a>
                         </div>
 
-                        <button type="button" class="last-chapter">
-                            <a href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Min(chapter => chapter.ChapterId)})">Đọc từ đầu</a>
-                        </button>
+                        <a class="" href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Min(chapter => chapter.ChapterId)})">
+                            <button type="button" class="last-chapter">
+                                Đọc từ đầu
+                            </button>
+                        </a>
                     </div>
                     <div class="col-md-9">
                         <div class="content-comic">
@@ -34,11 +36,12 @@
                             <span class="properti-comic">Thể loại: </span>
 
                             <div class="cover-type">
-                                @* @foreach( category category in comic.comic_category.ToList() ) *@
-                                <a href="">
-                                    <span class="type-comic">Hanh động</span>
-                                </a>
-
+                                @foreach (comic_category category in comic.comic_category.ToList())
+                                {
+                                    <a href="">
+                                        <span class="type-comic">@category.category.NameCategory</span>
+                                    </a>
+                                }
 
                             </div>
 

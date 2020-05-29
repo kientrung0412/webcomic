@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Model.EF;
@@ -38,6 +39,12 @@ namespace Model.DAO
             int? a = chapter.View;
             chapter.View = a + 1;
             WcDbContext.SaveChanges();
+        }
+
+        public chapter Select(int id)
+        {
+            var chapter = WcDbContext.chapters.Single(c => c.ChapterId == id);
+            return chapter;
         }
     }
 }
