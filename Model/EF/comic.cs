@@ -38,6 +38,9 @@ namespace Model.EF
 
         public int? StatusComicId { get; set; }
 
+        //thêm mới
+        [StringLength(2000)] public String SummaryComic { get; set; }
+
         [StringLength(256)] public string CommicBanner { get; set; }
 
         [Column(TypeName = "datetime2")] public DateTime? UpdateAt { get; set; }

@@ -11,11 +11,17 @@ namespace Model.Models
 {
     public class UploadFile
     {
+        public String SetNameFile(HttpPostedFileBase file)
+        {
+            String fileName = String.Format("{0}_{1}", DateTime.Now.ToString("ddMMyy_hhmmss"), file.FileName);
+            return fileName;
+        }
+
         public FileUpload Upload(HttpPostedFileBase file, String filePath)
         {
             FileUpload fileUpload = new FileUpload();
-            
-            if (file.ContentLength > 0 )
+
+            if (file.ContentLength > 0)
             {
                 String fileName = String.Format("{0}_{1}", DateTime.Now.ToString("ddMMyy_hhmmss"), file.FileName);
 

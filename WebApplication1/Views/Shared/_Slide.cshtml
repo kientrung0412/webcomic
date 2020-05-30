@@ -2,7 +2,7 @@
 @* Slide *@
 <div class="slide bg-main ">
 
-    <h2>Chuyện hot</h2>
+    <h2>Top chuyện hàng đầu</h2>
 
     <div class="slide-main">
         <div class="owl-carousel owl-theme">
@@ -17,14 +17,18 @@
                                 <div class="img-cover">
                                     <div class="img-bg bg-img-full" url-bg="@comic.CommicBanner"></div>
                                 </div>
-                                <div class="new-chapter">
-                                    <a href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Max(chapter => chapter.ChapterId)})">@comic.chapters.Max(chapter => chapter.NameChapter)</a>
-                                </div>
-                                @if (comic.chapters.ToList().Sum(chapter => chapter.View) / comic.chapters.Count > 2000)
+                                @if (comic.chapters.Count > 0)
                                 {
-                                    <div class="chpter-hot">
-                                        Hot
+                                    <div class="new-chapter">
+                                        <a href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Max(chapter => chapter.ChapterId)})">@comic.chapters.Max(chapter => chapter.NameChapter)</a>
                                     </div>
+
+                                    if (comic.chapters.ToList().Sum(chapter => chapter.View) / comic.chapters.Count > 2000)
+                                    {
+                                        <div class="chpter-hot">
+                                            Hot
+                                        </div>
+                                    }
                                 }
                             </div>
                         </a>

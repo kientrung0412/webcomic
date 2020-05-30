@@ -21,12 +21,14 @@
                                 </div>
                             </a>
                         </div>
-
-                        <a class="" href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Min(chapter => chapter.ChapterId)})">
-                            <button type="button" class="last-chapter">
-                                Đọc từ đầu
-                            </button>
-                        </a>
+                        @if (comic.chapters.Count > 0)
+                        {
+                            <a class="" href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Min(chapter => chapter.ChapterId)})">
+                                <button type="button" class="last-chapter">
+                                    Đọc từ đầu
+                                </button>
+                            </a>
+                        }
                     </div>
                     <div class="col-md-9">
                         <div class="content-comic">
@@ -81,7 +83,7 @@
                     <div class="row">
                         <div class="col-12">
                             <h4>Tóm tắt</h4>
-                            <p>@comic.NameComic</p>
+                            <p>@comic.SummaryComic</p>
                         </div>
                     </div>
                 </div>
@@ -93,15 +95,20 @@
                         <h4>Danh sách chương</h4>
                         <div class="show-list-chapter">
                             <ul class="list-chapters">
-                                @foreach (chapter chapter in comic.chapters.ToList())
+
+                                @if (comic.chapters.Count > 0)
                                 {
-                                    <a href="@Url.Action("Index", "Chapter", new {chapterId = chapter.ChapterId})">
-                                        <li>
-                                            <p class="name-chapter">@chapter.NameChapter</p>
-                                            <p class="time-at-chapter">@chapter.View</p>
-                                        </li>
-                                    </a>
+                                    foreach (chapter chapter in comic.chapters.ToList())
+                                    {
+                                        <a href="@Url.Action("Index", "Chapter", new {chapterId = chapter.ChapterId})">
+                                            <li>
+                                                <p class="name-chapter">@chapter.NameChapter</p>
+                                                <p class="time-at-chapter">@chapter.View</p>
+                                            </li>
+                                        </a>
+                                    }
                                 }
+
                             </ul>
                         </div>
                     </div>
