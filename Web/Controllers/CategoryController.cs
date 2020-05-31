@@ -35,12 +35,15 @@ namespace WebComic.Controllers
             return PartialView("_Navbar");
         }
 
-        public ActionResult _SeachCategory()
+        public ActionResult _FilterBar()
         {
             CategoryDAO categoryDao = new CategoryDAO();
             ViewBag.Data = categoryDao.List().OrderBy(category => category.CategoryId);
 
-            return PartialView("_SeachCategory");
+            StatusComicDAO statusComicDao = new StatusComicDAO();
+            ViewBag.Status = statusComicDao.ListUser();
+            
+            return PartialView("_FilterBar");
         }
     }
 }

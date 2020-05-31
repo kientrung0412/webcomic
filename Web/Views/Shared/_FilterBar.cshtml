@@ -1,0 +1,56 @@
+﻿@using Model.EF
+
+<div class="tab bg-main">
+
+    <h2>Tên chuyện</h2>
+    <div class="form-search">
+        <input type="text" class="form-control" name="name" id="" placeholder="Tên truyện">
+    </div>
+
+</div>
+
+
+<div class="tab bg-main">
+    <h2>Thể loại</h2>
+    <div class="form-search max-h-370">
+        <div class="part-type">
+
+            @foreach (category category in ViewBag.Data)
+            {
+                <label class="check">
+                    @category.NameCategory
+                    <input type="checkbox" name="category" value="@category.CategoryId" data-check="0">
+                    <span></span>
+                </label>
+            }
+        </div>
+
+    </div>
+
+    <span class="more">Xem tất cả</span>
+
+</div>
+
+<div class="tab bg-main">
+
+    <h2>Tình trạng</h2>
+    <div class="form-search">
+        <select class="form-control" name="status" id="">
+            @foreach (status_comic stcm in ViewBag.Status)
+            {
+                <option value="@stcm.StatusComicId">@stcm.StatusComicName</option>
+            }
+
+        </select>
+    </div>
+
+</div>
+
+<div class="tab bg-main">
+
+    <h2>Tên tác giả</h2>
+    <div class="form-search">
+        <input type="text" class="form-control" name="name" id="" placeholder="Tên tác giả">
+    </div>
+
+</div>

@@ -64,8 +64,8 @@ h2:after {
 
 /*   Css home/index   */
 
-.main.bg-main {
-    padding: 30px 20px 30px 20px;
+.main.bg-main, .tab.bg-main {
+    padding: 25px 20px 25px 20px;
     margin-top: 25px;
 }
 
@@ -204,6 +204,12 @@ a.nav-link {
     padding: 8px 15px !important;
 }
 
+a#show-category:after {
+    content: "\f35f";
+    font-family: "Ionicons";
+    right: -5px;
+    position: relative;
+}
 
 input.form-control.ip-search, button.btn.btn-white.my-2 {
     overflow: hidden;
@@ -472,7 +478,7 @@ ul.list-chapters li:hover {
     background: rgba(234, 234, 234, 0.64);;
     color: #fff;
     text-align: center;
- 
+
 }
 
 .check span:before {
@@ -492,4 +498,38 @@ ul.list-chapters li:hover {
 .check input[data-check = "-1"] ~ span:before {
     content: "\f129";
     color: rgba(208, 0, 0, 1);
+}
+
+/*name ajax search*/
+
+.form-search input[type=text] {
+    position: relative;
+    width: 100%;
+}
+
+.form-search input[type=text]:focus {
+    border: none;
+    overflow: hidden;
+    box-shadow: none;
+}
+.form-search{
+    overflow: hidden;
+}
+.max-h-370{
+    transition: all 0.5s;
+    max-height: 370px;
+}
+
+span.more {
+    float: right;
+    right: 0;
+    cursor: pointer;
+    color: #01dfff;
+    font-size: 13px;
+}
+span.more:after{
+    position: relative;
+    content: "\f35f";
+    left: 5px;
+    font-family: "Ionicons";
 }

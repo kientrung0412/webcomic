@@ -20,16 +20,16 @@
 
     //menu
     $('#show-category').click(function () {
-        $(".list-category").slideToggle("slow");
+        $(".list-category").stop().slideToggle("slow");
         event.stopPropagation();
     });
 
     $(".navbar-toggler").click(function () {
-        $(".list-category").slideUp("fast");
+        $(".list-category").stop().slideUp("fast");
     });
 
     $(window).click(function () {
-        $(".list-category").slideUp("slow");
+        $(".list-category").stop().slideUp("slow");
     });
 
     //cuộn
@@ -50,7 +50,7 @@
     function getData() {
         var listIn = new Array();
         var listNotIn = new Array();
-        
+
         $("input[name = category]").each(function () {
             var idCategorey = $(this).val();
             var status = $(this).attr("data-check");
@@ -64,39 +64,60 @@
                     break
             }
 
+
         })
-
+        
         //ajax to ComicController
-        
-        
-    }
 
+        $.ajax({
+            url : "/Comic/Test",
+            method : "GET",
+            traditional: true,
+            data : {
+                listIn : listIn,
+                listNotIn : listNotIn,
+            }, 
+            success: function (data) {
+                console.log(data);
+            }
+        })
+        
+
+    }
 
     //check box 3 status
 
+
     var check = $('.check');
 
-    check.click(function () {
+    check.change(function () {
 
         var dataCheck = $(this).children("input").attr("data-check");
 
         switch (dataCheck) {
             case "0":
                 $(this).children("input").attr("data-check", "1");
-                break
+                break;
             case "1":
                 $(this).children("input").attr("data-check", "-1");
-                break
+                break;
             case "-1":
                 $(this).children("input").attr("data-check", "0");
-                break
+                break;
 
         }
-
+        
         getData();
 
     })
 
+    
+    //more
+    
+    $('.more').click(function () {
+        $('.more').siblings('.form-search').stop().toggleClass("max-h-370");
+        $('.more').remove();
+    })
 
 });
 

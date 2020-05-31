@@ -99,5 +99,10 @@ namespace WebComic.Controllers
 
             return View();
         }
+
+        public ActionResult Test(String[] listIn, String[] listNotIn)
+        {
+            return Json(new {demo = listIn}, JsonRequestBehavior.AllowGet);
+        }
     }
 }

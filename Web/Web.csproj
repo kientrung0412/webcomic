@@ -181,7 +181,7 @@
         <Content Include="Views\Comic\SearchAdvanced.cshtml" />
         <Content Include="Views\Shared\_ComicNew.cshtml" />
         <Content Include="Views\Shared\_Navbar.cshtml" />
-        <Content Include="Views\Shared\_SeachCategory.cshtml" />
+        <Content Include="Views\Shared\_FilterBar.cshtml" />
         <Content Include="Views\Shared\_Slide.cshtml" />
         <Content Include="Views\UploadFile\Index.cshtml" />
         <Content Include="Web.config" />
