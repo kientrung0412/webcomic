@@ -11,8 +11,8 @@
         <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>WebApplication1</RootNamespace>
-        <AssemblyName>WebApplication1</AssemblyName>
+        <RootNamespace>Web</RootNamespace>
+        <AssemblyName>Web</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <MvcBuildViews>false</MvcBuildViews>
         <UseIISExpress>true</UseIISExpress>
@@ -178,8 +178,10 @@
         <Content Include="Views\Comic\ComicCategory.cshtml" />
         <Content Include="Views\Comic\Home.cshtml" />
         <Content Include="Views\Comic\Index.cshtml" />
+        <Content Include="Views\Comic\SearchAdvanced.cshtml" />
         <Content Include="Views\Shared\_ComicNew.cshtml" />
         <Content Include="Views\Shared\_Navbar.cshtml" />
+        <Content Include="Views\Shared\_SeachCategory.cshtml" />
         <Content Include="Views\Shared\_Slide.cshtml" />
         <Content Include="Views\UploadFile\Index.cshtml" />
         <Content Include="Web.config" />

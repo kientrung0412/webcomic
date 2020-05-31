@@ -10,6 +10,7 @@ namespace Model.Models
         private int _nationId;
         private int _statusId;
         private String _nameComic;
+        private String _authorComic;
 
 
         public SuperSearch()
@@ -20,13 +21,20 @@ namespace Model.Models
             ListNotIn = new List<string>();
         }
 
-        public SuperSearch(List<string> listIn, List<string> listNotIn, int nationId, int statusId, string nameComic)
+        public SuperSearch(List<string> listIn, List<string> listNotIn, int nationId, int statusId, string nameComic, string authorComic)
         {
             _listIn = listIn;
             _listNotIn = listNotIn;
             _nationId = nationId;
             _statusId = statusId;
             _nameComic = nameComic;
+            _authorComic = authorComic;
+        }
+
+        public string AuthorComic
+        {
+            get => _authorComic;
+            set => _authorComic = value;
         }
 
         public List<string> ListIn

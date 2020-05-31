@@ -28,7 +28,7 @@
                     </div>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="@Url.Action("Index", "Category")">Lọc nâng cao</a>
+                    <a class="nav-link" href="@Url.Action("SearchAdvanced", "Comic")">Lọc nâng cao</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="@Url.Action("Index", "Category")">Đăng nhập</a>
@@ -37,10 +37,10 @@
                     <a class="nav-link" href="@Url.Action("Index", "Category")">Đăng ký</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" action="">
-                <input class="form-control ip-search" type="search" placeholder="Nhập tên chuyện ">
+            <form class="form-inline my-2 my-lg-0" action="@Url.Action("SearchAdvanced","Comic")">
+                <input class="form-control ip-search" type="search" name="NameComic" placeholder="Nhập tên chuyện ">
                 <button class="btn btn-white my-2" type="submit">
-                    <i class="fas fa-search"></i>
+                    <i class="ion-ios-search-strong"></i>
                 </button>
             </form>
         </div>

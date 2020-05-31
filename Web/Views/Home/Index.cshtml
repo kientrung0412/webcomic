@@ -2,7 +2,6 @@
     ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using System.Activities.Statements
 @using Model.EF
 @{
     Html.RenderAction("_Slide", "Comic");
@@ -61,9 +60,9 @@
 
             @if (ViewBag.Page > 1)
             {
-                <li class="page-item disabled">
+                <li class="page-item">
                     <a class="page-link" href="@Url.Action("Home", "Comic", new {page = ViewBag.Page - 1})" tabindex="-1" aria-disabled="true">
-                        <i class="fas fa-chevron-left"></i>
+                       <i class="ion-chevron-left"></i>
                     </a>
                 </li>
             }
@@ -89,7 +88,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" href="@Url.Action("Home", "Comic", new {page = ViewBag.Page + 1})">
-                        <i class="fas fa-chevron-right"></i>
+                        <i class="ion-chevron-right"></i>
                     </a>
                 </li>
             }

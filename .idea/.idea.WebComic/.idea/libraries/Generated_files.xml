@@ -1,14 +1,8 @@
 ﻿<component name="libraryTable">
   <library name="Generated files" type="javaScript">
-    <properties>
-      <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/WebApplication1/Scripts/all.min.js" />
-        <item url="file://$PROJECT_DIR$/WebApplication1/Scripts/popper.min.js" />
-      </sourceFilesUrls>
-    </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/WebApplication1/Scripts/all.min.js" />
-      <root url="file://$PROJECT_DIR$/WebApplication1/Scripts/popper.min.js" />
+      <root url="file://$PROJECT_DIR$/Web/Scripts/all.min.js" />
+      <root url="file://$PROJECT_DIR$/Web/Scripts/popper.min.js" />
     </CLASSES>
     <SOURCES />
   </library>

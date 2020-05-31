@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,19 +20,21 @@ namespace WebComic.Controllers
 
             if (Request.Cookies["history"] != null)
             {
-                // var json = Request.Cookies["history"].Value;
+                var json = Request.Cookies["history"].Value;
                 // JObject o = JObject.Parse(json);
                 // JArray a = (JArray)o[0];
                 // JToken[] list = a.ToArray();
             }
             else
             {
-                SortedList<int, String> ints = new SortedList<int, String>();
+                NameValueCollection ints = new NameValueCollection();
 
-                ints.Add(chapterId, String.Format("{0:dd/MM/yyyy hh:mm }", DateTime.Now));
+                ints.Add(chapterId.ToString(),DateTime.Now.ToString("{0:dd/MM/yyyy hh:mm }"));
 
-
-                var cookie = new HttpCookie("history", JsonConvert.SerializeObject(ints));
+                var cookie = new HttpCookie("history");
+                cookie.Values.Add(ints);
+                
+                
                 cookie.Expires = DateTime.Now.AddDays(30);
                 Response.AppendCookie(cookie);
             }

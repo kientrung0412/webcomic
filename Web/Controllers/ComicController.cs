@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Routing;
+using System.Web.Routing;
 using Model.DAO;
 using Model.EF;
 using Model.Models;
@@ -34,7 +36,7 @@ namespace WebComic.Controllers
             }
 
             ComicDAO comicDao = new ComicDAO();
-            var list = comicDao.ListPage(new Pagination(12, page));
+            var list = comicDao.NewUpComic(new Pagination(12, page));
 
             // news comic
 
@@ -71,10 +73,31 @@ namespace WebComic.Controllers
         }
 
 
-        // [HttpPost]
-        // public ActionResult SearchAdvanced()
-        // {
-        //     
-        // }
+        public ActionResult SearchAdvanced(String NameComic, String page)
+        {
+            SuperSearch superSearch = new SuperSearch();
+            ComicDAO comicDao = new ComicDAO();
+
+            superSearch.NameComic = NameComic;
+
+            String url = "";
+
+            if (superSearch.NameComic != null)
+            {
+                url = url + String.Format("{0}={1}", nameof(superSearch.NameComic), NameComic);
+            }
+
+            var comics = comicDao.SearchAdvanced(superSearch, new Pagination(12, Convert.ToInt32(page)));
+
+            ViewBag.Data = comics.Comics;
+
+            ViewBag.Numpage = comics.PageSize;
+
+            ViewBag.Page = comics.Page;
+
+            ViewBag.Url = url;
+
+            return View();
+        }
     }
 }

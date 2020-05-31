@@ -39,14 +39,19 @@ namespace Model.DAO
         }
 
 
-        public PaginationComic ListPage(Pagination pagination)
+        public PaginationComic ListPage(Pagination pagination, IOrderedQueryable<comic> comics)
         {
             int page = pagination.Page;
             int size = pagination.Size;
 
+            if (page < 1)
+            {
+                page = 1;
+            }
+
             int skip = (page - 1) * size;
 
-            int sizePage = WcDbContext.comics.Count();
+            int sizePage = comics.Count();
 
             if (sizePage % size > 0)
             {
@@ -57,7 +62,36 @@ namespace Model.DAO
                 sizePage = sizePage / size;
             }
 
-            var sql = WcDbContext.comics.OrderByDescending(c => c.UpdateAt).Skip(skip).Take(size).ToList();
+            var sql = comics.Skip(skip).Take(size).ToList();
+
+            PaginationComic paginationComic = new PaginationComic(sizePage, page, sql);
+            return paginationComic;
+        }
+
+        public PaginationComic ListPage(Pagination pagination, IOrderedEnumerable<comic> comics)
+        {
+            int page = pagination.Page;
+            int size = pagination.Size;
+
+            if (page < 1)
+            {
+                page = 1;
+            }
+
+            int skip = (page - 1) * size;
+
+            int sizePage = comics.Count();
+
+            if (sizePage % size > 0)
+            {
+                sizePage = sizePage / size + 1;
+            }
+            else
+            {
+                sizePage = sizePage / size;
+            }
+
+            var sql = comics.Skip(skip).Take(size).ToList();
 
             PaginationComic paginationComic = new PaginationComic(sizePage, page, sql);
             return paginationComic;
@@ -72,7 +106,7 @@ namespace Model.DAO
             return comic;
         }
 
-        public List<comic> SearchAdvanced(SuperSearch search)
+        public PaginationComic SearchAdvanced(SuperSearch search, Pagination pagination)
         {
             char c = ',';
             String strIn = "''";
@@ -80,18 +114,19 @@ namespace Model.DAO
             String sqlJoin;
 
             int countListIn = search.ListIn.Count;
+            int countListNotIn = search.ListNotIn.Count;
+
 
             if (countListIn != 0)
             {
                 strIn = search.ListIn.Aggregate((s, s1) => s + c + s1);
             }
 
-
-            int countListNotIn = search.ListNotIn.Count;
             if (countListNotIn != 0)
             {
                 strNotIn = search.ListNotIn.Aggregate((s, s1) => s + c + s1);
             }
+
 
             if (countListIn > 0)
             {
@@ -109,17 +144,17 @@ namespace Model.DAO
                 );
             }
 
-            if (countListIn ==0 && countListNotIn ==0)
+            if (countListIn == 0 && countListNotIn == 0)
             {
                 sqlJoin = "";
             }
-            
 
 
             String sql = String.Format(
                 " select * from comic {0} where StatusComicId < 4 ",
                 sqlJoin
             );
+
 
             if (search.StatusId > 0)
             {
@@ -131,12 +166,19 @@ namespace Model.DAO
                 sql = sql + String.Format(" AND NationId = {0} ", search.NationId);
             }
 
-            if (search.NameComic != null || !search.NameComic.Trim().Equals(""))
+            if (search.NameComic != null && !search.NameComic.Trim().Equals(""))
             {
-                sql = sql + String.Format(" AND NameComic LIKE '{0}'", search.NameComic);
+                sql = sql + String.Format(" AND NameComic LIKE N'%{0}%'", search.NameComic);
             }
-            
-            var list = WcDbContext.comics.SqlQuery(sql).ToList();
+
+            if (search.AuthorComic != null && !search.AuthorComic.Trim().Equals(""))
+            {
+                sql = sql + String.Format(" AND NameComic LIKE N'%{0}%'", search.AuthorComic);
+            }
+
+            var comics = WcDbContext.comics.SqlQuery(sql).OrderBy(comic => comic.NameComic);
+
+            var list = ListPage(pagination, comics);
 
             return list;
         }
@@ -150,6 +192,13 @@ namespace Model.DAO
         public List<comic> NewComic()
         {
             var list = WcDbContext.comics.OrderBy(comic => comic.ReleaseDate).Take(12).ToList();
+            return list;
+        }
+
+        public PaginationComic NewUpComic(Pagination pagination)
+        {
+            var sql = WcDbContext.comics.OrderByDescending(c => c.UpdateAt);
+            var list = ListPage(pagination, sql);
             return list;
         }
     }

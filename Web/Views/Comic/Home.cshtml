@@ -58,7 +58,7 @@
 
             @if (ViewBag.Page > 1)
             {
-                <li class="page-item disabled">
+                <li class="page-item">
                     <a class="page-link" href="@Url.Action("Home", "Comic", new {page = ViewBag.Page - 1})" tabindex="-1" aria-disabled="true">
                         <i class="fas fa-chevron-left"></i>
                     </a>

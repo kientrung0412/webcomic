@@ -17,7 +17,7 @@ namespace WebComic.Controllers
         public ActionResult Index()
         {
             ComicDAO comicDao = new ComicDAO();
-            var list = comicDao.ListPage(new Pagination(12, 1));
+            var list = comicDao.NewUpComic(new Pagination(12, 1));
 
             // news comic
             List<comic> comics = list.Comics;

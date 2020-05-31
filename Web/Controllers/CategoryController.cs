@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Model.DAO;
 using Model.EF;
@@ -32,6 +33,14 @@ namespace WebComic.Controllers
             ViewBag.Data = categoryDao.List();
 
             return PartialView("_Navbar");
+        }
+
+        public ActionResult _SeachCategory()
+        {
+            CategoryDAO categoryDao = new CategoryDAO();
+            ViewBag.Data = categoryDao.List().OrderBy(category => category.CategoryId);
+
+            return PartialView("_SeachCategory");
         }
     }
 }
