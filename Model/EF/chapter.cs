@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace Model.EF
 {
     using System;
@@ -27,14 +29,16 @@ namespace Model.EF
 
         public int? View { get; set; }
 
-        public virtual comic comic { get; set; }
+        [JsonIgnore] public virtual comic comic { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
             "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<comment> comments { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
             "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<image_chapter> image_chapter { get; set; }
     }
 }

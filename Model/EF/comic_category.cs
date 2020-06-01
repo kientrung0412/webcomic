@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace Model.EF
 {
     using System;
@@ -15,8 +17,10 @@ namespace Model.EF
 
         public int? CategoryId { get; set; }
 
+        [JsonIgnore]
         public virtual category category { get; set; }
 
+        [JsonIgnore]
         public virtual comic comic { get; set; }
     }
 }

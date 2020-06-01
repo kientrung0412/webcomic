@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace Model.EF
 {
     using System;
@@ -22,6 +24,7 @@ namespace Model.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
             "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<image_chapter> image_chapter { get; set; }
     }
 }

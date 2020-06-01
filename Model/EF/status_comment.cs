@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace Model.EF
 {
     using System;
@@ -21,6 +23,7 @@ namespace Model.EF
         public string StatusCommentName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<comment> comments { get; set; }
     }
 }

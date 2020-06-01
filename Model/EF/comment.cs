@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace Model.EF
 {
     using System;
@@ -22,10 +24,13 @@ namespace Model.EF
 
         public int? StatusCommentId { get; set; }
 
+        [JsonIgnore]
         public virtual chapter chapter { get; set; }
 
+        [JsonIgnore]
         public virtual status_comment status_comment { get; set; }
 
+        [JsonIgnore]
         public virtual user user { get; set; }
     }
 }
