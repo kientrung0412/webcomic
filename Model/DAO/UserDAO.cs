@@ -33,19 +33,19 @@ namespace Model.DAO
                     StatusUserId = statusUser.StatusUserId,
                     StatusUserName = statusUser.StatusUserName
                 }).ToListAsync();
-            
+
             return list;
         }
 
-        public async Task<user> OneUserAs(int userId)
+        //kiểm tra người dùng có trong data base chưa
+        public user OneUser(int userId)
         {
-            user sql = await WcDbContext.users.SingleAsync(u => u.UserId == userId);
+            user sql = WcDbContext.users.Single(u => u.UserId == userId);
             return sql;
         }
 
         public async Task<int> UpdateAS(user user)
         {
-
             user sql = await WcDbContext.users.SingleAsync(u => u.UserId == user.UserId);
 
             sql.Username = user.Username;
@@ -60,7 +60,7 @@ namespace Model.DAO
 
         public async Task<int> ChangePassAs(ChangePass changePass)
         {
-            user user = OneUserAs(changePass.UserId).Result;
+            user user = OneUser(changePass.UserId);
             String oldPass = StringToMd5.GetMd5Hash(changePass.OldPass);
 
             if (user.UserPass == oldPass)
@@ -76,23 +76,23 @@ namespace Model.DAO
             }
         }
 
-        public async Task<int> SignUpAs(user user)
+        //đăng ký
+        public int SignUp(user user)
         {
             var a = CheckMail(user.UserMail);
-            
+
             if (a == 0)
             {
                 var sql = WcDbContext.users.Add(user);
-                var n = await WcDbContext.SaveChangesAsync();
+                var n = WcDbContext.SaveChanges();
+                //cho phép đăng ký
                 return n;
             }
             else
             {
-                
                 //email đã tồn tại
                 return -1;
             }
-           
         }
 
 
