@@ -1,4 +1,9 @@
 ﻿$(document).ready(function () {
+
+    var page = 1;
+
+    LoadBg();
+
     //slide
     $(".owl-carousel").owlCarousel({
         loop: true,
@@ -50,11 +55,12 @@
     function getData() {
         var listIn = new Array();
         var listNotIn = new Array();
-        
+
         var nameComic = $('input[name = name]').val();
         var author = $('input[name = author]').val();
         var nation = $('select[name = nation]').children('option:selected').val();
         var status = $('select[name = status]').children('option:selected').val();
+        var sort = $('select[name = sort]').children('option:selected').val();
 
         $("input[name = category]").each(function () {
             var idCategorey = $(this).val();
@@ -69,7 +75,7 @@
                     break
             }
         })
-        
+
 
         //ajax to ComicController
 
@@ -84,10 +90,70 @@
                 nameComic: nameComic,
                 status: status,
                 author: author,
-                nation: nation
+                nation: nation,
+                sort: sort,
+                page: page
             },
             success: function (data) {
+                var urlNew = this.url;
+                urlNew = urlNew.replace("Test?", "SearchAdvanced?")
+                history.pushState('', 'Search', urlNew);
+
                 console.log(data);
+
+                url = $(this).attr('href');
+                history.pushState({key: url}, '', url);
+
+                $('.ajax-show').children().remove();
+                $('.pagination').children().remove();
+                
+                $(data.PageSize).each(function (index , page) {
+                    $('.pagination').append(
+                        '<li class="page-item">' +
+                        '<a class="page-link" href="/Comic/SearchAdvanced?page=@pageBack&@ViewBag.Url" tabindex="-1" aria-disabled="true">' +
+                        '<i class="ion-chevron-left"></i>' +
+                        '</a>' +
+                        '</li>'
+                    );
+                })
+                
+                $(data.Comics).each(function (index, comic) {
+
+                    var newChapter = "";
+
+                    if (comic.chapters.length > 0) {
+                        var chapter = comic.chapters[comic.chapters.length - 1];
+                        var ChapterId = chapter.ChapterId;
+                        var NameChapter = chapter.NameChapter;
+
+                        newChapter = '<div class="new-chapter"><a href="/Comic?comicId=1">' +
+                            '</a><a href="/Chapter?chapterId=' + ChapterId + '">' + NameChapter + '</a>' +
+                            '</div>';
+                    }
+
+                    $('.ajax-show').append(
+                        '<div class="col-sm-3 col-6">' +
+                        '<div class="comic-item">' +
+                        '<a href="/Comic?comicId=' + comic.ComicId + '">' +
+                        '<div class="item-main">' +
+                        '<div class="img-cover">' +
+                        '<div class="img-bg bg-img-full" url-bg="' + comic.CommicBanner + '" ></div>' +
+                        '</div>' +
+                        newChapter +
+                        '</div>' +
+                        '</a>' +
+                        '<div class="name-comic text-light">' +
+                        '<a href="/Comic?comicId=10">' + comic.NameComic + '</a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                    );
+                    
+                    
+                    
+                    
+                })
+                LoadBg();
             }
         })
 
@@ -119,6 +185,24 @@
         getData();
 
     })
+
+    //even bộ lọc
+
+    $('input[name = name]').stop().keyup(function () {
+        getData();
+    });
+    $('input[name = author]').stop().keyup(function () {
+        getData();
+    });
+    $('select[name = nation]').stop().change(function () {
+        getData();
+    });
+    $('select[name = status]').stop().change(function () {
+        getData();
+    });
+    $('select[name = sort]').stop().change(function () {
+        getData();
+    });
 
 
     //more

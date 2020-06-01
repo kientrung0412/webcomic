@@ -31,14 +31,14 @@
                     <a class="nav-link" href="@Url.Action("SearchAdvanced", "Comic")">Lọc nâng cao</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="@Url.Action("Index", "Category")">Đăng nhập</a>
+                    <a class="nav-link" href="@Url.Action("Index", "User")">Đăng nhập</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="@Url.Action("Index", "Category")">Đăng ký</a>
+                    <a class="nav-link" href="@Url.Action("Index", "User")">Đăng ký</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0" action="@Url.Action("SearchAdvanced","Comic")">
-                <input class="form-control ip-search" type="search" name="NameComic" placeholder="Nhập tên chuyện ">
+                <input class="form-control ip-search" type="search" name="nameComic" placeholder="Nhập tên chuyện ">
                 <button class="btn btn-white my-2" type="submit">
                     <i class="ion-ios-search-strong"></i>
                 </button>

@@ -106,7 +106,7 @@ namespace Model.DAO
             return comic;
         }
 
-        public PaginationComic SearchAdvanced(SuperSearch search, Pagination pagination)
+        public PaginationComic SearchAdvanced(SuperSearch search, Pagination pagination, String sort)
         {
             char c = ',';
             String strIn = "''";
@@ -177,6 +177,31 @@ namespace Model.DAO
             }
 
             var comics = WcDbContext.comics.SqlQuery(sql).OrderBy(comic => comic.NameComic);
+
+            switch (Convert.ToInt32(sort))
+            {
+                case 1:
+                {
+                    comics = comics.OrderBy(comic => comic.NameComic);
+                    break;
+                }
+                case 2:
+                {
+                    comics = comics.OrderByDescending(comic => comic.NameComic);
+                    break;
+                }
+                case 3:
+                {
+                    comics = comics.OrderBy(comic => comic.UpdateAt);
+                    break;
+                }
+                case 4:
+                {
+                    comics = comics.OrderBy(comic => comic.ReleaseDate);
+                    break;
+                }
+
+            }
 
             var list = ListPage(pagination, comics);
 

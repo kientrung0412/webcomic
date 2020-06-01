@@ -28,6 +28,7 @@ dl, ol, ul, p {
     margin: 0;
 }
 
+
 a {
     color: #f0f0f0;
 }
@@ -46,7 +47,7 @@ h2 {
     font-size: 34px;
 }
 
-h2:after, h3:after {
+h2:after, h3:after, .task-sort:after {
     display: block;
     width: 100%;
     content: "";
@@ -501,7 +502,7 @@ ul.list-chapters li:hover {
     top: 50%;
     transform: translate(50%, -50%);
     transition: all 0.3s;
-    
+
 }
 
 .check input[data-check = "1"] ~ span:before {
@@ -640,3 +641,6 @@ button.float-right.btn-cmt {
     display: block;
 }
 
+.task-sort{
+    margin-top: 25px;
+}

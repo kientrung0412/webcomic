@@ -8,15 +8,6 @@ namespace WebComic.Controllers
 {
     public class CategoryController : Controller
     {
-        // GET
-        public ActionResult Index()
-        {
-            CategoryDAO categoryDao = new CategoryDAO();
-
-            var list = categoryDao.List();
-            ViewBag.ListCategory = list;
-            return View();
-        }
 
         [HttpPost]
         public ActionResult Delete()

@@ -134,6 +134,7 @@
         <Compile Include="Controllers\ComicController.cs" />
         <Compile Include="Controllers\HomeController.cs" />
         <Compile Include="Controllers\UploadFileController.cs" />
+        <Compile Include="Controllers\UserController.cs" />
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
@@ -186,6 +187,7 @@
         <Content Include="Views\Shared\_FilterBar.cshtml" />
         <Content Include="Views\Shared\_Slide.cshtml" />
         <Content Include="Views\UploadFile\Index.cshtml" />
+        <Content Include="Views\User\Index.cshtml" />
         <Content Include="Web.config" />
         <Content Include="Web.Debug.config">
             <DependentUpon>Web.config</DependentUpon>

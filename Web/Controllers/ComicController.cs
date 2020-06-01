@@ -74,21 +74,38 @@ namespace WebComic.Controllers
         }
 
 
-        public ActionResult SearchAdvanced(String NameComic, String page)
+        public ActionResult SearchAdvanced(String[] arrayIn, String[] arrayNotIn, String nameComic, String status,
+            String author,
+            String nation, String page, String sort)
         {
-            SuperSearch superSearch = new SuperSearch();
-            ComicDAO comicDao = new ComicDAO();
+            List<String> listIn = new List<string>();
+            List<String> listNotIn = new List<string>();
 
-            superSearch.NameComic = NameComic;
-
-            String url = "";
-
-            if (superSearch.NameComic != null)
+            if (arrayIn != null)
             {
-                url = url + String.Format("{0}={1}", nameof(superSearch.NameComic), NameComic);
+                listIn = arrayIn.ToList();
             }
 
-            var comics = comicDao.SearchAdvanced(superSearch, new Pagination(16, Convert.ToInt32(page)));
+            if (arrayNotIn != null)
+            {
+                listNotIn = arrayNotIn.ToList();
+            }
+
+
+            SuperSearch superSearch = new SuperSearch(listIn, listNotIn, Convert.ToInt32(nation),
+                Convert.ToInt32(status),
+                nameComic, author);
+
+            // String url = "";
+            //
+            // if (superSearch.NameComic != null)
+            // {
+            //     url = url + String.Format("{0}={1}", nameof(superSearch.NameComic), nameComic);
+            // }
+
+            ComicDAO comicDao = new ComicDAO();
+
+            var comics = comicDao.SearchAdvanced(superSearch, new Pagination(16, Convert.ToInt32(page)), sort);
 
             ViewBag.Data = comics.Comics;
 
@@ -96,13 +113,13 @@ namespace WebComic.Controllers
 
             ViewBag.Page = comics.Page;
 
-            ViewBag.Url = url;
+            ViewBag.Search = nameComic;
 
             return View();
         }
 
         public ActionResult Test(String[] arrayIn, String[] arrayNotIn, String nameComic, String status, String author,
-            String nation)
+            String nation, String page, String sort)
         {
             List<String> listIn = new List<string>();
             List<String> listNotIn = new List<string>();
@@ -123,13 +140,13 @@ namespace WebComic.Controllers
                 nameComic, author);
 
             ComicDAO comicDao = new ComicDAO();
-            Pagination pagination = new Pagination(16, 1);
+            Pagination pagination = new Pagination(16, Convert.ToInt32(page));
 
-            PaginationComic paginationComic = comicDao.SearchAdvanced(superSearch, pagination);
-            List<comic> comics = paginationComic.Comics;
-            int page = paginationComic.Page;
 
-            String json = JsonConvert.SerializeObject(comics);
+            PaginationComic paginationComic = comicDao.SearchAdvanced(superSearch, pagination, sort);
+
+
+            String json = JsonConvert.SerializeObject(paginationComic, Formatting.Indented);
 
             return Content(json);
         }
