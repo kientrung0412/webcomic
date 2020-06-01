@@ -33,7 +33,7 @@
 
             <div class="row ajax-show">
 
-                @foreach (comic comic in  ViewBag.Data)
+                @foreach (comic comic in  ViewBag.Comics)
                 {
                     <div class="col-sm-3 col-6">
 
@@ -118,9 +118,8 @@
     <div class="col-md-3">
         <div class=" main ">
             @{
-                Html.RenderAction("_FilterBar", "Category");
+                Html.RenderPartial("_FilterBar");
             }
-
         </div>
     </div>
 

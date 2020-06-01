@@ -104,16 +104,27 @@ namespace WebComic.Controllers
             // }
 
             ComicDAO comicDao = new ComicDAO();
+            CategoryDAO categoryDao = new CategoryDAO();
+            StatusComicDAO statusComicDao = new StatusComicDAO();
+            NationDAO nationDao = new NationDAO();
 
             var comics = comicDao.SearchAdvanced(superSearch, new Pagination(16, Convert.ToInt32(page)), sort);
 
-            ViewBag.Data = comics.Comics;
+            ViewBag.Comics = comics.Comics;
 
             ViewBag.Numpage = comics.PageSize;
 
             ViewBag.Page = comics.Page;
 
             ViewBag.Search = nameComic;
+            
+            ViewBag.Categorys = categoryDao.List().OrderBy(category => category.CategoryId);
+            
+            ViewBag.Status = statusComicDao.ListUser();
+            
+            ViewBag.Nations = nationDao.List();
+            
+            
 
             return View();
         }

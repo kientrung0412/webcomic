@@ -1,21 +1,11 @@
 ﻿@using Model.EF
 
-@* <div class="tab bg-main"> *@
-@* *@
-@*     <h3>Tên chuyện</h3> *@
-@*     <div class="form-search"> *@
-@*         <input type="text" class="form-control" name="name" id="" placeholder="Tên truyện"> *@
-@*     </div> *@
-@* *@
-@* </div> *@
-
-
 <div class="tab bg-main">
     <h3>Thể loại</h3>
     <div class="form-search max-h-370">
         <div class="part-type">
 
-            @foreach (category category in ViewBag.Data)
+            @foreach (category category in ViewBag.Categorys)
             {
                 <label class="check">
                     @category.NameCategory
@@ -62,7 +52,7 @@
     <div class="form-search">
         <select class="form-control" name="nation" id="">
             <option value="0">Tất cả</option>
-            @foreach (nation stcm in ViewBag.Nation)
+            @foreach (nation stcm in ViewBag.Nations)
             {
                 <option value="@stcm.NationId">@stcm.NameNation</option>
             }
