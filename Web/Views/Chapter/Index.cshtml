@@ -1,9 +1,50 @@
-﻿
-@{
-    ViewBag.Title = "Đọc chuyện";
-}
+﻿<div class="row">
+    <div class="col-12">
+        <div class="completed bg-main">
+            <ul>
+                <Li>
+                    <a href="@Url.Action("Index", "Home")">Home</a>
+                </Li>
+                <Li>
+                    <a href="@Url.Action("Index", "Home")">Home</a>
+                </Li>
+                <Li>
+                    <a href="@Url.Action("Index", "Home")">Home</a>
+                </Li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-12 text-center img-main">
+        <img src="http://cdn4.lhmanga.com/Store/Manga/0009336c-3de8-4802-8e92-3ee63178534f_5ed39236218a2.jpg" class="img-fluid" alt="">
+    </div>
+</div>
+
+
 <div class="row">
     <div class="col-12">
-        <img src="" class="img-fluid" alt="">
+        <div class="main bg-main">
+            <h3>Bình luận</h3>
+            <div class="cover-comment">
+
+                <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
+                <button type="submit" class="float-right btn-cmt">Đăng</button>
+
+            </div>
+
+            <div class="show-cmt">
+                <div class="item-comment">
+                    <div class="cover-comment-user">
+                        <div class="row">
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
     </div>
+
 </div>

@@ -137,6 +137,7 @@
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
+        <Compile Include="Models\AjaxComic.cs" />
         <Compile Include="Models\FileUpload.cs" />
         <Compile Include="Models\UploadFile.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
@@ -180,6 +181,7 @@
         <Content Include="Views\Comic\Index.cshtml" />
         <Content Include="Views\Comic\SearchAdvanced.cshtml" />
         <Content Include="Views\Shared\_ComicNew.cshtml" />
+        <Content Include="Views\Shared\_Footer.cshtml" />
         <Content Include="Views\Shared\_Navbar.cshtml" />
         <Content Include="Views\Shared\_FilterBar.cshtml" />
         <Content Include="Views\Shared\_Slide.cshtml" />

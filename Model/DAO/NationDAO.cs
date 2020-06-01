@@ -15,9 +15,9 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public async Task<List<nation>> ListAs()
+        public List<nation> List()
         {
-            var list = await WcDbContext.nations.ToListAsync();
+            var list =  WcDbContext.nations.ToList();
             return list;
         }
 

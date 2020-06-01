@@ -15,7 +15,7 @@
 
                 @foreach (comic comic in  ViewBag.Data)
                 {
-                    <div class="col-lg-3 col-sm-4 col-6">
+                    <div class="col-sm-3 col-6">
 
                         <div class="comic-item">
                             <a href="@Url.Action("Index", "Comic", new {comicId = @comic.ComicId})">
@@ -103,5 +103,6 @@
 
         </div>
     </div>
-
+    
+    
 </div>

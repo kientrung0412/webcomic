@@ -12,13 +12,20 @@ body {
     background-image: url("../Upload/Config/bg.jpg");
     background-repeat: repeat;
 
+
 }
 
 h1, h2, h3, h4, h5, h6, p, a, span {
     font-size: 16px;
     font-family: "Open Sans", sans-serif;
     color: #f1f1f1;
+    line-height: 1.3;
 
+}
+
+
+dl, ol, ul, p {
+    margin: 0;
 }
 
 a {
@@ -39,7 +46,7 @@ h2 {
     font-size: 34px;
 }
 
-h2:after {
+h2:after, h3:after {
     display: block;
     width: 100%;
     content: "";
@@ -50,6 +57,7 @@ h2:after {
 }
 
 .name-comic.text-light {
+    line-height: 1.2;
     margin-top: 10px;
 }
 
@@ -64,7 +72,7 @@ h2:after {
 
 /*   Css home/index   */
 
-.main.bg-main, .tab.bg-main {
+.main.bg-main, .tab.bg-main, .completed {
     padding: 25px 20px 25px 20px;
     margin-top: 25px;
 }
@@ -127,6 +135,7 @@ ul.pagination.justify-content-end {
 .item-main {
     margin-top: 20px;
     position: relative;
+    line-height: 1.5;
 }
 
 .img-cover {
@@ -304,11 +313,13 @@ button.last-chapter {
 }
 
 button.last-chapter {
+    color: #ffffff;
     font-size: 18px;
     margin-bottom: 5px;
 }
 
 button.last-chapter:hover {
+    color: #fff;
     background: rgba(255, 39, 7, 0.6);
 }
 
@@ -417,7 +428,7 @@ ul.list-chapters li {
     transition: all 0.3s;
     border-radius: 5px;
     margin: 12px 0;
-    padding: 12px;
+    padding: 15px;
 }
 
 
@@ -428,7 +439,8 @@ ul.list-chapters li:hover {
 
 .name-chapter {
     position: absolute;
-    top: 0;
+    top: 50%;
+    transform: translate(0, -50%);
     left: 0;
     display: inline-block;
     padding-left: 10px;
@@ -436,7 +448,8 @@ ul.list-chapters li:hover {
 
 .time-at-chapter {
     position: absolute;
-    top: 0;
+    top: 50%;
+    transform: translate(0, -50%);
     display: inline-block;
     right: 0;
     padding-right: 10px;
@@ -483,12 +496,18 @@ ul.list-chapters li:hover {
 
 .check span:before {
     font-family: "Ionicons";
-
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    transition: all 0.3s;
+    
 }
 
 .check input[data-check = "1"] ~ span:before {
     content: "\f122";
     color: #01dfff;
+
 }
 
 .check input[data-check = "0"] ~ span:before {
@@ -498,6 +517,7 @@ ul.list-chapters li:hover {
 .check input[data-check = "-1"] ~ span:before {
     content: "\f129";
     color: rgba(208, 0, 0, 1);
+
 }
 
 /*name ajax search*/
@@ -512,10 +532,12 @@ ul.list-chapters li:hover {
     overflow: hidden;
     box-shadow: none;
 }
-.form-search{
+
+.form-search {
     overflow: hidden;
 }
-.max-h-370{
+
+.max-h-370 {
     transition: all 0.5s;
     max-height: 370px;
 }
@@ -527,9 +549,94 @@ span.more {
     color: #01dfff;
     font-size: 13px;
 }
-span.more:after{
+
+span.more:after {
     position: relative;
     content: "\f35f";
     left: 5px;
     font-family: "Ionicons";
 }
+
+/*footer*/
+
+footer {
+    padding-top: 25px;
+    margin-top: 25px;
+}
+
+/*chpter*/
+.completed {
+    margin-bottom: 25px;
+    border-radius: 5px;
+}
+
+.completed ul {
+    list-style-type: none;
+    display: inline-flex;
+
+}
+
+.completed ul li {
+    margin-left: 15px;
+    margin-right: 15px;
+    position: relative;
+}
+
+.completed ul li:after {
+    content: "\f125";
+    color: #01dfff;
+    font-family: "Ionicons";
+    position: absolute;
+    right: -20px;
+    bottom: 50%;
+    transform: translate(0, 50%);
+}
+
+.completed ul li:nth-last-child(1):after {
+    content: "";
+}
+
+.completed ul li a {
+    font-size: 20px;
+}
+
+.img-main img {
+    margin-bottom: 5px;
+}
+
+/*text editer*/
+textarea#comment {
+    resize: none;
+    background: rgb(68, 68, 68);
+    color: #FFFFFF;
+}
+
+.cover-comment {
+    margin-top: 25px;
+    padding: 10px 5px 25px 5px;
+}
+
+button.float-right.btn-cmt {
+    margin-top: 10px;
+    padding: 5px 15px;
+    color: #fff;
+    background: #007f8d;
+    border: #000000 solid 1px;
+    border-radius: 5px;
+}
+
+/*cmt*/
+
+.avatar {
+    width: 40px;
+    border-radius: 50%;
+    height: 40px;
+    overflow: hidden;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+

@@ -43,6 +43,9 @@ namespace WebComic.Controllers
             StatusComicDAO statusComicDao = new StatusComicDAO();
             ViewBag.Status = statusComicDao.ListUser();
             
+            NationDAO nationDao = new NationDAO();
+            ViewBag.Nation = nationDao.List();
+            
             return PartialView("_FilterBar");
         }
     }

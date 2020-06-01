@@ -2,7 +2,7 @@
 
 <div class="tab bg-main">
 
-    <h2>Tên chuyện</h2>
+    <h3>Tên chuyện</h3>
     <div class="form-search">
         <input type="text" class="form-control" name="name" id="" placeholder="Tên truyện">
     </div>
@@ -11,7 +11,7 @@
 
 
 <div class="tab bg-main">
-    <h2>Thể loại</h2>
+    <h3>Thể loại</h3>
     <div class="form-search max-h-370">
         <div class="part-type">
 
@@ -33,24 +33,40 @@
 
 <div class="tab bg-main">
 
-    <h2>Tình trạng</h2>
+    <h3>Tình trạng</h3>
     <div class="form-search">
         <select class="form-control" name="status" id="">
+            <option value="0">Tất cả</option>
             @foreach (status_comic stcm in ViewBag.Status)
             {
                 <option value="@stcm.StatusComicId">@stcm.StatusComicName</option>
             }
-
         </select>
+    </div>
+
+</div>
+
+
+<div class="tab bg-main">
+
+    <h3>Tên tác giả</h3>
+    <div class="form-search">
+        <input type="text" class="form-control" name="author" placeholder="Tên tác giả">
     </div>
 
 </div>
 
 <div class="tab bg-main">
 
-    <h2>Tên tác giả</h2>
+    <h3>Quốc gia</h3>
     <div class="form-search">
-        <input type="text" class="form-control" name="name" id="" placeholder="Tên tác giả">
+        <select class="form-control" name="nation" id="">
+            <option value="0">Tất cả</option>
+            @foreach (nation stcm in ViewBag.Nation)
+            {
+                <option value="@stcm.NationId">@stcm.NameNation</option>
+            }
+        </select>
     </div>
 
 </div>
