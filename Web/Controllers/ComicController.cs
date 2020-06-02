@@ -75,8 +75,7 @@ namespace WebComic.Controllers
 
 
         public ActionResult SearchAdvanced(String[] arrayIn, String[] arrayNotIn, String nameComic, String status,
-            String author,
-            String nation, String page, String sort)
+            String author, String nation, String sort)
         {
             List<String> listIn = new List<string>();
             List<String> listNotIn = new List<string>();
@@ -108,7 +107,7 @@ namespace WebComic.Controllers
             StatusComicDAO statusComicDao = new StatusComicDAO();
             NationDAO nationDao = new NationDAO();
 
-            var comics = comicDao.SearchAdvanced(superSearch, new Pagination(16, Convert.ToInt32(page)), sort);
+            var comics = comicDao.SearchAdvanced(superSearch, new Pagination(16, Convert.ToInt32(1)), sort);
 
             ViewBag.Comics = comics.Comics;
 
@@ -117,15 +116,25 @@ namespace WebComic.Controllers
             ViewBag.Page = comics.Page;
 
             ViewBag.Search = nameComic;
-            
-            ViewBag.Categorys = categoryDao.List().OrderBy(category => category.CategoryId);
-            
-            ViewBag.Status = statusComicDao.ListUser();
-            
-            ViewBag.Nations = nationDao.List();
-            
-            
 
+            ViewBag.Categorys = categoryDao.List().OrderBy(category => category.CategoryId);
+
+            ViewBag.Status = statusComicDao.ListUser();
+
+            ViewBag.Nations = nationDao.List();
+
+            ViewBag.ListInAc = listIn;
+            
+            ViewBag.ListNotInAc = listNotIn;
+
+            ViewBag.AuthorAc = author;
+
+            ViewBag.SortAc = sort;
+
+            ViewBag.StatusAc = status;
+
+            ViewBag.NationAc = nation;
+            
             return View();
         }
 

@@ -1,5 +1,11 @@
 ﻿@using Model.EF
-
+@{
+    List<String> listInAc = ViewBag.ListInAc;
+    List<String> listNotInAc = ViewBag.ListNotInAc;
+    String statusAc = ViewBag.StatusAc;
+    String autherAc = ViewBag.AuthorAc;
+    String nationAc = ViewBag.NationAc;
+}
 <div class="tab bg-main">
     <h3>Thể loại</h3>
     <div class="form-search max-h-370">
@@ -7,11 +13,30 @@
 
             @foreach (category category in ViewBag.Categorys)
             {
-                <label class="check">
-                    @category.NameCategory
-                    <input type="checkbox" name="category" value="@category.CategoryId" data-check="0">
-                    <span></span>
-                </label>
+                if (listInAc.Contains(category.CategoryId.ToString()))
+                {
+                    <label class="check">
+                        @category.NameCategory
+                        <input type="checkbox" name="category" value="@category.CategoryId" data-check="1">
+                        <span></span>
+                    </label>
+                }
+                else if (listNotInAc.Contains(category.CategoryId.ToString()))
+                {
+                    <label class="check">
+                        @category.NameCategory
+                        <input type="checkbox" name="category" value="@category.CategoryId" data-check="-1">
+                        <span></span>
+                    </label>
+                }
+                else
+                {
+                    <label class="check">
+                        @category.NameCategory
+                        <input type="checkbox" name="category" value="@category.CategoryId" data-check="0">
+                        <span></span>
+                    </label>
+                }
             }
         </div>
 
@@ -29,7 +54,14 @@
             <option value="0">Tất cả</option>
             @foreach (status_comic stcm in ViewBag.Status)
             {
-                <option value="@stcm.StatusComicId">@stcm.StatusComicName</option>
+                if (stcm.StatusComicId.ToString().Equals(statusAc))
+                {
+                    <option value="@stcm.StatusComicId" selected="selected">@stcm.StatusComicName</option>
+                }
+                else
+                {
+                    <option value="@stcm.StatusComicId">@stcm.StatusComicName</option>
+                }
             }
         </select>
     </div>
@@ -41,7 +73,7 @@
 
     <h3>Tên tác giả</h3>
     <div class="form-search">
-        <input type="text" class="form-control" name="author" placeholder="Tên tác giả">
+        <input type="text" value="@autherAc" class="form-control" name="author" placeholder="Tên tác giả">
     </div>
 
 </div>
@@ -52,9 +84,16 @@
     <div class="form-search">
         <select class="form-control" name="nation" id="">
             <option value="0">Tất cả</option>
-            @foreach (nation stcm in ViewBag.Nations)
+            @foreach (nation nation in ViewBag.Nations)
             {
-                <option value="@stcm.NationId">@stcm.NameNation</option>
+                if (nation.NationId.ToString().Equals(nationAc))
+                {
+                    <option value="@nation.NationId" selected="selected">@nation.NameNation</option>
+                }
+                else
+                {
+                    <option value="@nation.NationId">@nation.NameNation</option>
+                }
             }
         </select>
     </div>

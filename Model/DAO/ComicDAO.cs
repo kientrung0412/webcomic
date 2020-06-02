@@ -139,7 +139,7 @@ namespace Model.DAO
             else
             {
                 sqlJoin = String.Format(
-                    "join (select ComicId from comic_category where CategoryId in ({0}) group by ComicId having COUNT(CategoryId) = {1}) t1 on comic.ComicId = t1.ComicId",
+                    " left join (select ComicId from comic_category where CategoryId in ({0}) group by ComicId having COUNT(CategoryId) = {1}) t1 on comic.ComicId = t1.ComicId",
                     strNotIn, countListNotIn
                 );
             }
@@ -155,6 +155,10 @@ namespace Model.DAO
                 sqlJoin
             );
 
+            // if (countListIn <= 0)
+            // {
+            //     sql = sql + " AND t1.ComicId is NULL ";
+            // }
 
             if (search.StatusId > 0)
             {
@@ -175,6 +179,7 @@ namespace Model.DAO
             {
                 sql = sql + String.Format(" AND NameComic LIKE N'%{0}%'", search.AuthorComic);
             }
+
 
             var comics = WcDbContext.comics.SqlQuery(sql).OrderBy(comic => comic.NameComic);
 
@@ -200,7 +205,6 @@ namespace Model.DAO
                     comics = comics.OrderBy(comic => comic.ReleaseDate);
                     break;
                 }
-
             }
 
             var list = ListPage(pagination, comics);

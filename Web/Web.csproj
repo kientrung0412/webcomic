@@ -148,12 +148,6 @@
         <Content Include="Content\all.min.css" />
         <Content Include="Content\bootstrap.min.css" />
         <Content Include="Content\font.min.css" />
-        <Content Include="Content\Font\Annual_Bold.ttf" />
-        <Content Include="Content\Font\Annual_Bold_Italic.ttf" />
-        <Content Include="Content\Font\Annual_Italic.ttf" />
-        <Content Include="Content\Font\Annual.ttf" />
-        <Content Include="Content\Font\NunitoSans-Black.ttf" />
-        <Content Include="Content\Font\NunitoSans-Bold.ttf" />
         <Content Include="Content\jquery-confirm.min.css" />
         <Content Include="Content\mystyle.css" />
         <Content Include="Content\owl.carousel.min.css" />
@@ -172,7 +166,9 @@
         <Content Include="Scripts\owl.carousel.min.js" />
         <Content Include="Scripts\popper.min.js" />
         <Content Include="Scripts\slide.js" />
+        <Content Include="Scripts\slide.min.js" />
         <Content Include="Scripts\table.js" />
+        <Content Include="Upload\a.jpeg" />
         <Content Include="Upload\Config\bg.jpg" />
         <Content Include="Upload\Config\logo.png" />
         <Content Include="Views\Category\Index.cshtml" />

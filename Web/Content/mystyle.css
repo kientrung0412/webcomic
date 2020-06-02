@@ -429,7 +429,7 @@ ul.list-chapters li {
     transition: all 0.3s;
     border-radius: 5px;
     margin: 12px 0;
-    padding: 15px;
+    padding: 7px 5px;
 }
 
 
@@ -439,9 +439,6 @@ ul.list-chapters li:hover {
 
 
 .name-chapter {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
     left: 0;
     display: inline-block;
     padding-left: 10px;
@@ -449,8 +446,6 @@ ul.list-chapters li:hover {
 
 .time-at-chapter {
     position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
     display: inline-block;
     right: 0;
     padding-right: 10px;
@@ -543,7 +538,7 @@ ul.list-chapters li:hover {
     max-height: 370px;
 }
 
-span.more {
+span.more , .more-comic{
     float: right;
     right: 0;
     cursor: pointer;
@@ -551,7 +546,7 @@ span.more {
     font-size: 13px;
 }
 
-span.more:after {
+span.more:after , .more-comic:after{
     position: relative;
     content: "\f35f";
     left: 5px;
@@ -605,6 +600,9 @@ footer {
     margin-bottom: 5px;
 }
 
+footer.container-fluid.bg-main {
+    padding-bottom: 20px;
+}
 /*text editer*/
 textarea#comment {
     resize: none;

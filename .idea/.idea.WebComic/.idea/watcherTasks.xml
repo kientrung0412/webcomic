@@ -16,7 +16,7 @@
       <option name="outputFromStdout" value="false" />
       <option name="program" value="yuicompressor" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="allJs" />
+      <option name="scopeName" value="js" />
       <option name="trackOnlyRoot" value="true" />
       <option name="workingDir" value="$FileDir$" />
       <envs />
@@ -36,7 +36,7 @@
       <option name="outputFromStdout" value="false" />
       <option name="program" value="yuicompressor" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="allCss" />
+      <option name="scopeName" value="css" />
       <option name="trackOnlyRoot" value="true" />
       <option name="workingDir" value="$FileDir$" />
       <envs />

@@ -1,7 +1,5 @@
 ﻿$(document).ready(function () {
-
-    var page = 1;
-
+    
     LoadBg();
 
     //slide
@@ -52,15 +50,18 @@
     })
 
     //get data
+    var page = 1;
+    
     function getData() {
+
         var listIn = new Array();
         var listNotIn = new Array();
-
         var nameComic = $('input[name = name]').val();
         var author = $('input[name = author]').val();
         var nation = $('select[name = nation]').children('option:selected').val();
         var status = $('select[name = status]').children('option:selected').val();
         var sort = $('select[name = sort]').children('option:selected').val();
+
 
         $("input[name = category]").each(function () {
             var idCategorey = $(this).val();
@@ -99,24 +100,62 @@
                 urlNew = urlNew.replace("Test?", "SearchAdvanced?")
                 history.pushState('', 'Search', urlNew);
 
-                console.log(data);
+                // console.log(data);
 
                 url = $(this).attr('href');
                 history.pushState({key: url}, '', url);
 
-                $('.ajax-show').children().remove();
-                $('.pagination').children().remove();
-                
-                $(data.PageSize).each(function (index , page) {
-                    $('.pagination').append(
-                        '<li class="page-item">' +
-                        '<a class="page-link" href="/Comic/SearchAdvanced?page=@pageBack&@ViewBag.Url" tabindex="-1" aria-disabled="true">' +
-                        '<i class="ion-chevron-left"></i>' +
-                        '</a>' +
-                        '</li>'
-                    );
-                })
-                
+                if (data.PageSize-1 < page) {
+                    $('.more-comic').hide("slow");
+                } else {
+                    $('.more-comic').show("slow");
+                }
+
+                // $('.pagination').children().remove();
+                //
+                //
+                // if (page > 1) {
+                //     $('.pagination').append(
+                //         '<li class="page-item">' +
+                //         '<a class="page-link page-search" page="' +
+                //         (page - 1) + '" tabindex="-1" aria-disabled="true"  >' +
+                //         '<i class="ion-chevron-left"></i>' +
+                //         '</a>' +
+                //         '</li>'
+                //     );
+                // }
+                //
+                // for (i = 1; i <= data.PageSize; i++) {
+                //
+                //     if (i == page) {
+                //         $('.pagination').append(
+                //             '<li class="page-item active">' +
+                //             '<a class="page-link page-search" page="' + i + '" tabindex="-1">' +
+                //             i +
+                //             '</a>' +
+                //             '</li>'
+                //         );
+                //     } else {
+                //         $('.pagination').append(
+                //             '<li class="page-item">' +
+                //             '<a class="page-link page-search" page="' + i + '" tabindex="-1" aria-disabled="true">' +
+                //             i +
+                //             '</a>' +
+                //             '</li>'
+                //         );
+                //     }
+                // }
+                //
+                // if (page < data.PageSize) {
+                //     $('.pagination').append(
+                //         '<li class="page-item">' +
+                //         '<a class="page-link page-search" href="' + (page + 1) + '" tabindex="-1" aria-disabled="true">' +
+                //         '<i class="ion-chevron-right"></i>' +
+                //         '</a>' +
+                //         '</li>'
+                //     );
+                // }
+
                 $(data.Comics).each(function (index, comic) {
 
                     var newChapter = "";
@@ -148,10 +187,8 @@
                         '</div>' +
                         '</div>'
                     );
-                    
-                    
-                    
-                    
+
+
                 })
                 LoadBg();
             }
@@ -167,6 +204,8 @@
 
     check.change(function () {
 
+        $('.ajax-show').children().remove();
+        
         var dataCheck = $(this).children("input").attr("data-check");
 
         switch (dataCheck) {
@@ -186,24 +225,60 @@
 
     })
 
+
     //even bộ lọc
 
     $('input[name = name]').stop().keyup(function () {
+        $('.ajax-show').children().remove();
+        page = 1;
         getData();
+
     });
     $('input[name = author]').stop().keyup(function () {
+        $('.ajax-show').children().remove();
+        page = 1;
         getData();
     });
     $('select[name = nation]').stop().change(function () {
+        $('.ajax-show').children().remove();
+        page = 1;
         getData();
     });
     $('select[name = status]').stop().change(function () {
+        $('.ajax-show').children().remove();
+        page = 1;
         getData();
     });
     $('select[name = sort]').stop().change(function () {
+        $('.ajax-show').children().remove();
+        page = 1;
         getData();
     });
 
+    $('#page-search').click(function () {
+        page++;
+        getData();
+    })
+
+    // $('.page-search').click(function () {
+    //     page = $(this).attr('page');
+    //     console.log(page);
+    //     getData();
+    // })
+
+
+    //select sort search
+
+    function selectOption() {
+        var sortAc = $('select[name = sort]').attr("select");
+        $('select[name = sort]').children("option").each(function () {
+            if (sortAc == $(this).val()) {
+                $(this).attr("selected", "selected");
+            }
+        })
+    }
+
+    selectOption();
 
     //more
 
@@ -214,12 +289,9 @@
 
     //un fix nav
 
-    if ($('completed') != null) {
+    if ($('#read-chapter').hasClass('ok')) {
         $('nav').css('position', 'unset');
     }
-    console.log($('completed'));
-
-
     // text editer
 
 

@@ -14,12 +14,12 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="text-search ">
-                            <input type="text" class="form-control" name="name" value="@ViewBag.Search"  placeholder="Nhập tên chuyện">
+                            <input type="text" class="form-control" name="name" value="@ViewBag.Search" placeholder="Nhập tên chuyện">
                         </div>
                     </div>
                     <div class="col-md-4 offset-md-4">
                         <div class="list-sort ">
-                            <select name="sort" class="form-control" >
+                            <select name="sort" class="form-control" select="@ViewBag.SortAc">
                                 <option value="1">A-Z</option>
                                 <option value="2">Z-A</option>
                                 <option value="3">Mới cập nhật</option>
@@ -75,39 +75,43 @@
             <nav aria-label="Page navigation example" class="page">
                 <ul class="pagination justify-content-end">
 
-                    @if (ViewBag.Page > 1)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="/Comic/SearchAdvanced?page=@pageBack&@ViewBag.Url" tabindex="-1" aria-disabled="true">
-                                <i class="ion-chevron-left"></i>
-                            </a>
-                        </li>
-                    }
+                    @*                     @if (ViewBag.Page > 1) *@
+                    @*                     { *@
+                    @*                         <li class="page-item"> *@
+                    @*                             <a class="page-link page-search" page="@pageBack" tabindex="-1" aria-disabled="true"> *@
+                    @*                                 <i class="ion-chevron-left"></i> *@
+                    @*                             </a> *@
+                    @*                         </li> *@
+                    @*                     } *@
+                    @* *@
+                    @*                     @for (var i = 1; i <= ViewBag.Numpage; i++) *@
+                    @*                     { *@
+                    @*                         if (ViewBag.Page == i) *@
+                    @*                         { *@
+                    @*                             <li class="page-item active"> *@
+                    @*                                 <a class="page-link page-search" page="@i">@i</a> *@
+                    @*                             </li> *@
+                    @*                         } *@
+                    @*                         else *@
+                    @*                         { *@
+                    @*                             <li class="page-item"> *@
+                    @*                                 <a class="page-link page-search" page="@i">@i</a> *@
+                    @*                             </li> *@
+                    @*                         } *@
+                    @*                     } *@
+                    @* *@
+                    @*                     @if (ViewBag.Page < ViewBag.Numpage) *@
+                    @*                     { *@
+                    @*                         <li class="page-item"> *@
+                    @*                             <a class="page-link page-search" page="@pageNext" tabindex="-1" aria-disabled="true"> *@
+                    @*                                 <i class="ion-chevron-right"></i> *@
+                    @*                             </a> *@
+                    @*                         </li> *@
+                    @*                     } *@
 
-                    @for (var i = 1; i <= ViewBag.Numpage; i++)
-                    {
-                        if (ViewBag.Page == i)
-                        {
-                            <li class="page-item active">
-                                <a class="page-link active" href="/Comic/SearchAdvanced?page=@i&@ViewBag.Url">@i</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="page-item">
-                                <a class="page-link active" href="/Comic/SearchAdvanced?page=@i&@ViewBag.Url">@i</a>
-                            </li>
-                        }
-                    }
-
-                    @if (ViewBag.Page < ViewBag.Numpage)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="/Comic/SearchAdvanced?page=@pageNext&@ViewBag.Url" tabindex="-1" aria-disabled="true">
-                                <i class="ion-chevron-right"></i>
-                            </a>
-                        </li>
-                    }
+                    <li id="page-search" class="page-item">
+                        <span class="more-comic">Xem thêm</span>
+                    </li>
 
                 </ul>
             </nav>

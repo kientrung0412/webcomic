@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using Model.DAO;
 using Newtonsoft.Json;
@@ -17,6 +20,9 @@ namespace WebComic.Controllers
         {
             ChapterDAO chapterDao = new ChapterDAO();
             chapterDao.UpdateView(chapterId);
+            var chapter = chapterDao.Select(chapterId);
+
+            ViewBag.Chapter = chapter;
 
             if (Request.Cookies["history"] != null)
             {
@@ -27,19 +33,21 @@ namespace WebComic.Controllers
             }
             else
             {
-                NameValueCollection ints = new NameValueCollection();
-
-                ints.Add(chapterId.ToString(),DateTime.Now.ToString("{0:dd/MM/yyyy hh:mm }"));
+                ListDictionary history = new ListDictionary();
+                history.Add(chapter.ComicId.ToString(), DateTime.Now.ToString("{0:dd/MM/yyyy hh:mm }"));
 
                 var cookie = new HttpCookie("history");
-                cookie.Values.Add(ints);
-                
-                
                 cookie.Expires = DateTime.Now.AddDays(30);
+
+                var binFormatter = new BinaryFormatter();
+                var mStream = new MemoryStream();
+              
+
+                // cookie.Value = s;
+
                 Response.AppendCookie(cookie);
             }
 
-            ViewBag.Data = chapterDao.Select(chapterId);
 
             // ViewBag.Title  =  
 
