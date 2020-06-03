@@ -3,7 +3,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Model.EF;
-using up_down.Models;
 
 namespace Model.DAO
 {

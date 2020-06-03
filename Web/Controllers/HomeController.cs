@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Model.DAO;
 using Model.EF;
 using Model.Models;
-using Newtonsoft.Json;
 
 namespace WebComic.Controllers
 {

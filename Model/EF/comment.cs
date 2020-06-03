@@ -3,10 +3,7 @@ using Newtonsoft.Json;
 namespace Model.EF
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("comment")]
     public partial class comment

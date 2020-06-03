@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace up_down.Models
+﻿namespace up_down.Models
 {
     public class FileDownloadInfor
     {

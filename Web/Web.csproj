@@ -140,6 +140,7 @@
         </Compile>
         <Compile Include="Models\AjaxComic.cs" />
         <Compile Include="Models\FileUpload.cs" />
+        <Compile Include="Models\MyConvert.cs" />
         <Compile Include="Models\UploadFile.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>

@@ -5,11 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Web;
-using System.Web.Configuration;
 using System.Web.Mvc;
 using Model.DAO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Model.EF;
+using Model.Models;
 
 namespace WebComic.Controllers
 {
@@ -20,36 +19,56 @@ namespace WebComic.Controllers
         {
             ChapterDAO chapterDao = new ChapterDAO();
             chapterDao.UpdateView(chapterId);
-            var chapter = chapterDao.Select(chapterId);
 
-            ViewBag.Chapter = chapter;
+            var chapter = chapterDao.Select(chapterId);
+            var comicId = chapter.comic.ComicId;
+            var now = DateTime.Now.ToString("{0:dd/MM/yyyy hh:mm }");
 
             if (Request.Cookies["history"] != null)
             {
-                var json = Request.Cookies["history"].Value;
-                // JObject o = JObject.Parse(json);
-                // JArray a = (JArray)o[0];
-                // JToken[] list = a.ToArray();
+                var str = Request.Cookies["history"].Value;
+                var history = MyConvert.StringToListDictionary(str);
+                var b = history.ContainsKey(comicId.ToString());
+
+                if (b)
+                {
+                    history[chapter.comic.ComicId.ToString()] = now;
+                }
+                else
+                {
+                    history.Add(comicId.ToString(), now);
+                }
+                
+                var strCookie = MyConvert.ListDictionaryToString(history);
+                
+                var cookie = new HttpCookie("history");
+                cookie.Expires = DateTime.Now.AddDays(30);
+
+                cookie.Value = strCookie;
+
+                Response.AppendCookie(cookie);
+                
+                
             }
             else
             {
-                ListDictionary history = new ListDictionary();
-                history.Add(chapter.ComicId.ToString(), DateTime.Now.ToString("{0:dd/MM/yyyy hh:mm }"));
+                Dictionary<string, string> history = new Dictionary<string, string>();
+                history.Add(comicId.ToString(), now);
+
+                var str = MyConvert.ListDictionaryToString(history);
 
                 var cookie = new HttpCookie("history");
                 cookie.Expires = DateTime.Now.AddDays(30);
 
-                var binFormatter = new BinaryFormatter();
-                var mStream = new MemoryStream();
-              
-
-                // cookie.Value = s;
+                cookie.Value = str;
 
                 Response.AppendCookie(cookie);
             }
 
 
-            // ViewBag.Title  =  
+            ViewBag.Title = String.Format("{0} {1}", chapter.comic.NameComic, chapter.NameChapter);
+            ViewBag.Home = comicId;
+            ViewBag.Chapter = chapter;
 
             return View();
         }

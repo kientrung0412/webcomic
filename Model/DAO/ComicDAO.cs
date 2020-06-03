@@ -155,10 +155,6 @@ namespace Model.DAO
                 sqlJoin
             );
 
-            // if (countListIn <= 0)
-            // {
-            //     sql = sql + " AND t1.ComicId is NULL ";
-            // }
 
             if (search.StatusId > 0)
             {
