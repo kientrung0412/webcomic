@@ -1,14 +1,22 @@
-﻿﻿﻿using System.Collections.Generic;
- using Model.EF;
+﻿using System.Collections.Generic;
+using Model.EF;
 
 namespace Model.Models
 {
     public class PaginationComic
     {
-        
         private int pageSize;
         private int page;
         private List<comic> _comics;
+        private List<ComicCategoryFilte> _categoryFiltes;
+
+        public PaginationComic(int pageSize, int page, List<ComicCategoryFilte> categoryFiltes)
+        {
+            this.pageSize = pageSize;
+            this.page = page;
+            _categoryFiltes = categoryFiltes;
+        }
+
 
         public PaginationComic(int pageSize, int page, List<comic> comics)
         {
@@ -33,6 +41,12 @@ namespace Model.Models
         {
             get => _comics;
             set => _comics = value;
+        }
+
+        public List<ComicCategoryFilte> CategoryFiltes
+        {
+            get => _categoryFiltes;
+            set => _categoryFiltes = value;
         }
     }
 }

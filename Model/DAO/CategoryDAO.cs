@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Model.EF;
+using Model.Models;
 
 namespace Model.DAO
 {
@@ -15,7 +16,7 @@ namespace Model.DAO
         {
             WcDbContext = new WCDbContext();
         }
-        
+
         public async Task<int> AddAs(String name)
         {
             category category = new category();
@@ -41,8 +42,9 @@ namespace Model.DAO
                 .Where(c => DbFunctions.Like(c.NameCategory, stringSearch))
                 .OrderBy(c => c.CategoryId)
                 .ToList();
-            
+
             return list;
         }
+        
     }
 }

@@ -6,6 +6,11 @@ namespace Model.EF
 
     public partial class comic_category
     {
+        public comic_category(int? categoryId)
+        {
+            CategoryId = categoryId;
+        }
+
         [Key]
         public int ComicCategoryId { get; set; }
 

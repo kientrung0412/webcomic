@@ -39,6 +39,7 @@ namespace Model.DAO
         }
 
 
+        //phân trang thường
         public PaginationComic ListPage(Pagination pagination, IOrderedQueryable<comic> comics)
         {
             int page = pagination.Page;
@@ -68,6 +69,38 @@ namespace Model.DAO
             return paginationComic;
         }
 
+        //phân trang tìm theo thể lọai
+        public PaginationComic ListPage(Pagination pagination, IOrderedQueryable<ComicCategoryFilte> comics)
+        {
+            int page = pagination.Page;
+            int size = pagination.Size;
+
+            if (page < 1)
+            {
+                page = 1;
+            }
+
+            int skip = (page - 1) * size;
+
+            int sizePage = comics.Count();
+
+            if (sizePage % size > 0)
+            {
+                sizePage = sizePage / size + 1;
+            }
+            else
+            {
+                sizePage = sizePage / size;
+            }
+
+            var sql = comics.Skip(skip).Take(size).ToList();
+
+            PaginationComic paginationComic = new PaginationComic(sizePage, page, sql);
+            return paginationComic;
+        }
+
+
+        //phân trang đặc biệt
         public PaginationComic ListPage(Pagination pagination, IOrderedEnumerable<comic> comics)
         {
             int page = pagination.Page;
@@ -224,6 +257,28 @@ namespace Model.DAO
         {
             var sql = WcDbContext.comics.OrderByDescending(c => c.UpdateAt);
             var list = ListPage(pagination, sql);
+            return list;
+        }
+
+        public PaginationComic CategoryComic(Pagination pagination, String categoryId)
+        {
+            int id = Convert.ToInt32(categoryId);
+
+            var sql = (WcDbContext.comics
+                .Join(WcDbContext.comic_category, comics => comics.ComicId, comicCategory => comicCategory.ComicId,
+                    (comics, comicCategory) => new {comics, comicCategory})
+                .Where(@t => @t.comicCategory.CategoryId == id)
+                .Select(@t => new ComicCategoryFilte()
+                    {
+                        ComicId = @t.comics.ComicId,
+                        BanerComic = @t.comics.CommicBanner,
+                        Chapters = @t.comics.chapters,
+                        NameComic = @t.comics.NameComic
+                    }
+                )).OrderBy(filte => filte.NameComic);
+
+            PaginationComic list = ListPage(pagination, sql);
+            
             return list;
         }
     }

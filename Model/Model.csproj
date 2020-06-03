@@ -77,6 +77,7 @@
         <Compile Include="EF\status_comment.cs" />
         <Compile Include="EF\status_user.cs" />
         <Compile Include="EF\user.cs" />
+        <Compile Include="Models\ComicCategoryFilte.cs" />
         <Compile Include="Models\ChangePass.cs" />
         <Compile Include="Models\Pagination.cs" />
         <Compile Include="Models\PaginationComic.cs" />

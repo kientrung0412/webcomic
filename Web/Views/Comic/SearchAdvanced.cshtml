@@ -109,9 +109,12 @@
                     @*                         </li> *@
                     @*                     } *@
 
-                    <li id="page-search" class="page-item">
-                        <span class="more-comic">Xem thêm</span>
-                    </li>
+                    @if (ViewBag.Comics != null)
+                    {
+                        <li id="page-search" class="page-item">
+                            <span class="more-comic">Xem thêm</span>
+                        </li>
+                    }
 
                 </ul>
             </nav>

@@ -19,7 +19,7 @@
                                 @foreach (category c in ViewBag.Data)
                                 {
                                     <div class="col-md-2 col-6 item-category">
-                                        <a href="">@c.NameCategory</a>
+                                        <a href="@Url.Action("Index", "Category", new {categoryId = c.CategoryId})">@c.NameCategory</a>
                                     </div>
                                 }
 
@@ -31,13 +31,25 @@
                     <a class="nav-link" href="@Url.Action("SearchAdvanced", "Comic")">Lọc nâng cao</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="@Url.Action("Index", "User")">Đăng nhập</a>
+                    <a class="nav-link" href="@Url.Action("History", "User")">Lịch sử</a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="@Url.Action("Index", "User")">Đăng ký</a>
-                </li>
+                @if (Session["user"] == null)
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link" href="@Url.Action("Login", "User")">Đăng nhập</a>
+                    </li>
+                }
+                @if (Session["user"] != null)
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link" href="@Url.Action("Index", "User")">Tài khoản</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="@Url.Action("Index", "User")">Đăng ký</a>
+                    </li>
+                }
             </ul>
-            <form class="form-inline my-2 my-lg-0" action="@Url.Action("SearchAdvanced","Comic")">
+            <form class="form-inline my-2 my-lg-0" action="@Url.Action("SearchAdvanced", "Comic")">
                 <input class="form-control ip-search" type="search" name="nameComic" placeholder="Nhập tên chuyện ">
                 <button class="btn btn-white my-2" type="submit">
                     <i class="ion-ios-search-strong"></i>

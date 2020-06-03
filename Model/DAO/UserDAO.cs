@@ -36,7 +36,7 @@ namespace Model.DAO
             return list;
         }
 
-        //kiểm tra người dùng có trong data base chưa
+        //Lấy ra 1 người dùng
         public user OneUser(int userId)
         {
             user sql = WcDbContext.users.Single(u => u.UserId == userId);
@@ -99,6 +99,32 @@ namespace Model.DAO
         {
             var a = WcDbContext.users.Where(user => user.UserMail == mail).Count();
             return a;
+        }
+
+        public Boolean Login(String email, String password)
+        {
+            Boolean check = false;
+
+            try
+            {
+                password = StringToMd5.GetMd5Hash(password);
+
+                if (email.Trim() != null && password != null)
+                {
+                    var b = WcDbContext.users.Where(user => user.UserMail == email && user.UserPass == password)
+                        .Count();
+                    if (b == 1)
+                    {
+                        check = true;
+                    }
+                }
+            }
+            catch
+            {
+                check = false;
+            }
+
+            return check;
         }
     }
 }

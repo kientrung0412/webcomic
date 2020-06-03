@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    
+
     LoadBg();
 
     //slide
@@ -51,7 +51,7 @@
 
     //get data
     var page = 1;
-    
+
     function getData() {
 
         var listIn = new Array();
@@ -105,7 +105,7 @@
                 url = $(this).attr('href');
                 history.pushState({key: url}, '', url);
 
-                if (data.PageSize-1 < page) {
+                if (data.PageSize - 1 < page) {
                     $('.more-comic').hide("slow");
                 } else {
                     $('.more-comic').show("slow");
@@ -205,7 +205,7 @@
     check.change(function () {
 
         $('.ajax-show').children().remove();
-        
+
         var dataCheck = $(this).children("input").attr("data-check");
 
         switch (dataCheck) {

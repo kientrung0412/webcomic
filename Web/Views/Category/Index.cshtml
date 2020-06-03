@@ -1,3 +1,100 @@
-﻿@{
-    var a = ViewBag.ListCategory;
+﻿@using Model.EF
+@using Model.Models
+@{
+    ComicCategoryFilte comicCategoryFilte = ViewBag.ListCategory;
 }
+
+<div class="main bg-main">
+
+    <h2>Danh sách</h2>
+
+    <div class="row">
+        
+        @if (comicCategoryFilte == null)
+        {
+            <div class="col-12 pt-2">
+                <h4>Không có kết quả phù hợp</h4>
+            </div>
+        }
+        @foreach (ComicCategoryFilte comic in  ViewBag.ComicsMain)
+        {
+            <div class="col-lg-2 col-sm-3 col-6">
+
+                <div class="comic-item" id-comic="@comic.ComicId">
+                    <a href="@Url.Action("Index", "Comic", new {comicId = @comic.ComicId})">
+                        <div class="item-main">
+                            <div class="img-cover">
+                                <div class="img-bg bg-img-full" url-bg="@comic.BanerComic"></div>
+                            </div>
+                            @if (comic.Chapters.Count > 0)
+                            {
+                                <div class="new-chapter">
+                                    <a href="@Url.Action("Index", "Chapter", new {chapterId = comic.Chapters.Max(chapter => chapter.ChapterId)})">@comic.Chapters.Max(chapter => chapter.NameChapter)</a>
+                                </div>
+
+                                if (comic.Chapters.ToList().Sum(chapter => chapter.View) / comic.Chapters.Count > 2000)
+                                {
+                                    <div class="chpter-hot">
+                                        Hot
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </a>
+
+                    <div class="name-comic text-light">
+                        <a href="@Url.Action("Index", "Comic", new {comicId = @comic.ComicId})">@comic.NameComic</a>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+
+    </div>
+
+    @* paging *@
+
+    <nav aria-label="Page navigation example" class="page">
+        <ul class="pagination justify-content-end">
+
+            @if (ViewBag.Page > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", "Category", new {page = ViewBag.Page - 1, categoryId = ViewBag.Category})" tabindex="-1" aria-disabled="true">
+                        <i class="ion-chevron-left"></i>
+                    </a>
+                </li>
+            }
+
+
+            @for (var i = 1; i <= ViewBag.Numpage; i++)
+            {
+                if (ViewBag.Page == i)
+                {
+                    <li class="page-item active">
+                        <a class="page-link active" href="@Url.Action("Index", "Category", new {page = i, categoryId = ViewBag.Category})">@i</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link active" href="@Url.Action("Index", "Category", new {page = i, categoryId = ViewBag.Category})">@i</a>
+                    </li>
+                }
+            }
+
+            @if (ViewBag.Page < ViewBag.Numpage)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", "Category", new {page = ViewBag.Page + 1, categoryId = ViewBag.Category})">
+                        <i class="ion-chevron-right"></i>
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </nav>
+
+</div>
