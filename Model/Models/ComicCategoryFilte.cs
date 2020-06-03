@@ -10,5 +10,6 @@ namespace Model.Models
         public String BanerComic { get; set; }
         public String NameComic { get; set; }
         public ICollection<chapter> Chapters { get; set; }
+
     }
 }

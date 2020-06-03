@@ -2,8 +2,9 @@
 @{
     ViewBag.Title = "Tìm kiếm nâng cao";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    int pageBack = ViewBag.Page - 1;
-    int pageNext = ViewBag.Page + 1;
+    // int pageBack = ViewBag.Page - 1;
+    // int pageNext = ViewBag.Page + 1;
+    List<comic> comics = ViewBag.Comics;
 }
 <div class="row">
     <div class="col-md-9">
@@ -33,7 +34,7 @@
 
             <div class="row ajax-show">
 
-                @foreach (comic comic in  ViewBag.Comics)
+                @foreach (comic comic in  comics)
                 {
                     <div class="col-sm-3 col-6">
 
@@ -109,7 +110,7 @@
                     @*                         </li> *@
                     @*                     } *@
 
-                    @if (ViewBag.Comics != null)
+                    @if (comics.Count > 0)
                     {
                         <li id="page-search" class="page-item">
                             <span class="more-comic">Xem thêm</span>

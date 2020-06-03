@@ -18,12 +18,16 @@ namespace WebComic.Controllers
             if (categoryId.Trim() != null)
             {
                 ComicDAO comicDao = new ComicDAO();
+                CategoryDAO categoryDao = new CategoryDAO();
+
+
                 var list = comicDao.CategoryComic(new Pagination(16, Convert.ToInt32(page)), categoryId);
 
                 ViewBag.ComicsMain = list.CategoryFiltes;
                 ViewBag.Page = list.Page;
                 ViewBag.Numpage = list.PageSize;
                 ViewBag.Category = categoryId;
+                ViewBag.NameCategory = categoryDao.One(Convert.ToInt32(categoryId)).NameCategory;
             }
 
             return View();

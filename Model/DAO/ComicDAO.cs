@@ -278,7 +278,8 @@ namespace Model.DAO
                 )).OrderBy(filte => filte.NameComic);
 
             PaginationComic list = ListPage(pagination, sql);
-            
+
+
             return list;
         }
     }

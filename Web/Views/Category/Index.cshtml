@@ -1,22 +1,25 @@
-﻿@using Model.EF
+﻿@using System.Web.Configuration
 @using Model.Models
 @{
-    ComicCategoryFilte comicCategoryFilte = ViewBag.ListCategory;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<ComicCategoryFilte> comics = ViewBag.ComicsMain;
+    String name = ViewBag.NameCategory;
+    name = name.ToLower();
 }
 
 <div class="main bg-main">
 
-    <h2>Danh sách</h2>
+    <h2>Danh sách truyện thể loại: @name</h2>
 
     <div class="row">
-        
-        @if (comicCategoryFilte == null)
+
+        @if (comics.Count < 1)
         {
             <div class="col-12 pt-2">
-                <h4>Không có kết quả phù hợp</h4>
+                <h4>Không có kết quả phù hợp cho thể loại: @name</h4>
             </div>
         }
-        @foreach (ComicCategoryFilte comic in  ViewBag.ComicsMain)
+        @foreach (ComicCategoryFilte comic in  comics)
         {
             <div class="col-lg-2 col-sm-3 col-6">
 
@@ -98,3 +101,7 @@
     </nav>
 
 </div>
+
+@{
+    Html.RenderAction("_ComicNew", "Comic");
+}

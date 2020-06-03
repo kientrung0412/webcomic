@@ -45,6 +45,11 @@ namespace Model.DAO
 
             return list;
         }
-        
+
+        public category One(int id)
+        {
+            var ctg = WcDbContext.categories.Single(category => category.CategoryId == id);
+            return ctg;
+        }
     }
 }
