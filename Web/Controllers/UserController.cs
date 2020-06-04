@@ -30,7 +30,6 @@ namespace WebComic.Controllers
 
         public ActionResult Login()
         {
-            ViewBag.Mss = "Thông tin tài khoản hoặc mật khẩu không trính xác";
             return View();
         }
 

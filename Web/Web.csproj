@@ -183,6 +183,7 @@
         <Content Include="Views\Shared\_Navbar.cshtml" />
         <Content Include="Views\Shared\_FilterBar.cshtml" />
         <Content Include="Views\Shared\_Slide.cshtml" />
+        <Content Include="Views\Shared\_User.cshtml" />
         <Content Include="Views\UploadFile\Index.cshtml" />
         <Content Include="Views\User\History.cshtml" />
         <Content Include="Views\User\Index.cshtml" />

@@ -15,7 +15,7 @@ body {
 
 }
 
-h1, h2, h3, h4, h5, h6, p, a, span {
+h1, h2, h3, h4, h5, h6, p, a, span, label {
     font-size: 16px;
     font-family: "Open Sans", sans-serif;
     color: #f1f1f1;
@@ -538,7 +538,7 @@ ul.list-chapters li:hover {
     max-height: 370px;
 }
 
-span.more , .more-comic{
+span.more, .more-comic {
     float: right;
     right: 0;
     cursor: pointer;
@@ -546,7 +546,7 @@ span.more , .more-comic{
     font-size: 13px;
 }
 
-span.more:after , .more-comic:after{
+span.more:after, .more-comic:after {
     position: relative;
     content: "\f35f";
     left: 5px;
@@ -603,6 +603,7 @@ footer {
 footer.container-fluid.bg-main {
     padding-bottom: 20px;
 }
+
 /*text editer*/
 textarea#comment {
     resize: none;
@@ -639,6 +640,93 @@ button.float-right.btn-cmt {
     display: block;
 }
 
-.task-sort{
+.task-sort {
     margin-top: 25px;
 }
+
+/*slidebar*/
+#sidebar-wrapper {
+    min-height: 100vh;
+    transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper a.nav-link.active {
+    background: #007f8d;
+}
+
+#sidebar-wrapper a.nav-link {
+    margin-bottom: 10px;
+    padding: 12px 0 12px 15px;
+    transition: all 0.3s;
+}
+
+#sidebar-wrapper a.nav-link:hover {
+    background: #007f8d;
+}
+
+#sidebar-wrapper .sidebar-heading a {
+    font-size: 28px;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    text-align: center;
+    padding: 10px 0;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+
+button#menu-toggle {
+    color: #fff;
+}
+
+button#menu-toggle:focus {
+    box-shadow: none;
+}
+
+
+#sidebar-wrapper {
+    margin-left: 0;
+}
+
+#page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+}
+
+
+.user {
+    margin-top: 20px;
+}
+
+.tab-content {
+    background-color: white
+}
+
+.form-info {
+    width: 500px;
+    background-color: white;
+    padding: 20px;
+}
+
+/*user*/
+.cover.bg-main {
+    height: 100%;
+    padding: 20px 20px;
+    margin-top: 20px;
+}
+

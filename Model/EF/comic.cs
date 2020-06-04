@@ -20,6 +20,7 @@ namespace Model.EF
             StatusComicId = 4;
             ReleaseDate = DateTime.Now;
         }
+        
 
         public int ComicId { get; set; }
 

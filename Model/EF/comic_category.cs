@@ -11,6 +11,10 @@ namespace Model.EF
             CategoryId = categoryId;
         }
 
+        public comic_category()
+        {
+        }
+
         [Key]
         public int ComicCategoryId { get; set; }
 
