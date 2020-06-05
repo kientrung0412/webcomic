@@ -21,6 +21,7 @@ namespace Model.EF
             Rating = 0;
             NumRating = 0;
             ReleaseDate = DateTime.Now;
+            UpdateAt = DateTime.Now;
         }
 
 

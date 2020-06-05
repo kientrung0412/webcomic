@@ -59,18 +59,23 @@ namespace Model.DAO
         public int Delete(int id)
         {
             var comic = WcDbContext.comics.Single(c => c.ComicId == id);
-
             var a = WcDbContext.comics.Remove(comic);
+
+            var chaoters = WcDbContext.chapters.Where(chapter => chapter.ComicId == id).ToList();
+            var b = WcDbContext.chapters.RemoveRange(chaoters);
 
             var i = WcDbContext.SaveChanges();
 
             return i;
         }
 
-        public List<comic> List()
+        public PaginationComic List(Pagination pagination)
         {
-            var comics = WcDbContext.comics.ToList();
-            return comics;
+            var comics = WcDbContext.comics.OrderBy(comic => comic.ComicId);
+
+            PaginationComic list = ListPage(pagination, comics);
+
+            return list;
         }
 
         //phân trang thường

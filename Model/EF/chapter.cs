@@ -15,6 +15,7 @@ namespace Model.EF
         {
             comments = new HashSet<comment>();
             image_chapter = new HashSet<image_chapter>();
+            View = 0;
         }
 
         public int ChapterId { get; set; }

@@ -35,7 +35,7 @@
                         {
                             i++;
                             var date1 = (DateTime) comic.ReleaseDate;
-                            var data = date1.ToString("dd/MM/yy hh:mm");
+                            var date = date1.ToString("dd/MM/yy hh:mm");
 
                             <tr class="d-flex text-center">
                                 <td class="col-1">@i</td>
@@ -45,12 +45,16 @@
                                 <td class="col-2">@comic.NameComic</td>
                                 <td class="col-2">@comic.AuthorComic</td>
                                 <td class="col-2">@comic.user.Username</td>
-                                <td class="col-2">@data</td>
+                                <td class="col-2">@date</td>
                                 <td class="col-1">
-                                    <button id-comic="@comic.ComicId" class="btn btn-success btn-active" type="button">Đồng ý</button>
+                                    <button id-comic="@comic.ComicId" class="btn btn-success btn-active-comic" type="button">
+                                        <i class="ion-android-done"></i>
+                                    </button>
                                 </td>
                                 <td class="col-1">
-                                    <button id-comic="@comic.ComicId" class="btn btn-danger btn-delete-comic" type="button">Xóa</button>
+                                    <button id-comic="@comic.ComicId" class="btn btn-danger btn-delete-comic" type="button">
+                                        <i class="ion-android-delete"></i>
+                                    </button>
                                 </td>
                             </tr>
                         }

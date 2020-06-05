@@ -5,6 +5,8 @@
     List<category> categories = ViewBag.Categorys;
     List<nation> nations = ViewBag.Nations;
 
+    int mss = ViewBag.Mess;
+
 }
 
 <div class="bg-main cover">
@@ -12,6 +14,28 @@
         <h2>Yêu cầu đăng truyện</h2>
     </div>
     <div class="from-add-comic">
+
+        @switch (mss)
+        {
+            case 1:
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Thành công !</strong> Gửi yêu cầu thành công.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                break;
+                
+            case 0:
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Thất bại!</strong> Gửi yêu cầu thất bại.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                break;
+        }
+
         <form action="@Url.Action("UpComic", "User")" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6 col-12 form-group">
@@ -24,7 +48,7 @@
                 </div>
                 <div class="col-md-12 form-group">
                     <p class="mb-2">Thể loại</p>
-                    @if (categories.Count > 0)
+                    @if (categories != null)
                     {
                         foreach (category category in categories)
                         {
@@ -42,7 +66,7 @@
                 </div>
                 <div class="col-md-6 col-12 form-group">
                     <label>Quốc gia</label>
-                    @if (nations.Count > 0)
+                    @if (nations != null)
                     {
                         <select name="nation" class="form-control">
                             @foreach (nation nation in nations)

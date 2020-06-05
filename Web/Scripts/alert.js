@@ -1,7 +1,6 @@
 ﻿// Hàm xóa
 
-function Delete(id, urlPost) {
-    var id = $(this).attr('row-id');
+function Delete(urlPost, id) {
     $.confirm({
         icon: 'ion-alert-circled',
 
@@ -30,7 +29,7 @@ function Delete(id, urlPost) {
                                     autoClose: 'ok|2000',
                                     title: 'Thông báo',
                                     content: 'Xóa thành công',
-                                    type: 'blue'
+                                    type: 'green'
                                 })
                             } else {
                                 $.alert({
@@ -120,7 +119,7 @@ function Update(urlPost, id) {
 $(document).ready(function () {
 
     //cấp phép
-    $('.btn-active').click(function () {
+    $('.btn-active-comic').click(function () {
         $(this).parents("tr").slideUp("slown").removeClass("d-flex");
 
         let id = $(this).attr("id-comic");
@@ -133,7 +132,7 @@ $(document).ready(function () {
         $(this).parents("tr").slideUp("slown").removeClass("d-flex");
 
         let id = $(this).attr("id-comic");
-        let b = Update("/User/DeleteComic", id);
+        let b = Delete("/User/DeleteComic", id);
     })
 })
 

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Model.EF;
 
@@ -43,6 +44,13 @@ namespace Model.DAO
         {
             var chapter = WcDbContext.chapters.Single(c => c.ChapterId == id);
             return chapter;
+        }
+
+        public List<chapter> ListChapterComic(int id)
+        {
+            var chapters = WcDbContext.chapters.Where(c => c.ComicId == id).OrderBy(c => c.ChapterId)
+                .ToList();
+            return chapters;
         }
     }
 }

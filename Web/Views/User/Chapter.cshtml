@@ -1,0 +1,55 @@
+﻿@using Model.EF
+@{
+    ViewBag.Title = "Đăng truyện";
+    Layout = "~/Views/Shared/_User.cshtml";
+    // List<category> categories = ViewBag.Categorys;
+    // List<nation> nations = ViewBag.Nations;
+    //
+    // int mss = ViewBag.Mess;
+
+}
+
+<div class="bg-main cover">
+    <div class="title">
+        <h2>Thêm chương</h2>
+    </div>
+    <div class="from-add-comic">
+
+        @*         @switch (mss) *@
+        @*         { *@
+        @*             case 1: *@
+        @*                 <div class="alert alert-success alert-dismissible fade show" role="alert"> *@
+        @*                     <strong>Thành công !</strong> Gửi yêu cầu thành công. *@
+        @*                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"> *@
+        @*                         <span aria-hidden="true">&times;</span> *@
+        @*                     </button> *@
+        @*                 </div> *@
+        @*                 break; *@
+        @* *@
+        @*             case 0: *@
+        @*                 <div class="alert alert-warning alert-dismissible fade show" role="alert"> *@
+        @*                     <strong>Thất bại!</strong> Gửi yêu cầu thất bại. *@
+        @*                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"> *@
+        @*                         <span aria-hidden="true">&times;</span> *@
+        @*                     </button> *@
+        @*                 </div> *@
+        @*                 break; *@
+        @*         } *@
+        
+        <form action="@Url.Action("UpComic", "User")" method="post" enctype="multipart/form-data">
+            
+            <div class="row">
+                <div class="col-md-6 col-12 form-group">
+                    <label>Tên chương</label>
+                    <input type="text" class="form-control" name="namechapter" placeholder="Tên truyện">
+                </div>
+                <div class="col-md-6 col-12 form-group">
+                    <label>Ảnh</label>
+                    <input type="file" class="form-control" name="files" multiple="multiple">
+                </div>
+            </div>
+            
+        </form>
+        
+    </div>
+</div>
