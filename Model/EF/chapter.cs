@@ -14,7 +14,6 @@ namespace Model.EF
         public chapter()
         {
             comments = new HashSet<comment>();
-            image_chapter = new HashSet<image_chapter>();
             View = 0;
         }
 
@@ -35,10 +34,6 @@ namespace Model.EF
             "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
         public virtual ICollection<comment> comments { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
-            "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [JsonIgnore]
-        public virtual ICollection<image_chapter> image_chapter { get; set; }
+        
     }
 }

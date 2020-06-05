@@ -134,6 +134,10 @@ $(document).ready(function () {
         let id = $(this).attr("id-comic");
         let b = Delete("/User/DeleteComic", id);
     })
+    
+    //xoa chapter
+    
+    
 })
 
 

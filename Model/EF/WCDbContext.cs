@@ -14,7 +14,6 @@ namespace Model.EF
         public virtual DbSet<comic> comics { get; set; }
         public virtual DbSet<comic_category> comic_category { get; set; }
         public virtual DbSet<comment> comments { get; set; }
-        public virtual DbSet<image_chapter> image_chapter { get; set; }
         public virtual DbSet<nation> nations { get; set; }
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<status_comic> status_comic { get; set; }
@@ -31,11 +30,6 @@ namespace Model.EF
 
             modelBuilder.Entity<chapter>()
                 .HasMany(e => e.comments)
-                .WithOptional(e => e.chapter)
-                .WillCascadeOnDelete();
-
-            modelBuilder.Entity<chapter>()
-                .HasMany(e => e.image_chapter)
                 .WithOptional(e => e.chapter)
                 .WillCascadeOnDelete();
 

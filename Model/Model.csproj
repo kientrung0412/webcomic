@@ -69,7 +69,6 @@
         <Compile Include="EF\WCDbContext.cs" />
         <Compile Include="EF\role.cs" />
         <Compile Include="EF\FileDownloadInfor.cs" />
-        <Compile Include="EF\image_chapter.cs" />
         <Compile Include="EF\nation.cs" />
         <Compile Include="EF\status_comic.cs" />
         <Compile Include="EF\status_comment.cs" />

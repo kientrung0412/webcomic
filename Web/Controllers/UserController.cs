@@ -315,7 +315,7 @@ namespace WebComic.Controllers
         }
 
         //hiển thị và thêm mới chapter
-        public ActionResult Chapter()
+        public ActionResult Chapter(String comicId)
         {
             if (_user == null)
             {
@@ -323,7 +323,7 @@ namespace WebComic.Controllers
             }
             else
             {
-                int id = Convert.ToInt32(Request["comicId"]);
+                int id = Convert.ToInt32(comicId);
 
                 ChapterDAO chapterDao = new ChapterDAO();
                 var chapters = chapterDao.ListChapterComic(id);
@@ -385,9 +385,8 @@ namespace WebComic.Controllers
             ViewBag.Mess = mss;
             ViewBag.Chapters = chapters;
 
-            // return View();
+            return View();
 
-            return RedirectToAction(Url.Action("Chapter", "User", new {comicId = comicId}));
         }
     }
 }
