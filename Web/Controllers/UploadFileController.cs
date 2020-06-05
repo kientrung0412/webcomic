@@ -17,9 +17,8 @@ namespace WebComic.Controllers
         public ActionResult UploadAvatar(HttpPostedFileBase file)
         {
             String path = Server.MapPath("~/Upload/Avatar");
-            UploadFile uploadFile = new UploadFile();
 
-            var fileUpload = uploadFile.Upload(file, path);
+            var fileUpload = UploadFile.Upload(file, path, file.FileName);
             if (fileUpload.Code == 1)
             {
                 ViewBag.Mss = fileUpload.Mss;
@@ -42,11 +41,10 @@ namespace WebComic.Controllers
                 int numDone = 0;
                 
                 String path = Server.MapPath("~/Upload/Truyen");
-                UploadFile uploadFile = new UploadFile();
 
                 foreach (HttpPostedFileBase file in files)
                 {
-                    var fileUpload = uploadFile.Upload(file, path);
+                    var fileUpload = UploadFile.Upload(file, path, file.FileName);
                     if (fileUpload.Code == 1)
                     {
                         numDone++;

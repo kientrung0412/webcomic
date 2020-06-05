@@ -138,31 +138,35 @@
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
-        <Compile Include="Models\AjaxComic.cs" />
         <Compile Include="Models\FileUpload.cs" />
         <Compile Include="Models\MyConvert.cs" />
         <Compile Include="Models\UploadFile.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
+        <Content Include="Content\alertify.bootstrap.css" />
         <Content Include="Content\all.css" />
         <Content Include="Content\all.min.css" />
         <Content Include="Content\bootstrap.min.css" />
         <Content Include="Content\font.min.css" />
         <Content Include="Content\jquery-confirm.min.css" />
         <Content Include="Content\mystyle.css" />
+        <Content Include="Content\mystyle.min.css" />
         <Content Include="Content\owl.carousel.min.css" />
         <Content Include="Content\owl.theme.default.min.css" />
         <Content Include="favicon.ico" />
         <Content Include="Global.asax" />
         <Content Include="Scripts\alert.js" />
+        <Content Include="Scripts\alertify.min.js" />
         <Content Include="Scripts\all.js" />
         <Content Include="Scripts\all.min.js" />
         <Content Include="Scripts\boostrap.min.js" />
         <Content Include="Scripts\font.min.js" />
+        <Content Include="Scripts\ionicons.js" />
         <Content Include="Scripts\jquery-3.5.1.js" />
         <Content Include="Scripts\jquery-3.5.1.min.js" />
         <Content Include="Scripts\jquery-3.5.1.min.map" />
+        <Content Include="Scripts\jquery-confirm.min.js" />
         <Content Include="Scripts\load-bg.js" />
         <Content Include="Scripts\owl.carousel.min.js" />
         <Content Include="Scripts\popper.min.js" />
@@ -171,6 +175,7 @@
         <Content Include="Scripts\table.js" />
         <Content Include="Upload\a.jpeg" />
         <Content Include="Upload\Config\bg.jpg" />
+        <Content Include="Upload\Config\bg_user.jpg" />
         <Content Include="Upload\Config\logo.png" />
         <Content Include="Views\Category\Index.cshtml" />
         <Content Include="Views\Chapter\Index.cshtml" />
@@ -185,9 +190,13 @@
         <Content Include="Views\Shared\_Slide.cshtml" />
         <Content Include="Views\Shared\_User.cshtml" />
         <Content Include="Views\UploadFile\Index.cshtml" />
+        <Content Include="Views\User\Censorship.cshtml" />
+        <Content Include="Views\User\ComicsUser.cshtml" />
         <Content Include="Views\User\History.cshtml" />
         <Content Include="Views\User\Index.cshtml" />
+        <Content Include="Views\User\ListAllComic.cshtml" />
         <Content Include="Views\User\Login.cshtml" />
+        <Content Include="Views\User\UpComic.cshtml" />
         <Content Include="Web.config" />
         <Content Include="Web.Debug.config">
             <DependentUpon>Web.config</DependentUpon>

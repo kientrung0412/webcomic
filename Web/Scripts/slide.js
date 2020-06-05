@@ -13,10 +13,10 @@
                 items: 2
             },
             575: {
-                items: 4
+                items: 3
             },
             991: {
-                items: 5
+                items: 4
             }
         }
     });
@@ -56,14 +56,14 @@
 
         var listIn = new Array();
         var listNotIn = new Array();
-        var nameComic = $('input[name = name]').val();
-        var author = $('input[name = author]').val();
-        var nation = $('select[name = nation]').children('option:selected').val();
-        var status = $('select[name = status]').children('option:selected').val();
-        var sort = $('select[name = sort]').children('option:selected').val();
+        var nameComic = $('#name-seach').val();
+        var author = $('#author-seach').val();
+        var nation = $('#nation-search').children('option:selected').val();
+        var status = $('#status-search').children('option:selected').val();
+        var sort = $('#sort-seach').children('option:selected').val();
 
 
-        $("input[name = category]").each(function () {
+        $(".category-search").each(function () {
             var idCategorey = $(this).val();
             var status = $(this).attr("data-check");
 
@@ -228,28 +228,28 @@
 
     //even bộ lọc
 
-    $('input[name = name]').stop().keyup(function () {
+    $('#name-seach').stop().keyup(function () {
         $('.ajax-show').children().remove();
         page = 1;
         getData();
 
     });
-    $('input[name = author]').stop().keyup(function () {
+    $('#author-seach').stop().keyup(function () {
         $('.ajax-show').children().remove();
         page = 1;
         getData();
     });
-    $('select[name = nation]').stop().change(function () {
+    $('#name-seach').stop().change(function () {
         $('.ajax-show').children().remove();
         page = 1;
         getData();
     });
-    $('select[name = status]').stop().change(function () {
+    $('#status-search').stop().change(function () {
         $('.ajax-show').children().remove();
         page = 1;
         getData();
     });
-    $('select[name = sort]').stop().change(function () {
+    $('#sort-seach').stop().change(function () {
         $('.ajax-show').children().remove();
         page = 1;
         getData();
@@ -299,5 +299,12 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+
+    //requetcomic
+
+    $("#requestcomic").click(function () {
+        Update();
+    })
+
 });
 

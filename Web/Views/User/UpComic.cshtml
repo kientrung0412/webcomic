@@ -1,0 +1,66 @@
+﻿@using Model.EF
+@{
+    ViewBag.Title = "Đăng truyện";
+    Layout = "~/Views/Shared/_User.cshtml";
+    List<category> categories = ViewBag.Categorys;
+    List<nation> nations = ViewBag.Nations;
+
+}
+
+<div class="bg-main cover">
+    <div class="title">
+        <h2>Yêu cầu đăng truyện</h2>
+    </div>
+    <div class="from-add-comic">
+        <form action="@Url.Action("UpComic", "User")" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6 col-12 form-group">
+                    <label>Tên truyện</label>
+                    <input type="text" class="form-control" name="nameComic" value="" placeholder="Tên truyện">
+                </div>
+                <div class="col-md-6 col-12 form-group">
+                    <label>Tác giả</label>
+                    <input type="text" class="form-control" name="author" value="" placeholder="Tên tác giả">
+                </div>
+                <div class="col-md-12 form-group">
+                    <p class="mb-2">Thể loại</p>
+                    @if (categories.Count > 0)
+                    {
+                        foreach (category category in categories)
+                        {
+                            <label class="mr-4">
+                                <input type="checkbox" value="@category.CategoryId" name="category">
+                                @category.NameCategory
+                            </label>
+                        }
+                    }
+
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="">Tóm tắt nội dung</label>
+                    <textarea name="summary" class="form-control"  rows="7"></textarea>
+                </div>
+                <div class="col-md-6 col-12 form-group">
+                    <label>Quốc gia</label>
+                    @if (nations.Count > 0)
+                    {
+                        <select name="nation" class="form-control">
+                            @foreach (nation nation in nations)
+                            {
+                                <option value="@nation.NationId">@nation.NameNation</option>
+                            }
+                        </select>
+                    }
+
+                </div>
+                <div class="col-md-6 col-12 form-group">
+                    <label>Ảnh bìa</label>
+                    <input type="file" class=" form-control" name="file" accept="image/*">
+                </div>
+                <div class="col-md-3 col-12 float-right">
+                    <button class="btn btn-success" type="submit">Gửi yêu cầu</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

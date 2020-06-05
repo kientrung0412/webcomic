@@ -67,8 +67,8 @@ h2:after, h3:after, .task-sort:after {
 }
 
 .bg-main {
-    background: rgb(35, 37, 38);
     background: linear-gradient(90deg, rgba(35, 37, 38, 1) 0%, rgba(65, 67, 69, 1) 100%);
+    color: #f1f1f1;
 }
 
 /*   Css home/index   */
@@ -708,25 +708,50 @@ button#menu-toggle:focus {
     margin-left: -15rem;
 }
 
-
-.user {
-    margin-top: 20px;
-}
-
-.tab-content {
-    background-color: white
-}
-
-.form-info {
-    width: 500px;
-    background-color: white;
-    padding: 20px;
-}
-
 /*user*/
 .cover.bg-main {
     height: 100%;
     padding: 20px 20px;
     margin-top: 20px;
+    border-radius: 5px;
 }
 
+.profile-avatar {
+    max-width: 50%;
+    text-align: center;
+    position: relative;
+}
+
+.avatar-profile {
+    position: absolute;
+}
+
+.role.bg-main {
+    text-align: center;
+}
+
+.role.bg-main p {
+    font-size: 24px;
+    padding-bottom: 15px;
+}
+
+.from-add-comic {
+    margin-top: 25px;
+}
+
+nav.navbar.bg-main {
+    z-index: 99;
+}
+
+/*table*/
+.data-table.bg-main {
+    margin-top: 25px;
+}
+
+.jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
+    overflow: hidden;
+    padding: 5px;
+}
+span.jconfirm-title {
+    color: black;
+}

@@ -1,0 +1,106 @@
+﻿@using Model.EF
+@{
+    ViewBag.Title = "Kiểm duyệt";
+    Layout = "~/Views/Shared/_User.cshtml";
+    List<comic> comics = ViewBag.Comics;
+}
+
+<div class="cover bg-main">
+    <div class="title">
+        <h2>Kiểm duyệt</h2>
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+            <div class="data-table bg-main">
+
+                <table id="censorship" class="display table table-hover table-dark">
+                    <thead class="thead-dark">
+                    <tr class="d-flex text-center">
+                        <th class="col-1">Stt</th>
+                        <th class="col-1">Ảnh</th>
+                        <th class="col-2">Tên truyện</th>
+                        <th class="col-2">Tên tác giả</th>
+                        <th class="col-2">Tên người đăng</th>
+                        <th class="col-2">Thời gian đăng</th>
+                        <th class="col-1">Cho phép</th>
+                        <th class="col-1">Xóa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if (comics.Count > 0)
+                    {
+                        int i = 0;
+                        foreach (comic comic in comics)
+                        {
+                            i++;
+                            var date1 = (DateTime) comic.ReleaseDate;
+                            var data = date1.ToString("dd/MM/yy hh:mm");
+
+                            <tr class="d-flex text-center">
+                                <td class="col-1">@i</td>
+                                <td class="col-1">
+                                    <img src="@comic.CommicBanner" alt="" class="img-fluid">
+                                </td>
+                                <td class="col-2">@comic.NameComic</td>
+                                <td class="col-2">@comic.AuthorComic</td>
+                                <td class="col-2">@comic.user.Username</td>
+                                <td class="col-2">@data</td>
+                                <td class="col-1">
+                                    <button id-comic="@comic.ComicId" class="btn btn-success btn-active" type="button">Đồng ý</button>
+                                </td>
+                                <td class="col-1">
+                                    <button id-comic="@comic.ComicId" class="btn btn-danger btn-delete-comic" type="button">Xóa</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+
+
+                <nav aria-label="Page navigation example" class="page">
+                    <ul class="pagination justify-content-end">
+
+                        @if (ViewBag.Page > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Censorship", "User", new {page = ViewBag.Page - 1})" tabindex="-1" aria-disabled="true">
+                                    <i class="ion-chevron-left"></i>
+                                </a>
+                            </li>
+                        }
+
+
+                        @for (var i = 1; i <= ViewBag.Numpage; i++)
+                        {
+                            if (ViewBag.Page == i)
+                            {
+                                <li class="page-item active">
+                                    <a class="page-link active" href="@Url.Action("Censorship", "User", new {page = i})">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link active" href="@Url.Action("Censorship", "User", new {page = i})">@i</a>
+                                </li>
+                            }
+                        }
+
+                        @if (ViewBag.Page < ViewBag.Numpage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Censorship", "User", new {page = ViewBag.Page + 1})">
+                                    <i class="ion-chevron-right"></i>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>

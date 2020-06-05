@@ -22,7 +22,7 @@ namespace WebComic.Controllers
 
             var chapter = chapterDao.Select(chapterId);
             var comicId = chapter.comic.ComicId;
-            var now = DateTime.Now.ToString("{0:dd/MM/yyyy hh:mm }");
+            var now = DateTime.Now.ToString("dd/MM/yyyy hh:mm");
 
             if (Request.Cookies["history"] != null)
             {

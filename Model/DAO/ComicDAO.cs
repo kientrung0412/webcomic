@@ -30,14 +30,48 @@ namespace Model.DAO
             return n;
         }
 
-        public async Task<int> AddAs(comic comic)
-        {
-            var sql = WcDbContext.comics.Add(comic);
-            var n = await WcDbContext.SaveChangesAsync();
 
-            return n;
+        public comic Add(comic comic, List<int> category)
+        {
+            var rs = WcDbContext.comics.Add(comic);
+            int comicId = rs.ComicId;
+
+            foreach (int categoryId in category)
+            {
+                var cc = WcDbContext.comic_category.Add(new comic_category(comicId, categoryId));
+            }
+
+            var n = WcDbContext.SaveChanges();
+
+            return rs;
         }
 
+        public int Update(comic comic)
+        {
+            var a = WcDbContext.comics.Single(c => c.ComicId == comic.ComicId);
+
+            a = comic;
+
+            var i = WcDbContext.SaveChanges();
+            return i;
+        }
+
+        public int Delete(int id)
+        {
+            var comic = WcDbContext.comics.Single(c => c.ComicId == id);
+
+            var a = WcDbContext.comics.Remove(comic);
+
+            var i = WcDbContext.SaveChanges();
+
+            return i;
+        }
+
+        public List<comic> List()
+        {
+            var comics = WcDbContext.comics.ToList();
+            return comics;
+        }
 
         //phân trang thường
         public PaginationComic ListPage(Pagination pagination, IOrderedQueryable<comic> comics)
@@ -243,19 +277,21 @@ namespace Model.DAO
 
         public List<comic> SlideComic()
         {
-            var list = WcDbContext.comics.OrderBy(comic => comic.ComicId).Take(10).ToList();
+            var list = WcDbContext.comics.Where(comic => comic.StatusComicId < 4).OrderBy(comic => comic.ComicId)
+                .Take(10).ToList();
             return list;
         }
 
         public List<comic> NewComic()
         {
-            var list = WcDbContext.comics.OrderBy(comic => comic.ReleaseDate).Take(12).ToList();
+            var list = WcDbContext.comics.Where(comic => comic.StatusComicId < 4)
+                .OrderByDescending(comic => comic.ComicId).Take(12).ToList();
             return list;
         }
 
         public PaginationComic NewUpComic(Pagination pagination)
         {
-            var sql = WcDbContext.comics.OrderByDescending(c => c.UpdateAt);
+            var sql = WcDbContext.comics.Where(comic => comic.StatusComicId < 4).OrderByDescending(c => c.UpdateAt);
             var list = ListPage(pagination, sql);
             return list;
         }
@@ -279,6 +315,24 @@ namespace Model.DAO
 
             PaginationComic list = ListPage(pagination, sql);
 
+
+            return list;
+        }
+
+        public PaginationComic CensorshipComic(Pagination pagination)
+        {
+            var comics = WcDbContext.comics.Where(comic => comic.StatusComicId == 4).OrderBy(comic => comic.ComicId);
+
+            PaginationComic list = ListPage(pagination, comics);
+
+            return list;
+        }
+
+        public PaginationComic ComicUser(Pagination pagination, int userId)
+        {
+            var comics = WcDbContext.comics.Where(comic => comic.UserId == userId).OrderBy(comic => comic.ComicId);
+
+            PaginationComic list = ListPage(pagination, comics);
 
             return list;
         }

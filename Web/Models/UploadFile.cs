@@ -12,7 +12,7 @@ namespace Model.Models
             return fileName;
         }
 
-        public FileUpload Upload(HttpPostedFileBase file, String filePath)
+        public static FileUpload Upload(HttpPostedFileBase file, String filePath, String fileName)
         {
             FileUpload fileUpload = new FileUpload();
 
@@ -20,7 +20,6 @@ namespace Model.Models
             {
                 if (file.ContentLength > 0)
                 {
-                    String fileName = String.Format("{0}_{1}", DateTime.Now.ToString("ddMMyy_hhmmss"), file.FileName);
 
                     if (!Directory.Exists(filePath))
                     {
@@ -31,7 +30,7 @@ namespace Model.Models
                     {
                         file.SaveAs(Path.Combine(filePath, fileName));
                         fileUpload.Code = 1;
-                        fileUpload.Mss = String.Format("{0}/{1}", filePath, fileName);
+                        fileUpload.Mss = fileName;
 
                         return fileUpload;
                     }

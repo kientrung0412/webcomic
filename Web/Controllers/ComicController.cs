@@ -65,7 +65,7 @@ namespace WebComic.Controllers
         public ActionResult _ComicNew()
         {
             ComicDAO comicDao = new ComicDAO();
-            ViewBag.Data = comicDao.NewComic().OrderBy(comic => comic.ReleaseDate);
+            ViewBag.Data = comicDao.NewComic().OrderByDescending(comic => comic.UserId);
 
             return PartialView("_ComicNew");
         }

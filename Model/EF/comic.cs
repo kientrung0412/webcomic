@@ -18,9 +18,11 @@ namespace Model.EF
             comic_category = new HashSet<comic_category>();
             //thêm mới
             StatusComicId = 4;
+            Rating = 0;
+            NumRating = 0;
             ReleaseDate = DateTime.Now;
         }
-        
+
 
         public int ComicId { get; set; }
 
@@ -49,7 +51,7 @@ namespace Model.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
             "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        
+
         public virtual ICollection<chapter> chapters { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",

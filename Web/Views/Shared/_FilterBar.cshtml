@@ -17,7 +17,7 @@
                 {
                     <label class="check">
                         @category.NameCategory
-                        <input type="checkbox" name="category" value="@category.CategoryId" data-check="1">
+                        <input type="checkbox" class="category-search" name="category" value="@category.CategoryId" data-check="1">
                         <span></span>
                     </label>
                 }
@@ -25,7 +25,7 @@
                 {
                     <label class="check">
                         @category.NameCategory
-                        <input type="checkbox" name="category" value="@category.CategoryId" data-check="-1">
+                        <input type="checkbox" class="category-search" name="category" value="@category.CategoryId" data-check="-1">
                         <span></span>
                     </label>
                 }
@@ -33,7 +33,7 @@
                 {
                     <label class="check">
                         @category.NameCategory
-                        <input type="checkbox" name="category" value="@category.CategoryId" data-check="0">
+                        <input type="checkbox" class="category-search" name="category" value="@category.CategoryId" data-check="0">
                         <span></span>
                     </label>
                 }
@@ -50,7 +50,7 @@
 
     <h3>Tình trạng</h3>
     <div class="form-search">
-        <select class="form-control" name="status" id="">
+        <select class="form-control" id="status-search" name="status" id="">
             <option value="0">Tất cả</option>
             @foreach (status_comic stcm in ViewBag.Status)
             {
@@ -73,7 +73,7 @@
 
     <h3>Tên tác giả</h3>
     <div class="form-search">
-        <input type="text" value="@autherAc" class="form-control" name="author" placeholder="Tên tác giả">
+        <input type="text" id="author-seach" value="@autherAc" class="form-control" name="author" placeholder="Tên tác giả">
     </div>
 
 </div>
@@ -82,7 +82,7 @@
 
     <h3>Quốc gia</h3>
     <div class="form-search">
-        <select class="form-control" name="nation" id="">
+        <select class="form-control"  name="nation" id="nation-search">
             <option value="0">Tất cả</option>
             @foreach (nation nation in ViewBag.Nations)
             {
