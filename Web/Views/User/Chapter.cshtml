@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Đăng truyện";
     Layout = "~/Views/Shared/_User.cshtml";
-    // List<category> categories = ViewBag.Categorys;
+    List<chapter> chapters = ViewBag.Chapters;
     // List<nation> nations = ViewBag.Nations;
     //
     // int mss = ViewBag.Mess;
@@ -35,9 +35,9 @@
         @*                 </div> *@
         @*                 break; *@
         @*         } *@
-        
-        <form action="@Url.Action("UpComic", "User")" method="post" enctype="multipart/form-data">
-            
+
+        <form action="@Url.Action("Chapter", "User")" method="post" enctype="multipart/form-data">
+
             <div class="row">
                 <div class="col-md-6 col-12 form-group">
                     <label>Tên chương</label>
@@ -47,9 +47,12 @@
                     <label>Ảnh</label>
                     <input type="file" class="form-control" name="files" multiple="multiple">
                 </div>
+                <div class="col-md-3 col-12 float-right">
+                    <button class="btn btn-success" type="submit">Thêm</button>
+                </div>
             </div>
-            
+
         </form>
-        
+
     </div>
 </div>

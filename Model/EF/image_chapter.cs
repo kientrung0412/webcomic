@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 namespace Model.EF
@@ -11,12 +12,11 @@ namespace Model.EF
 
         public int? ChapterId { get; set; }
 
-        public int? DocumentId { get; set; }
+        [StringLength(256)]
+        public String PartFile { get; set; }
 
         [JsonIgnore]
         public virtual chapter chapter { get; set; }
-
-        [JsonIgnore]
-        public virtual document document { get; set; }
+        
     }
 }

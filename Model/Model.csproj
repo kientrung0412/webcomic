@@ -57,7 +57,6 @@
         <Compile Include="DAO\ChapterDAO.cs" />
         <Compile Include="DAO\ComicDAO.cs" />
         <Compile Include="DAO\ComnentDAO.cs" />
-        <Compile Include="DAO\DocumentDAO.cs" />
         <Compile Include="DAO\NationDAO.cs" />
         <Compile Include="DAO\RoleDAO.cs" />
         <Compile Include="DAO\StatusComicDAO.cs" />
@@ -69,7 +68,6 @@
         <Compile Include="EF\comment.cs" />
         <Compile Include="EF\WCDbContext.cs" />
         <Compile Include="EF\role.cs" />
-        <Compile Include="EF\document.cs" />
         <Compile Include="EF\FileDownloadInfor.cs" />
         <Compile Include="EF\image_chapter.cs" />
         <Compile Include="EF\nation.cs" />

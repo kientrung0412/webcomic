@@ -333,5 +333,17 @@ namespace WebComic.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        public ActionResult Chapter(String namechapter, HttpPostedFileBase files, int comicId)
+        {
+            chapter chapter = new chapter();
+            chapter.NameChapter = namechapter;
+            chapter.ComicId = comicId;
+            
+            ChapterDAO
+            
+            return Content("2374");
+        }
     }
 }
