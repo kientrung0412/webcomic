@@ -18,7 +18,7 @@ namespace WebComic.Controllers
             user user = new user();
             user.UserId = 1;
             user.RoleId = 1;
-            
+
             // Session["user"] = user;
 
 
@@ -323,27 +323,71 @@ namespace WebComic.Controllers
             }
             else
             {
-                int id = Convert.ToInt32(Request["idChapter"]);
+                int id = Convert.ToInt32(Request["comicId"]);
 
                 ChapterDAO chapterDao = new ChapterDAO();
                 var chapters = chapterDao.ListChapterComic(id);
 
+                Messenge messenge = new Messenge();
+                messenge.Code = 3;
+
                 ViewBag.Chapters = chapters;
+                ViewBag.Mess = messenge;
 
                 return View();
             }
         }
 
         [HttpPost]
-        public ActionResult Chapter(String namechapter, HttpPostedFileBase files, int comicId)
+        public ActionResult Chapter(String namechapter, HttpPostedFileBase[] files, String comicId)
         {
             chapter chapter = new chapter();
             chapter.NameChapter = namechapter;
-            chapter.ComicId = comicId;
-            
-            ChapterDAO
-            
-            return Content("2374");
+            chapter.ComicId = Convert.ToInt32(comicId);
+
+
+            ChapterDAO chapterDao = new ChapterDAO();
+            var n = chapterDao.Add(chapter);
+
+            Messenge mss = new Messenge();
+
+            if (n != null)
+            {
+                String path = String.Format("~{0}", n.FolderImage);
+                path = Server.MapPath(path);
+
+                int s = 0;
+                int f = 0;
+
+                for (int i = 0; i < files.Length; i++)
+                {
+                    Messenge messenge = UploadFile.Upload(files[i], path, String.Format("{0}.jpg", i));
+                    if (messenge.Code == 1)
+                    {
+                        s++;
+                    }
+                    else
+                    {
+                        f++;
+                    }
+                }
+
+                mss.Mss = String.Format("Tải lên thành công {0}, thất bại {1}", s, f);
+                mss.Code = 1;
+            }
+            else
+            {
+                mss.Code = 0;
+            }
+
+            var chapters = chapterDao.ListChapterComic(Convert.ToInt32(comicId));
+
+            ViewBag.Mess = mss;
+            ViewBag.Chapters = chapters;
+
+            // return View();
+
+            return RedirectToAction(Url.Action("Chapter", "User", new {comicId = comicId}));
         }
     }
 }

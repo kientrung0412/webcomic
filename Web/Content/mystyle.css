@@ -15,7 +15,7 @@ body {
 
 }
 
-h1, h2, h3, h4, h5, h6, p, a, span, label, td, tr{
+h1, h2, h3, h4, h5, h6, p, a, span, label, td, tr, th{
     font-size: 16px;
     font-family: "Open Sans", sans-serif;
     color: #f1f1f1;

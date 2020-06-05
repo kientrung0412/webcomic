@@ -28,6 +28,7 @@ namespace Model.EF
 
         public int? View { get; set; }
 
+        [StringLength(256)] public string FolderImage { get; set; }
         [JsonIgnore] public virtual comic comic { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",

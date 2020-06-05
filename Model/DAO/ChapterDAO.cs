@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Model.EF;
@@ -14,11 +15,18 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public async Task<int> AddAs(chapter chapter)
+        public chapter Add(chapter chapter)
         {
-            var sql = WcDbContext.chapters.Add(chapter);
-            var n = await WcDbContext.SaveChangesAsync();
-            return n;
+            var c = WcDbContext.chapters.Add(chapter);
+            WcDbContext.SaveChanges();
+            
+            c.FolderImage = String.Format("/Upload/truyen/{0}/{1}", c.ComicId, c.ChapterId);
+            var comic = WcDbContext.comics.Single(comic1 => comic1.ComicId == c.ComicId);
+            comic.UpdateAt = DateTime.Now;
+
+            WcDbContext.SaveChanges();
+
+            return c;
         }
 
         public async Task<int> DeleteAs(int id)

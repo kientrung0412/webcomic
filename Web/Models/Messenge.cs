@@ -2,7 +2,7 @@
 
 namespace Model.Models
 {
-    public class FileUpload
+    public class Messenge
     {
         public int Code
         {

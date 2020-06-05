@@ -1,11 +1,11 @@
 ﻿@using Model.EF
+@using Model.Models
 @{
     ViewBag.Title = "Đăng truyện";
     Layout = "~/Views/Shared/_User.cshtml";
     List<chapter> chapters = ViewBag.Chapters;
-    // List<nation> nations = ViewBag.Nations;
-    //
-    // int mss = ViewBag.Mess;
+
+    Messenge mss = ViewBag.Mess;
 
 }
 
@@ -15,28 +15,28 @@
     </div>
     <div class="from-add-comic">
 
-        @*         @switch (mss) *@
-        @*         { *@
-        @*             case 1: *@
-        @*                 <div class="alert alert-success alert-dismissible fade show" role="alert"> *@
-        @*                     <strong>Thành công !</strong> Gửi yêu cầu thành công. *@
-        @*                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"> *@
-        @*                         <span aria-hidden="true">&times;</span> *@
-        @*                     </button> *@
-        @*                 </div> *@
-        @*                 break; *@
-        @* *@
-        @*             case 0: *@
-        @*                 <div class="alert alert-warning alert-dismissible fade show" role="alert"> *@
-        @*                     <strong>Thất bại!</strong> Gửi yêu cầu thất bại. *@
-        @*                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"> *@
-        @*                         <span aria-hidden="true">&times;</span> *@
-        @*                     </button> *@
-        @*                 </div> *@
-        @*                 break; *@
-        @*         } *@
+        @switch (mss.Code)
+        {
+            case 1:
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Thành công !</strong> @mss.Mss .
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                break;
 
-        <form action="@Url.Action("Chapter", "User")" method="post" enctype="multipart/form-data">
+            case 0:
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Thất bại!</strong> tải lên thất bại.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                break;
+        }
+
+        <form action="@Url.Action("Chapter", "User", new {comicId = Request["comicId"]})" method="post" enctype="multipart/form-data">
 
             <div class="row">
                 <div class="col-md-6 col-12 form-group">
@@ -54,5 +54,53 @@
 
         </form>
 
+    </div>
+</div>
+
+<div class="cover bg-main">
+    <div class="title">
+        <h2>Danh sach chuyện trên web</h2>
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+            <div class="data-table bg-main">
+
+                <table id="censorship" class="display table table-hover table-dark">
+                    <thead class="thead-dark">
+                    <tr class="d-flex text-center">
+                        <th class="col-1">Stt</th>
+                        <th class="col-3">Tên chương</th>
+                        <th class="col-3">Lượt xem</th>
+                        <th class="col-4">Đường dẫn ảnh</th>
+                        <th class="col-1">Xóa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if (chapters.Count > 0)
+                    {
+                        int i = 0;
+                        foreach (chapter chapter in chapters)
+                        {
+                            i++;
+
+                            <tr class="d-flex text-center">
+                                <td class="col-1">@i</td>
+                                <td class="col-3">@chapter.NameChapter</td>
+                                <td class="col-3">@chapter.View</td>
+                                <td class="col-4">@chapter.FolderImage</td>
+                                <td class="col-1">
+                                    <button id-chapter="@chapter.ChapterId" class="btn btn-danger btn-delete-chapter" type="button">
+                                        <i class="ion-android-delete"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </div>
 </div>
