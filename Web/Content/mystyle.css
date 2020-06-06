@@ -15,7 +15,7 @@ body {
 
 }
 
-h1, h2, h3, h4, h5, h6, p, a, span, label, td, tr, th{
+h1, h2, h3, h4, h5, h6, p, a, span, label, td, tr, th {
     font-size: 16px;
     font-family: "Open Sans", sans-serif;
     color: #f1f1f1;
@@ -465,6 +465,7 @@ ul.list-chapters li:hover {
     display: block;
     margin: 15px 10px 15px 0;
     padding-left: 1.2rem;
+    line-height: 1;
     color: #FFFFFF;
 }
 
@@ -560,7 +561,7 @@ footer {
     margin-top: 25px;
 }
 
-/*chpter*/
+/*chapter*/
 .completed {
     margin-bottom: 25px;
     border-radius: 5px;
@@ -602,6 +603,26 @@ footer {
 
 footer.container-fluid.bg-main {
     padding-bottom: 20px;
+}
+.nav-btm{
+    padding: 5px;
+}
+
+.nav-btm .col-md-1 {
+    padding: 10px 0;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.nav-btm .col-md-1 a{
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+.nav-btm .col-md-1:hover {
+    color: #fd7e14;
+    background: #007f8d;
 }
 
 /*text editer*/
@@ -674,7 +695,7 @@ button.float-right.btn-cmt {
 }
 
 #sidebar-wrapper .list-group {
-    width: 15rem;
+    width: 14rem;
 }
 
 #page-content-wrapper {
@@ -705,7 +726,7 @@ button#menu-toggle:focus {
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    margin-left: -15rem;
+    margin-left: -14rem;
 }
 
 /*user*/
@@ -752,6 +773,19 @@ nav.navbar.bg-main {
     overflow: hidden;
     padding: 5px;
 }
+
 span.jconfirm-title {
     color: black;
+}
+
+tr td:nth-child(1):before {
+    content: '\f216';
+    left: 50%;
+    top: 0;
+    font-family: "Ionicons";
+    position: absolute;
+    transform: translate(-50%, 80%);
+    font-size: 24px;
+    color: #fd7e14;
+    cursor: pointer;
 }

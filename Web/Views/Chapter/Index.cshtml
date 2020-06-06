@@ -1,26 +1,45 @@
-﻿<div id="read-chapter" class="ok"></div>
+﻿@using Model.EF
+@{
+    chapter chapter = ViewBag.Chapter;
+    var pathFolder = String.Format("~{0}", chapter.FolderImage);
+    IEnumerable<String> paths = new List<string>();
+    try
+    {
+        paths = Directory.EnumerateFiles(Server.MapPath(pathFolder));
+    }
+    catch
+    {
+        // ignored
+    }
+
+}
+
+<div id="read-chapter" class="ok"></div>
 
 <div class="row">
     <div class="col-12">
-        <div  class="completed bg-main">
+        <div class="completed bg-main">
             <ul>
                 <Li>
                     <a href="@Url.Action("Index", "Home")">Home</a>
                 </Li>
-                <Li>
-                    <a href="@Url.Action("Index", "Home")">Home</a>
+                <Li class="d-md-block d-none">
+                    <a href="@Url.Action("Index", "Comic", new {comicId = chapter.ComicId})">@chapter.comic.NameComic</a>
                 </Li>
                 <Li>
-                    <a href="@Url.Action("Index", "Home")">Home</a>
+                    <a href="@Url.Action("Index", "Chapter", new {chapterId = chapter.ChapterId})">@chapter.NameChapter</a>
                 </Li>
             </ul>
         </div>
     </div>
-    <div class="col-12 text-center img-main">
-        <img src="http://cdn4.lhmanga.com/Store/Manga/0009336c-3de8-4802-8e92-3ee63178534f_5ed39236218a2.jpg" class="img-fluid" alt="">
+    <div class="col-md-10 offset-md-1 col-12 text-center img-main">
+        @foreach (String path in paths)
+        {
+            var a = path.Substring(42);
+            <img src="@a" class="img-fluid" alt="">
+        }
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-12">
@@ -49,4 +68,30 @@
         </div>
     </div>
 
+</div>
+
+
+<div class="bg-main">
+    <div class="row text-center nav-btm">
+        <div class="col-md-1 col-3 offset-md-4 " title="Mũi tên trái">
+            <a href="@Url.Action("Index", "Home")" id="back">
+                <i class="ion-ios-skipbackward"></i>
+            </a>
+        </div>
+        <div class="col-md-1 col-3">
+            <a href="">
+                <i class="ion-android-home"></i>
+            </a>
+        </div>
+        <div class="col-md-1 col-3" title="Phím 'M'">
+            <a>
+                <i class="ion-android-menu"></i>
+            </a>
+        </div>
+        <div class="col-md-1 col-3" title="Mũi tên trái">
+            <a href="">
+                <i class="ion-ios-skipforward"></i>
+            </a>
+        </div>
+    </div>
 </div>

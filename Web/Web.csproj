@@ -186,6 +186,7 @@
         <Content Include="Views\Shared\_Slide.cshtml" />
         <Content Include="Views\Shared\_User.cshtml" />
         <Content Include="Views\UploadFile\Index.cshtml" />
+        <Content Include="Views\User\Category.cshtml" />
         <Content Include="Views\User\Censorship.cshtml" />
         <Content Include="Views\User\Chapter.cshtml" />
         <Content Include="Views\User\ComicsUser.cshtml" />

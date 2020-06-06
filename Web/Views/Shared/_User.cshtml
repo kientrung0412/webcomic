@@ -3,9 +3,9 @@
     user user = new user();
     user.UserId = 1;
     user.RoleId = 1;
-    
+
     // user = (user) Session["user"];
-    
+
 }
 
 <!doctype html>
@@ -56,6 +56,12 @@
                     </a>
                     <a class="nav-link" href="@Url.Action("ListAllComic", "User")">
                         Danh sách truyện
+                    </a>
+                    <a class="nav-link" href="@Url.Action("Category", "User")">
+                        Danh sách thể loại
+                    </a>
+                    <a class="nav-link" href="@Url.Action("Category", "User")">
+                        Danh sách tài khoản
                     </a>
                 }
 

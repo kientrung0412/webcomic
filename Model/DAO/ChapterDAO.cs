@@ -19,7 +19,7 @@ namespace Model.DAO
         {
             var c = WcDbContext.chapters.Add(chapter);
             WcDbContext.SaveChanges();
-            
+
             c.FolderImage = String.Format("/Upload/truyen/{0}/{1}", c.ComicId, c.ChapterId);
             var comic = WcDbContext.comics.Single(comic1 => comic1.ComicId == c.ComicId);
             comic.UpdateAt = DateTime.Now;
@@ -29,13 +29,13 @@ namespace Model.DAO
             return c;
         }
 
-        public async Task<int> DeleteAs(int id)
+        public int Delete(int id)
         {
-            var select = await WcDbContext.chapters.FindAsync(id);
+            var select = WcDbContext.chapters.Single(chapter => chapter.ChapterId == id);
 
             var sql = WcDbContext.chapters.Remove(select);
 
-            var n = await WcDbContext.SaveChangesAsync();
+            var n = WcDbContext.SaveChanges();
 
             return n;
         }

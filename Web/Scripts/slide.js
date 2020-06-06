@@ -16,7 +16,7 @@
                 items: 3
             },
             991: {
-                items: 4
+                items: 5
             }
         }
     });
@@ -221,6 +221,8 @@
 
         }
 
+        page = 1;
+        
         getData();
 
     })
@@ -305,6 +307,18 @@
     $("#requestcomic").click(function () {
         Update();
     })
-
+    
+    //show detail row
+    // $('tr td:first').click(function () {
+    //     console.log("dshf");
+    // })
+    
+    //chuyển chap
+    $(window).keydown(function (e) {
+        if (e.which == 37){
+            $('#back').trigger('mouseup');
+        }
+    })
+    
 });
 

@@ -23,7 +23,7 @@ function Delete(urlPost, id) {
                         type: 'POST',
                         data: {id: id},
                         success: function (data) {
-                            if (data === "True") {
+                            if (data == "True") {
                                 $.alert({
                                     icon: 'ion-android-done',
                                     autoClose: 'ok|2000',
@@ -82,7 +82,7 @@ function Update(urlPost, id) {
                         data: {id: id},
                         success: function (data) {
 
-                            if (data === "True") {
+                            if (data == "True") {
                                 $.alert({
                                     icon: 'ion-android-done',
                                     autoClose: 'ok|2000',
@@ -136,8 +136,12 @@ $(document).ready(function () {
     })
     
     //xoa chapter
-    
-    
+    $('.btn-delete-chapter').click(function () {
+        $(this).parents("tr").slideUp("slown").removeClass("d-flex");
+
+        let id = $(this).attr("id-chapter");
+        let b = Delete("/User/DeleteChapter", id);
+    })
 })
 
 

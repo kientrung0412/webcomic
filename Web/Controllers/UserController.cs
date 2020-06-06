@@ -85,7 +85,7 @@ namespace WebComic.Controllers
                 comic comic = new comic();
 
                 comic.NationId = nation;
-                comic.UserId = user.UserId;
+                comic.UserId = _user.UserId;
                 comic.NameComic = nameComic;
                 comic.AuthorComic = author;
                 comic.SummaryComic = summary;
@@ -387,6 +387,37 @@ namespace WebComic.Controllers
 
             return View();
 
+        }
+        
+        
+        //xóa chapter
+        public Boolean DeleteChapter()
+        {
+            try
+            {
+                String id = Request["id"];
+
+                ChapterDAO chapterDao = new ChapterDAO();
+
+                var n = chapterDao.Delete(Convert.ToInt32(id));
+
+                return (n==1);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //thể loại
+        public ActionResult Category()
+        {
+            CategoryDAO categoryDao = new CategoryDAO();
+            var categorys = categoryDao.List();
+
+            ViewBag.Categotys = categorys;
+            
+            return View();
         }
     }
 }
