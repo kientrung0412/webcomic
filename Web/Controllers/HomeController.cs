@@ -24,50 +24,9 @@ namespace WebComic.Controllers
             ViewBag.Numpage = numPage;
 
             int page = list.Page;
-            ViewBag.Page =page;
-            
+            ViewBag.Page = page;
+
             return View();
-        }
-        
-
-        [HttpPost]
-        public ActionResult GetList()
-        {
-            int start = Convert.ToInt32(Request["start"]);
-            int length = Convert.ToInt32(Request["length"]);
-            String searchValue = Request["search[value]"];
-            String sortColumnName = Request["columns[" + Request["order[0][column]"] + "][data]"];
-            String sortDirection = Request["order[0][dir]"];
-
-
-            CategoryDAO categoryDao = new CategoryDAO();
-
-            List<category> list = categoryDao.List();
-
-            int totalRow = list.Count;
-
-            //Tìm kiếm
-
-
-            if (!String.IsNullOrEmpty(searchValue))
-            {
-                list = categoryDao.ListSearch(searchValue);
-            }
-
-            int filterRow = list.Count;
-
-            //Sắp xếp
-
-
-            // list = list.(order )
-
-            //Phân trang
-
-            list = list.Skip(start).Take(length).ToList();
-
-            return Json(
-                new {data = list, draw = Request["draw"], recordsTotal = totalRow, recordsFiltered = filterRow},
-                JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -12,9 +12,9 @@ namespace Model.Models
             return fileName;
         }
 
-        public static Messenge Upload(HttpPostedFileBase file, String filePath, String fileName)
+        public static Messenger Upload(HttpPostedFileBase file, String filePath, String fileName)
         {
-            Messenge messenge = new Messenge();
+            Messenger messenger = new Messenger();
 
             try
             {
@@ -29,33 +29,33 @@ namespace Model.Models
                     try
                     {
                         file.SaveAs(Path.Combine(filePath, fileName));
-                        messenge.Code = 1;
-                        messenge.Mss = fileName;
+                        messenger.Code = 1;
+                        messenger.Mss = fileName;
 
-                        return messenge;
+                        return messenger;
                     }
                     catch (Exception e)
                     {
-                        messenge.Mss = String.Format("Tải lên thất bại!, {0}", e);
-                        messenge.Code = 0;
+                        messenger.Mss = String.Format("Tải lên thất bại!, {0}", e);
+                        messenger.Code = 0;
 
-                        return messenge;
+                        return messenger;
                     }
                 }
                 else
                 {
-                    messenge.Mss = "Có lỗi tải lên";
-                    messenge.Code = 0;
+                    messenger.Mss = "Có lỗi tải lên";
+                    messenger.Code = 0;
 
-                    return messenge;
+                    return messenger;
                 }
             }
             catch (Exception e)
             {
-                messenge.Mss = "Có lỗi: " + e;
-                messenge.Code = 0;
+                messenger.Mss = "Có lỗi: " + e;
+                messenger.Code = 0;
 
-                return messenge;
+                return messenger;
             }
         }
     }

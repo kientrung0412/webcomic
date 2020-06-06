@@ -2,8 +2,18 @@
 
 namespace Model.Models
 {
-    public class Messenge
+    public class Messenger
     {
+        private int code;
+        private String mss;
+
+
+        public Messenger()
+        {
+            code = -1;
+            mss = null;
+        }
+
         public int Code
         {
             get => code;
@@ -15,8 +25,5 @@ namespace Model.Models
             get => mss;
             set => mss = value;
         }
-
-        private int code;
-        private String mss;
     }
 }

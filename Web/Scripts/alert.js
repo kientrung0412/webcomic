@@ -33,7 +33,7 @@ function Delete(urlPost, id, btn) {
                                     type: 'green'
                                 })
 
-                                btn.parents("tr").slideUp("slown").removeClass("d-flex");
+                                btn.parents("tr").slideUp(300).removeClass("d-flex");
 
                             } else {
                                 $.alert({
@@ -96,7 +96,7 @@ function Update(urlPost, id, rm, btn) {
                                 })
 
                                 if (rm = true) {
-                                    btn.parents("tr").slideUp("slown").removeClass("d-flex");
+                                    btn.parents("tr").slideUp(300).removeClass("d-flex");
                                 }
 
                             } else {
@@ -139,8 +139,6 @@ $(document).ready(function () {
     $('.btn-delete-comic').click(function () {
         let id = $(this).attr("id-comic");
         let b = Delete("/User/DeleteComic", id, $(this));
-
-
     })
 
 
@@ -148,6 +146,17 @@ $(document).ready(function () {
     $('.btn-delete-chapter').click(function () {
         let id = $(this).attr("id-chapter");
         let b = Delete("/User/DeleteChapter", id, $(this));
+    })
+
+    //hien thi chi tiet
+    $('.btn-detail').click(function () {
+        $(this).parents("tr").next().toggleClass("d-none").toggleClass("d-flex");
+    })
+
+    //xoa the loai
+    $('.btn-delete-category').click(function () {
+        let id = $(this).attr("id-category");
+        let b = Delete("/User/DeleteCategory", id, $(this));
     })
 })
 

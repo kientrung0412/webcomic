@@ -19,5 +19,11 @@ namespace Model.DAO
                 .OrderBy(comic => comic.StatusComicId).ToList();
             return list;
         }
+
+        public List<status_comic> ListAll()
+        {
+            var list = WcDbContext.status_comic.ToList();
+            return list;
+        }
     }
 }

@@ -56,7 +56,7 @@ namespace WebComic.Controllers
 
                 ViewBag.Nations = nationDao.List();
                 ViewBag.Categorys = categoryDao.List();
-                ViewBag.Mess = -1;
+                ViewBag.Mss = -1;
 
                 return View();
             }
@@ -109,11 +109,11 @@ namespace WebComic.Controllers
 
                     if (i > 0)
                     {
-                        ViewBag.Mess = 1;
+                        ViewBag.Mss = 1;
                     }
                     else
                     {
-                        ViewBag.Mess = 0;
+                        ViewBag.Mss = 0;
                     }
 
                     CategoryDAO categoryDao = new CategoryDAO();
@@ -124,7 +124,7 @@ namespace WebComic.Controllers
                 }
                 catch
                 {
-                    ViewBag.Mess = 0;
+                    ViewBag.Mss = 0;
                 }
 
                 return View();
@@ -240,9 +240,13 @@ namespace WebComic.Controllers
                 ComicDAO comicDao = new ComicDAO();
                 var list = comicDao.List(new Pagination(10, page));
 
+                StatusComicDAO statusComicDao = new StatusComicDAO();
+                var statusComics = statusComicDao.ListAll();
+                
                 ViewBag.Comics = list.Comics;
                 ViewBag.Page = list.Page;
                 ViewBag.Numpage = list.PageSize;
+                ViewBag.StatusComics = statusComics;
 
                 return View();
             }
@@ -328,16 +332,17 @@ namespace WebComic.Controllers
                 ChapterDAO chapterDao = new ChapterDAO();
                 var chapters = chapterDao.ListChapterComic(id);
 
-                Messenge messenge = new Messenge();
-                messenge.Code = 3;
+                Messenger messenger = new Messenger();
+                messenger.Code = 3;
 
                 ViewBag.Chapters = chapters;
-                ViewBag.Mess = messenge;
+                ViewBag.Mss = messenger;
 
                 return View();
             }
         }
 
+        //them moi chapter
         [HttpPost]
         public ActionResult Chapter(String namechapter, HttpPostedFileBase[] files, String comicId)
         {
@@ -349,7 +354,7 @@ namespace WebComic.Controllers
             ChapterDAO chapterDao = new ChapterDAO();
             var n = chapterDao.Add(chapter);
 
-            Messenge mss = new Messenge();
+            Messenger mss = new Messenger();
 
             if (n != null)
             {
@@ -361,8 +366,8 @@ namespace WebComic.Controllers
 
                 for (int i = 0; i < files.Length; i++)
                 {
-                    Messenge messenge = UploadFile.Upload(files[i], path, String.Format("{0}.jpg", i));
-                    if (messenge.Code == 1)
+                    Messenger messenger = UploadFile.Upload(files[i], path, String.Format("{0}.jpg", i));
+                    if (messenger.Code == 1)
                     {
                         s++;
                     }
@@ -382,14 +387,13 @@ namespace WebComic.Controllers
 
             var chapters = chapterDao.ListChapterComic(Convert.ToInt32(comicId));
 
-            ViewBag.Mess = mss;
+            ViewBag.Mss = mss;
             ViewBag.Chapters = chapters;
 
             return View();
-
         }
-        
-        
+
+
         //xóa chapter
         public Boolean DeleteChapter()
         {
@@ -401,7 +405,7 @@ namespace WebComic.Controllers
 
                 var n = chapterDao.Delete(Convert.ToInt32(id));
 
-                return (n==1);
+                return (n == 1);
             }
             catch
             {
@@ -415,9 +419,49 @@ namespace WebComic.Controllers
             CategoryDAO categoryDao = new CategoryDAO();
             var categorys = categoryDao.List();
 
-            ViewBag.Categotys = categorys;
-            
+            ViewBag.Categories = categorys;
+            ViewBag.Mss = new Messenger();
+
             return View();
+        }
+
+        //thêm thể lọa
+        [HttpPost]
+        public ActionResult Category(String namecategory)
+        {
+            CategoryDAO categoryDao = new CategoryDAO();
+            var b = categoryDao.Add(namecategory);
+            var categorys = categoryDao.List();
+
+
+            Messenger messenger = new Messenger();
+
+            if (b == 1)
+            {
+                messenger.Code = 1;
+                messenger.Mss = "Thêm mới thành công";
+            }
+            else
+            {
+                messenger.Code = 0;
+                messenger.Mss = "Thêm mới thất bại";
+            }
+
+            ViewBag.Mss = messenger;
+            ViewBag.Categories = categorys;
+
+
+            return View();
+        }
+
+        //xóa thể loại
+        [HttpPost]
+        public ActionResult DeleteCategory(String id)
+        {
+            CategoryDAO categoryDao = new CategoryDAO();
+            var b = categoryDao.Delete(Convert.ToInt32(id));
+            
+            return Content(b.ToString());
         }
     }
 }

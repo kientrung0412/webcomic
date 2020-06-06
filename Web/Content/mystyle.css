@@ -6,6 +6,8 @@
     margin: 0;
     padding: 0;
     line-height: 1;
+    transition: all 0.3s;
+
 }
 
 body {
@@ -25,6 +27,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, label, td, tr, th {
 
 
 dl, ol, ul, p {
+    list-style-type: none;
     margin: 0;
 }
 
@@ -485,7 +488,7 @@ ul.list-chapters li:hover {
     left: 0;
     height: 1em;
     width: 1em;
-    background: rgba(234, 234, 234, 0.64);;
+    background: rgba(234, 234, 234, 0.64);
     color: #fff;
     text-align: center;
 
@@ -604,7 +607,8 @@ footer {
 footer.container-fluid.bg-main {
     padding-bottom: 20px;
 }
-.nav-btm{
+
+.nav-btm {
     padding: 5px;
 }
 
@@ -614,7 +618,7 @@ footer.container-fluid.bg-main {
     border-radius: 5px;
 }
 
-.nav-btm .col-md-1 a{
+.nav-btm .col-md-1 a {
     width: 100%;
     height: 100%;
     font-size: 20px;
@@ -624,6 +628,12 @@ footer.container-fluid.bg-main {
     color: #fd7e14;
     background: #007f8d;
 }
+
+/*#nav-bottom{*/
+/*    position: fixed;*/
+/*    bottom: 0;*/
+/*    z-index: 99;*/
+/*}*/
 
 /*text editer*/
 textarea#comment {
@@ -731,20 +741,21 @@ button#menu-toggle:focus {
 
 /*user*/
 .cover.bg-main {
-    height: 100%;
     padding: 20px 20px;
     margin-top: 20px;
     border-radius: 5px;
 }
 
 .profile-avatar {
+    left: 50%;
+    position: relative;
     max-width: 50%;
     text-align: center;
-    position: relative;
+    transform: translate(-50%, 0);
 }
 
 .avatar-profile {
-    position: absolute;
+    display: block;
 }
 
 .role.bg-main {
@@ -752,8 +763,8 @@ button#menu-toggle:focus {
 }
 
 .role.bg-main p {
+    margin-top: 15px;
     font-size: 24px;
-    padding-bottom: 15px;
 }
 
 .from-add-comic {
@@ -778,7 +789,7 @@ span.jconfirm-title {
     color: black;
 }
 
-tr td:nth-child(1):before {
+tr td span {
     content: '\f216';
     left: 50%;
     top: 0;
@@ -788,4 +799,18 @@ tr td:nth-child(1):before {
     font-size: 24px;
     color: #fd7e14;
     cursor: pointer;
+    transition: all 0.3s;
 }
+
+tr td span:hover{
+    color: rgba(253, 126, 20, 0.73);
+}
+
+.detail-show ul li {
+    margin-top: 13px;
+    margin-bottom: 13px;
+    line-height: 1.5;
+}
+/*.table-dark.table-hover tbody tr:nth-child(2n):hover{*/
+/*    background: #343a40;*/
+/*}*/

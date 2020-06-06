@@ -17,11 +17,13 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public async Task<int> AddAs(String name)
+        public int Add(String name)
         {
             category category = new category();
+            category.NameCategory = name;
             WcDbContext.categories.Add(category);
-            var n = await WcDbContext.SaveChangesAsync();
+
+            var n = WcDbContext.SaveChanges();
             return n;
         }
 
@@ -33,23 +35,20 @@ namespace Model.DAO
             return list;
         }
 
-        public List<category> ListSearch(String s)
-        {
-            var stringSearch = String.Format("%{0}%", s.ToLower());
-
-
-            var list = WcDbContext.categories
-                .Where(c => DbFunctions.Like(c.NameCategory, stringSearch))
-                .OrderBy(c => c.CategoryId)
-                .ToList();
-
-            return list;
-        }
-
         public category One(int id)
         {
             var ctg = WcDbContext.categories.Single(category => category.CategoryId == id);
             return ctg;
+        }
+
+        public Boolean Delete(int id)
+        {
+            var ctg = WcDbContext.categories.Single(category => category.CategoryId == id);
+            WcDbContext.categories.Remove(ctg);
+
+            var i = WcDbContext.SaveChanges();
+
+            return i == 1;
         }
     }
 }

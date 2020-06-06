@@ -40,7 +40,7 @@
                             <div class="cover-type">
                                 @foreach (comic_category category in comic.comic_category.ToList())
                                 {
-                                    <a href="">
+                                    <a href="@Url.Action("Index", "Category", new {categoryId = category.CategoryId})">
                                         <span class="type-comic">@category.category.NameCategory</span>
                                     </a>
                                 }

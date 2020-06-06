@@ -3,6 +3,8 @@
     ViewBag.Title = "Tất cả truyện";
     Layout = "~/Views/Shared/_User.cshtml";
     List<comic> comics = ViewBag.Comics;
+    List<status_comic> statusComics = ViewBag.StatusComics;
+
 }
 
 <div class="cover bg-main">
@@ -23,8 +25,7 @@
                         <th class="col-1">Tên người đăng</th>
                         <th class="col-2">Thời gian đăng</th>
                         <th class="col-2">Cập nhật lần cuối</th>
-                        <th class="col-1">Trạng thái</th>
-                        <th class="col-1">Sủa</th>
+                        <th class="col-2">Trạng thái</th>
                         <th class="col-1">Xóa</th>
                     </tr>
                     </thead>
@@ -35,31 +36,72 @@
                         foreach (comic comic in comics)
                         {
                             i++;
+                            var chapters = comic.chapters;
+
                             var date1 = (DateTime) comic.ReleaseDate;
                             var reDate = date1.ToString("dd/MM/yy hh:mm");
 
                             var date2 = (DateTime) comic.UpdateAt;
-                            var dateAt = date2.ToString("dd/MM/yy hh:mm");
+                            var updateAt = date2.ToString("dd/MM/yy hh:mm");
 
                             <tr class="d-flex text-center">
-                                <td class="col-1">@i</td>
+                                <td class="col-1">
+                                    @i
+                                    <span class="btn-detail">
+                                        <i class="ion-ios-eye"></i>
+                                    </span>
+                                </td>
                                 <td class="col-1">
                                     <img src="@comic.CommicBanner" alt="" class="img-fluid">
                                 </td>
                                 <td class="col-2">@comic.NameComic</td>
-                                <td class="col-1">@comic.user.Username</td>
+                                <td class="col-1" title="Email: @comic.user.UserMail ">@comic.user.Username</td>
                                 <td class="col-2">@reDate</td>
-                                <td class="col-2">@dateAt</td>
-                                <td class="col-1">@comic.status_comic.StatusComicName</td>
-                                <td class="col-1">
-                                    <button id-comic="@comic.ComicId" class="btn btn-info btn-edit-comic" type="button">
-                                        <i class="ion-edit"></i>
-                                    </button>
+                                <td class="col-2">@updateAt</td>
+                                <td class="col-2">
+                                    <select name="change-status-comic" class="form-control" id-comic="@comic.ComicId">
+                                        @foreach (status_comic statusComic in statusComics)
+                                        {
+                                            if (comic.status_comic.StatusComicId == statusComic.StatusComicId)
+                                            {
+                                                <option value="@statusComic.StatusComicId" selected="selected">@statusComic.StatusComicName</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@statusComic.StatusComicId">@statusComic.StatusComicName</option>
+                                            }
+                                        }
+                                    </select>
                                 </td>
                                 <td class="col-1">
                                     <button id-comic="@comic.ComicId" class="btn btn-danger btn-delete-comic" type="button">
                                         <i class="ion-android-delete"></i>
                                     </button>
+                                </td>
+                            </tr>
+                            <tr class="d-none detail-show">
+                                <td class="col-11 offset-1">
+                                    <div class="row">
+                                        <ul class="col-12">
+                                            <li class="row">
+                                                <div class="col-2">Tóm tắt: </div>
+                                                <div class="col-10"> @comic.SummaryComic</div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col-2"> Tổng số chương: </div>
+                                                <div class="col-10">@chapters.Count</div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col-2">Tổng lượt xem: </div>
+                                                <div class="col-10"> @chapters.Sum(chapter => chapter.View)</div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col-2">Đánh giá: </div>
+                                                <div class="col-10"> @comic.Rating/100 sau @comic.NumRating đánh giá</div>
+                                            </li>
+                                        </ul>
+
+                                    </div>
                                 </td>
                             </tr>
                         }

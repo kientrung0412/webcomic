@@ -3,6 +3,7 @@
     ViewBag.Title = "Truyện đã đăng";
     Layout = "~/Views/Shared/_User.cshtml";
     List<comic> comics = ViewBag.Comics;
+
 }
 
 <div class="cover bg-main">
@@ -32,14 +33,26 @@
                     @if (comics.Count > 0)
                     {
                         int i = 0;
+
                         foreach (comic comic in comics)
                         {
                             i++;
+
+                            var chapters = comic.chapters;
+
                             var date1 = (DateTime) comic.ReleaseDate;
                             var date = date1.ToString("dd/MM/yy hh:mm");
 
+                            var updateAt1 = (DateTime) comic.UpdateAt;
+                            var updateAt = updateAt1.ToString("dd/MM/yy hh:mm");
+
                             <tr class="d-flex text-center">
-                                <td class="col-1">@i</td>
+                                <td class="col-1">
+                                    @i
+                                    <span class="btn-detail">
+                                        <i class="ion-ios-eye"></i>
+                                    </span>
+                                </td>
                                 <td class="col-1">
                                     <img src="@comic.CommicBanner" alt="" class="img-fluid">
                                 </td>
@@ -61,6 +74,48 @@
                                     <button id-comic="@comic.ComicId" class="btn btn-danger btn-delete-comic" type="button">
                                         <i class="ion-android-delete"></i>
                                     </button>
+                                </td>
+                            </tr>
+
+                            <tr class="d-none detail-show">
+                                <td class="col-11 offset-1">
+                                    <div class="row">
+                                        <ul class="col-12">
+                                            <li class="row">
+                                                <div class="col-2">
+                                                    Tóm tắt:
+                                                </div>
+                                                <div class="col-10">
+                                                    @comic.SummaryComic
+                                                </div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col-2">
+                                                    Cập nhật lần cuối:
+                                                </div>
+                                                <div class="col-10">
+                                                    @updateAt
+                                                </div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col-2">
+                                                    Tổng số chương:
+                                                </div>
+                                                <div class="col-10">
+                                                    @chapters.Count
+                                                </div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col-2">Tổng lượt xem: </div>
+                                                <div class="col-10">@chapters.Sum(chapter => chapter.View)</div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col-2">Đánh giá: </div>
+                                                <div class="col-10">@comic.Rating/100 sau @comic.NumRating đánh giá</div>
+                                            </li>
+                                        </ul>
+
+                                    </div>
                                 </td>
                             </tr>
                         }

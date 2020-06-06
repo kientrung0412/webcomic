@@ -36,7 +36,7 @@
     });
 
     //cuộn
-    var nav = $('.navbar');
+    var nav = $('#top-nav');
 
     $(document).scroll(function () {
         var scrollTop = $(window).scrollTop();
@@ -292,7 +292,7 @@
     //un fix nav
 
     if ($('#read-chapter').hasClass('ok')) {
-        $('nav').css('position', 'unset');
+        $('#top-nav').css('position', 'unset');
     }
     // text editer
 
@@ -308,10 +308,6 @@
         Update();
     })
     
-    //show detail row
-    // $('tr td:first').click(function () {
-    //     console.log("dshf");
-    // })
     
     //chuyển chap
     $(window).keydown(function (e) {

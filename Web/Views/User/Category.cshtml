@@ -1,8 +1,110 @@
-﻿@model dynamic
-
+﻿@using Model.EF
+@using Model.Models
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
+    ViewBag.Title = "Thể loại";
+    Layout = "~/Views/Shared/_User.cshtml";
 
-<h2>title</h2>
+    List<category> categories = ViewBag.Categories;
+    Messenger mss = ViewBag.Mss;
+
+}
+<div class="row">
+    <div class="col-md-4 col-12">
+        <div class="bg-main cover">
+            <div class="title">
+                <h2>Thêm chương</h2>
+            </div>
+            <div class="from-add-comic">
+
+                @switch (mss.Code)
+                {
+                    case 1:
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Thành công !</strong> @mss.Mss .
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        break;
+
+                    case 0:
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Thất bại!</strong> tải lên thất bại.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        break;
+                }
+
+                <form action="@Url.Action("Category", "User", new {comicId = Request["comicId"]})" method="post" enctype="multipart/form-data">
+
+                    <div class="row">
+                        <div class=" col-12 form-group">
+                            <label>Tên thể loại</label>
+                            <input type="text" class="form-control" name="namecategory" placeholder="Tên truyện">
+                        </div>
+                        <div class="col-12 form-group">
+                            <button class="btn btn-success" type="submit">Thêm</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-12">
+        <div class="cover bg-main">
+            <div class="title">
+                <h2>Danh sách thể loại</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="data-table bg-main">
+
+                        <table id="censorship" class="display table table-hover table-dark">
+                            <thead class="thead-dark">
+                            <tr class="d-flex text-center">
+                                <th class="col-1">Stt</th>
+                                <th class="col-3">Tên thể loại</th>
+                                <th class="col-4">Truyện thuộc thể loại</th>
+                                <th class="col-2">Sửa</th>
+                                <th class="col-2">Xóa</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if (categories.Count > 0)
+                            {
+                                int i = 0;
+                                foreach (category category in categories)
+                                {
+                                    i++;
+
+                                    <tr class="d-flex text-center">
+                                        <td class="col-1">@i</td>
+                                        <td class="col-3">@category.NameCategory</td>
+                                        <td class="col-4">@category.comic_category.Count</td>
+                                        <td class="col-2">
+                                            <button id-category="@category.CategoryId" class="btn btn-info btn-edit-category" type="button">
+                                                <i class="ion-edit"></i>
+                                            </button>
+                                        </td>
+                                        <td class="col-2">
+                                            <button id-category="@category.CategoryId" class="btn btn-danger btn-delete-category" type="button">
+                                                <i class="ion-android-delete"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
