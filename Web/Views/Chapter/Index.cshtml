@@ -5,7 +5,7 @@
     IEnumerable<String> paths = new List<string>();
     try
     {
-        paths = Directory.EnumerateFiles(Server.MapPath(pathFolder));
+        paths = Directory.EnumerateFiles(Server.MapPath(pathFolder)).OrderBy(s => s.Length);
     }
     catch
     {

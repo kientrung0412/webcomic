@@ -1,6 +1,7 @@
 ﻿// Hàm xóa
 
-function Delete(urlPost, id) {
+
+function Delete(urlPost, id, btn) {
     $.confirm({
         icon: 'ion-alert-circled',
 
@@ -31,6 +32,9 @@ function Delete(urlPost, id) {
                                     content: 'Xóa thành công',
                                     type: 'green'
                                 })
+
+                                btn.parents("tr").slideUp("slown").removeClass("d-flex");
+
                             } else {
                                 $.alert({
                                     icon: 'ion-alert-circled',
@@ -58,7 +62,7 @@ function Delete(urlPost, id) {
     });
 }
 
-function Update(urlPost, id) {
+function Update(urlPost, id, rm, btn) {
     var q;
 
     $.confirm({
@@ -90,6 +94,11 @@ function Update(urlPost, id) {
                                     content: 'Cập nhật thành công',
                                     type: 'green'
                                 })
+
+                                if (rm = true) {
+                                    btn.parents("tr").slideUp("slown").removeClass("d-flex");
+                                }
+
                             } else {
                                 $.alert({
                                     icon: 'ion-alert-circled',
@@ -120,27 +129,25 @@ $(document).ready(function () {
 
     //cấp phép
     $('.btn-active-comic').click(function () {
-        $(this).parents("tr").slideUp("slown").removeClass("d-flex");
-
         let id = $(this).attr("id-comic");
-        let b = Update("/User/UpdateCensorship", id);
+        let b = Update("/User/UpdateCensorship", id, true, $(this));
     });
 
     //xoa chuyeenj
 
-    $('.btn-delete-comic').click(function () {
-        $(this).parents("tr").slideUp("slown").removeClass("d-flex");
 
+    $('.btn-delete-comic').click(function () {
         let id = $(this).attr("id-comic");
-        let b = Delete("/User/DeleteComic", id);
+        let b = Delete("/User/DeleteComic", id, $(this));
+
+
     })
-    
+
+
     //xoa chapter
     $('.btn-delete-chapter').click(function () {
-        $(this).parents("tr").slideUp("slown").removeClass("d-flex");
-
         let id = $(this).attr("id-chapter");
-        let b = Delete("/User/DeleteChapter", id);
+        let b = Delete("/User/DeleteChapter", id, $(this));
     })
 })
 
