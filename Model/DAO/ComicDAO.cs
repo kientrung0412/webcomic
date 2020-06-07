@@ -56,13 +56,24 @@ namespace Model.DAO
             return i;
         }
 
-        public int Delete(int id)
+        public int Delete(comic cm)
         {
-            var comic = WcDbContext.comics.Single(c => c.ComicId == id);
-            var a = WcDbContext.comics.Remove(comic);
+            var comic = new comic();
 
-            var chaoters = WcDbContext.chapters.Where(chapter => chapter.ComicId == id).ToList();
-            var b = WcDbContext.chapters.RemoveRange(chaoters);
+            if (cm.user.RoleId == 1)
+            {
+                comic = WcDbContext.comics.Single(c => c.ComicId == cm.ComicId);
+            }
+            else
+            {
+                comic = WcDbContext.comics.Single(c =>
+                    c.ComicId == cm.ComicId && c.UserId == cm.UserId && c.user.RoleId < 3);
+            }
+
+            WcDbContext.comics.Remove(comic);
+
+            var chaoters = WcDbContext.chapters.Where(chapter => chapter.ComicId == cm.ComicId).ToList();
+            WcDbContext.chapters.RemoveRange(chaoters);
 
             var i = WcDbContext.SaveChanges();
 

@@ -15,25 +15,41 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public chapter Add(chapter chapter)
+        public chapter Add(chapter chapter, int userId)
         {
-            var c = WcDbContext.chapters.Add(chapter);
-            WcDbContext.SaveChanges();
+            try
+            {
+                var comic = WcDbContext.comics.Single(c =>
+                    c.UserId == userId && c.user.RoleId < 3 && c.StatusComicId < 4 && c.ComicId == chapter.ComicId);
+                if (comic != null)
+                {
+                    //thêm chapter
+                    var ct = WcDbContext.chapters.Add(chapter);
 
-            c.FolderImage = String.Format("/Upload/truyen/{0}/{1}", c.ComicId, c.ChapterId);
-            var comic = WcDbContext.comics.Single(comic1 => comic1.ComicId == c.ComicId);
-            comic.UpdateAt = DateTime.Now;
+                    //Cập nhật time
+                    comic.UpdateAt = DateTime.Now;
 
-            WcDbContext.SaveChanges();
+                    ct.FolderImage = String.Format("/Upload/truyen/{0}/{1}", ct.ComicId, ct.ChapterId);
 
-            return c;
+                    WcDbContext.SaveChanges();
+
+                    return ct;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+            return null;
         }
 
-        public int Delete(int id)
+        public int Delete(chapter ct, int userId)
         {
-            var select = WcDbContext.chapters.Single(chapter => chapter.ChapterId == id);
+            var chapter =
+                WcDbContext.chapters.Single(c => c.ChapterId == ct.ChapterId && c.comic.UserId == userId);
 
-            var sql = WcDbContext.chapters.Remove(select);
+            var sql = WcDbContext.chapters.Remove(chapter);
 
             var n = WcDbContext.SaveChanges();
 

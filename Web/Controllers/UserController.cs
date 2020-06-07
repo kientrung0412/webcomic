@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.SessionState;
+using Microsoft.Ajax.Utilities;
 using Model.DAO;
 using Model.EF;
 using Model.Models;
@@ -11,21 +13,14 @@ namespace WebComic.Controllers
 {
     public class UserController : Controller
     {
-        private user _user;
+        user _user;
+        HttpContext context = System.Web.HttpContext.Current;
 
         public UserController()
         {
-            user user = new user();
-            user.UserId = 1;
-            user.RoleId = 1;
-
-            // Session["user"] = user;
-
-
             try
             {
-                // _user = (user) Session["user"];
-                _user = user;
+                _user = (user) (context.Session["user"]);
             }
             catch
             {
@@ -33,37 +28,39 @@ namespace WebComic.Controllers
             }
         }
 
+        public Boolean CheckStatusUser()
+        {
+            return (context.Session["user"] == null || _user.StatusUserId != 1);
+        }
+
+
         // profile
         public ActionResult Index()
         {
-            if (_user == null)
+            if (CheckStatusUser())
             {
-                return Redirect(Url.Action("Login", "User"));
+                return RedirectToAction("Login");
             }
-            else
-            {
-                return View();
-            }
+
+            return View();
         }
 
         //from them truyen
         public ActionResult UpComic()
         {
-            if (_user != null)
+            if (CheckStatusUser())
             {
-                CategoryDAO categoryDao = new CategoryDAO();
-                NationDAO nationDao = new NationDAO();
-
-                ViewBag.Nations = nationDao.List();
-                ViewBag.Categorys = categoryDao.List();
-                ViewBag.Mss = -1;
-
-                return View();
+                return RedirectToAction("Login");
             }
-            else
-            {
-                return Redirect(Url.Action("Login", "User"));
-            }
+
+            CategoryDAO categoryDao = new CategoryDAO();
+            NationDAO nationDao = new NationDAO();
+
+            ViewBag.Nations = nationDao.List();
+            ViewBag.Categorys = categoryDao.List();
+            ViewBag.Mss = -1;
+
+            return View();
         }
 
         //them truyen moi
@@ -71,103 +68,102 @@ namespace WebComic.Controllers
         public ActionResult UpComic(String nameComic, String author, int[] category, int nation,
             HttpPostedFileBase file, String summary)
         {
-            if (_user != null)
+            if (CheckStatusUser())
             {
-                user user = (user) Session["user"];
+                return RedirectToAction("Login");
+            }
 
-                List<int> categorys = new List<int>();
+            List<int> categorys = new List<int>();
 
-                if (category != null)
+            if (category != null)
+            {
+                categorys = category.ToList();
+            }
+
+            comic comic = new comic();
+
+            comic.NationId = nation;
+            comic.UserId = _user.UserId;
+            comic.NameComic = nameComic;
+            comic.AuthorComic = author;
+            comic.SummaryComic = summary;
+
+            try
+            {
+                ComicDAO comicDao = new ComicDAO();
+
+                var add = comicDao.Add(comic, categorys);
+
+                String path = String.Format("~/Upload/Truyen/{0}", add.ComicId);
+                path = Server.MapPath(path);
+
+                var a = UploadFile.Upload(file, path, "baner.jpg");
+
+                path = String.Format("/Upload/Truyen/{0}/baner.jpg", add.ComicId);
+
+                comic.CommicBanner = path;
+
+                var i = comicDao.Update(comic);
+
+                if (i > 0)
                 {
-                    categorys = category.ToList();
+                    ViewBag.Mss = 1;
                 }
-
-                comic comic = new comic();
-
-                comic.NationId = nation;
-                comic.UserId = _user.UserId;
-                comic.NameComic = nameComic;
-                comic.AuthorComic = author;
-                comic.SummaryComic = summary;
-
-                try
-                {
-                    ComicDAO comicDao = new ComicDAO();
-
-                    var add = comicDao.Add(comic, categorys);
-
-                    String path = String.Format("~/Upload/Truyen/{0}", add.ComicId);
-                    path = Server.MapPath(path);
-
-                    var a = UploadFile.Upload(file, path, "baner.jpg");
-
-                    path = String.Format("/Upload/Truyen/{0}/baner.jpg", add.ComicId);
-
-                    comic.CommicBanner = path;
-
-                    var i = comicDao.Update(comic);
-
-                    if (i > 0)
-                    {
-                        ViewBag.Mss = 1;
-                    }
-                    else
-                    {
-                        ViewBag.Mss = 0;
-                    }
-
-                    CategoryDAO categoryDao = new CategoryDAO();
-                    NationDAO nationDao = new NationDAO();
-
-                    ViewBag.Nations = nationDao.List();
-                    ViewBag.Categorys = categoryDao.List();
-                }
-                catch
+                else
                 {
                     ViewBag.Mss = 0;
                 }
 
-                return View();
+                CategoryDAO categoryDao = new CategoryDAO();
+                NationDAO nationDao = new NationDAO();
+
+                ViewBag.Nations = nationDao.List();
+                ViewBag.Categorys = categoryDao.List();
             }
-            else
+            catch
             {
-                return Redirect(Url.Action("Login", "User"));
+                ViewBag.Mss = 0;
             }
+
+            return View();
         }
 
         //truyen dang theo tai khoan
         public ActionResult ComicsUser()
         {
-            if (_user != null)
+            if (CheckStatusUser())
             {
-                int page = Convert.ToInt32(Request["page"]);
-
-                if (page <= 0)
-                {
-                    page = 1;
-                }
-
-                int userId = _user.UserId;
-
-                ComicDAO comicDao = new ComicDAO();
-                PaginationComic list = comicDao.ComicUser(new Pagination(10, page), userId);
-
-                ViewBag.Comics = list.Comics;
-                ViewBag.Page = list.Page;
-                ViewBag.Numpage = list.PageSize;
-
-                return View();
+                return RedirectToAction("Login");
             }
-            else
+
+            int page = Convert.ToInt32(Request["page"]);
+
+            if (page <= 0)
             {
-                return Redirect(Url.Action("Login", "User"));
+                page = 1;
             }
+
+            int userId = _user.UserId;
+
+            ComicDAO comicDao = new ComicDAO();
+            PaginationComic list = comicDao.ComicUser(new Pagination(10, page), userId);
+
+            ViewBag.Comics = list.Comics;
+            ViewBag.Page = list.Page;
+            ViewBag.Numpage = list.PageSize;
+
+            return View();
         }
 
         //thay doi ten
         [HttpPost]
         public ActionResult ChangeName(String name)
         {
+            if (CheckStatusUser())
+            {
+                return RedirectToAction("Login");
+            }
+
             return Content("gdh");
         }
 
@@ -175,6 +171,11 @@ namespace WebComic.Controllers
         [HttpPost]
         public ActionResult ChangePass(String oldPass, String newPass)
         {
+            if (CheckStatusUser())
+            {
+                return RedirectToAction("Login");
+            }
+
             return Content("ghgs");
         }
 
@@ -183,13 +184,13 @@ namespace WebComic.Controllers
         {
             var str = Request.Cookies["history"]?.Value;
 
-            var history = new Dictionary<string, string>{};
-            
+            var history = new Dictionary<string, string> { };
+
             if (str != null)
             {
-                 history = MyConvert.StringToListDictionary(str);
+                history = MyConvert.StringToListDictionary(str);
             }
-            
+
             ViewBag.History = history;
             return View();
         }
@@ -197,44 +198,53 @@ namespace WebComic.Controllers
         //dang xuat
         public ActionResult Logout()
         {
-            Session["user"] = null;
+            context.Session["user"] = null;
             return Redirect(Url.Action("Index", "Home"));
         }
 
         //from dang nhap
         public ActionResult Login()
         {
-            if (_user != null)
+            if (!CheckStatusUser())
             {
-                return Redirect(Url.Action("Index", "User"));
+                return RedirectToAction("Index");
             }
-            else
-            {
-                return View();
-            }
+
+            return View();
         }
 
         //dang nhap
         [HttpPost]
         public ActionResult Login(String mail, String password)
         {
-            UserDAO userDao = new UserDAO();
-            var check = userDao.Login(mail, password);
-            if (check)
+            if (context.Session["user"] != null)
             {
+                return RedirectToAction("Index");
+            }
+
+            UserDAO userDao = new UserDAO();
+            var user = userDao.Login(mail, password);
+
+            if (user != null)
+            {
+                context.Session["user"] = user;
+
                 return Redirect(Url.Action("Index", "User"));
             }
-            else
-            {
-                ViewBag.Mss = "Thông tin tài khoản hoặc mật khẩu không chính xác";
-                return Redirect(Url.Action("Login", "User"));
-            }
+
+            ViewBag.Mss = "Thông tin tài khoản hoặc mật khẩu không chính xác";
+            return Redirect(Url.Action("Login", "User"));
         }
 
         //tat ca chuyen
         public ActionResult ListAllComic()
         {
-            if (_user != null && _user.RoleId == 1)
+            if (CheckStatusUser())
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (_user.RoleId == 1)
             {
                 int page = Convert.ToInt32(Request["page"]);
 
@@ -256,16 +266,19 @@ namespace WebComic.Controllers
 
                 return View();
             }
-            else
-            {
-                return Redirect(Url.Action("Index", "User"));
-            }
+
+            return Redirect(Url.Action("Index", "User"));
         }
 
         //kiem duyet truyen
         public ActionResult Censorship()
         {
-            if (_user != null && _user.RoleId == 1)
+            if (CheckStatusUser())
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (_user.RoleId == 1)
             {
                 int page = Convert.ToInt32(Request["page"]);
 
@@ -283,50 +296,68 @@ namespace WebComic.Controllers
 
                 return View();
             }
-            else
-            {
-                return Redirect(Url.Action("Index", "User"));
-            }
+
+            return Redirect(Url.Action("Index", "User"));
         }
 
         //thong qua truyen
         [HttpPost]
-        public ActionResult UpdateCensorship()
+        public Boolean UpdateCensorship()
         {
-            String id = Request["id"];
+            if (CheckStatusUser())
+            {
+                return false;
+            }
 
-            ComicDAO comicDao = new ComicDAO();
-
-            var comic = comicDao.GetComicAs(Convert.ToInt32(id)).Result;
-            comic.StatusComicId = 1;
-            var n = comicDao.Update(comic);
-
-            return Content((n == 1).ToString());
-        }
-
-        //xoa truyen
-        [HttpPost]
-        public ActionResult DeleteComic()
-        {
-            try
+            if (_user.RoleId == 1)
             {
                 String id = Request["id"];
 
                 ComicDAO comicDao = new ComicDAO();
 
-                var n = comicDao.Delete(Convert.ToInt32(id));
+                var comic = comicDao.GetComicAs(Convert.ToInt32(id)).Result;
+                comic.StatusComicId = 1;
+                var n = comicDao.Update(comic);
 
-                return Content((n > 0).ToString());
+                return n == 1;
             }
-            catch
+
+            return false;
+        }
+
+        //xoa truyen
+        [HttpPost]
+        public Boolean DeleteComic()
+        {
+            if (CheckStatusUser())
             {
-                return Content("false");
+                return false;
             }
+
+            if (_user.UserId < 3)
+            {
+                comic comic = new comic();
+                comic.user = _user;
+                comic.ComicId = Convert.ToInt32(Request["id"]);
+
+                ComicDAO comicDao = new ComicDAO();
+
+                var n = comicDao.Delete(comic);
+
+                return n > 0;
+            }
+
+            return false;
         }
 
         //hiển thị và thêm mới chapter
         public ActionResult Chapter(String comicId)
         {
+            if (CheckStatusUser())
+            {
+                return RedirectToAction("Login");
+            }
+
             if (_user == null)
             {
                 return Redirect(Url.Action("Login", "User"));
@@ -352,71 +383,82 @@ namespace WebComic.Controllers
         [HttpPost]
         public ActionResult Chapter(String namechapter, HttpPostedFileBase[] files, String comicId)
         {
-            chapter chapter = new chapter();
-            chapter.NameChapter = namechapter;
-            chapter.ComicId = Convert.ToInt32(comicId);
-
-
-            ChapterDAO chapterDao = new ChapterDAO();
-            var n = chapterDao.Add(chapter);
-
-            Messenger mss = new Messenger();
-
-            if (n != null)
+            if (CheckStatusUser())
             {
-                String path = String.Format("~{0}", n.FolderImage);
-                path = Server.MapPath(path);
+                return RedirectToAction("Login");
+            }
 
-                int s = 0;
-                int f = 0;
+            if (_user.RoleId < 3)
+            {
+                chapter chapter = new chapter();
+                chapter.NameChapter = namechapter;
+                chapter.ComicId = Convert.ToInt32(comicId);
+                int userId = _user.UserId;
 
-                for (int i = 0; i < files.Length; i++)
+                ChapterDAO chapterDao = new ChapterDAO();
+                var n = chapterDao.Add(chapter, userId);
+
+                Messenger mss = new Messenger();
+
+                if (n != null)
                 {
-                    Messenger messenger = UploadFile.Upload(files[i], path, String.Format("{0}.jpg", i));
-                    if (messenger.Code == 1)
+                    String path = String.Format("~{0}", n.FolderImage);
+                    path = Server.MapPath(path);
+
+                    int s = 0;
+                    int f = 0;
+
+                    for (int i = 0; i < files.Length; i++)
                     {
-                        s++;
+                        Messenger messenger = UploadFile.Upload(files[i], path, String.Format("{0}.jpg", i));
+                        if (messenger.Code == 1)
+                        {
+                            s++;
+                        }
+                        else
+                        {
+                            f++;
+                        }
                     }
-                    else
-                    {
-                        f++;
-                    }
+
+                    mss.Mss = String.Format("Tải lên thành công {0}, thất bại {1}", s, f);
+                    mss.Code = 1;
+                }
+                else
+                {
+                    mss.Code = 0;
                 }
 
-                mss.Mss = String.Format("Tải lên thành công {0}, thất bại {1}", s, f);
-                mss.Code = 1;
+                var chapters = chapterDao.ListChapterComic(Convert.ToInt32(comicId));
+
+                ViewBag.Mss = mss;
+                ViewBag.Chapters = chapters;
+
+                return View();
             }
-            else
-            {
-                mss.Code = 0;
-            }
 
-            var chapters = chapterDao.ListChapterComic(Convert.ToInt32(comicId));
-
-            ViewBag.Mss = mss;
-            ViewBag.Chapters = chapters;
-
-            return View();
+            return RedirectToAction("Chapter", "User");
         }
 
 
         //xóa chapter
         public Boolean DeleteChapter()
         {
-            try
-            {
-                String id = Request["id"];
-
-                ChapterDAO chapterDao = new ChapterDAO();
-
-                var n = chapterDao.Delete(Convert.ToInt32(id));
-
-                return (n == 1);
-            }
-            catch
+            if (CheckStatusUser())
             {
                 return false;
             }
+
+            chapter chapter = new chapter();
+            chapter.ChapterId = Convert.ToInt32(Request["id"]);
+
+            int userId = _user.UserId;
+
+            ChapterDAO chapterDao = new ChapterDAO();
+
+            var n = chapterDao.Delete(chapter, userId);
+
+            return (n == 1);
         }
 
         //thể loại
@@ -435,59 +477,99 @@ namespace WebComic.Controllers
         [HttpPost]
         public ActionResult Category(String namecategory)
         {
-            CategoryDAO categoryDao = new CategoryDAO();
-            var b = categoryDao.Add(namecategory);
-            var categorys = categoryDao.List();
-
-
-            Messenger messenger = new Messenger();
-
-            if (b == 1)
+            if (CheckStatusUser())
             {
-                messenger.Code = 1;
-                messenger.Mss = "Thêm mới thành công";
-            }
-            else
-            {
-                messenger.Code = 0;
-                messenger.Mss = "Thêm mới thất bại";
+                return RedirectToAction("Login");
             }
 
-            ViewBag.Mss = messenger;
-            ViewBag.Categories = categorys;
+            if (_user.RoleId == 1)
+            {
+                CategoryDAO categoryDao = new CategoryDAO();
+                var b = categoryDao.Add(namecategory);
+                var categorys = categoryDao.List();
 
 
-            return View();
+                Messenger messenger = new Messenger();
+
+                if (b == 1)
+                {
+                    messenger.Code = 1;
+                    messenger.Mss = "Thêm mới thành công";
+                }
+                else
+                {
+                    messenger.Code = 0;
+                    messenger.Mss = "Thêm mới thất bại";
+                }
+
+                ViewBag.Mss = messenger;
+                ViewBag.Categories = categorys;
+
+
+                return View();
+            }
+
+            return RedirectToAction("Index");
         }
 
         //xóa thể loại
         [HttpPost]
-        public ActionResult DeleteCategory(String id)
+        public Boolean DeleteCategory(String id)
         {
-            CategoryDAO categoryDao = new CategoryDAO();
-            var b = categoryDao.Delete(Convert.ToInt32(id));
+            if (CheckStatusUser())
+            {
+                return false;
+            }
 
-            return Content(b.ToString());
+            if (_user.RoleId == 1)
+            {
+                CategoryDAO categoryDao = new CategoryDAO();
+                var b = categoryDao.Delete(Convert.ToInt32(id));
+
+                return b;
+            }
+
+            return false;
         }
 
         //sửa tên thể laoi
         [HttpPost]
         public Boolean EditCategory(int id, String name)
         {
-            CategoryDAO categoryDao = new CategoryDAO();
-            var b = categoryDao.Edit(id, name);
+            if (CheckStatusUser())
+            {
+                return false;
+            }
 
-            return b;
+            if (_user.RoleId == 1)
+            {
+                CategoryDAO categoryDao = new CategoryDAO();
+                var b = categoryDao.Edit(id, name);
+
+                return b;
+            }
+
+            return false;
         }
 
         //thay đôi trang thái truyện
         [HttpPost]
-        public ActionResult ChangeStatusComic(int id, int stt)
+        public Boolean ChangeStatusComic(int id, int stt)
         {
-            ComicDAO comicDao = new ComicDAO();
-            Boolean b = comicDao.ChangeStatusComic(id, stt);
+            if (CheckStatusUser())
+            {
+                return false;
+            }
 
-            return Content(b.ToString());
+            if (_user.RoleId == 1)
+            {
+                ComicDAO comicDao = new ComicDAO();
+                Boolean b = comicDao.ChangeStatusComic(id, stt);
+
+                return b;
+            }
+
+            return false;
         }
     }
 }

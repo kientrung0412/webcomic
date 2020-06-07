@@ -100,31 +100,22 @@ namespace Model.DAO
             var a = WcDbContext.users.Where(user => user.UserMail == mail).Count();
             return a;
         }
-
-        public Boolean Login(String email, String password)
+        
+        public user Login(String email, String password)
         {
-            Boolean check = false;
-
             try
             {
                 password = StringToMd5.GetMd5Hash(password);
+                var user = WcDbContext.users.Single(u => u.UserMail == email && u.UserPass == password);
 
-                if (email.Trim() != null && password != null)
-                {
-                    var b = WcDbContext.users.Where(user => user.UserMail == email && user.UserPass == password)
-                        .Count();
-                    if (b == 1)
-                    {
-                        check = true;
-                    }
-                }
+                return user;
             }
             catch
             {
-                check = false;
+                return null;
             }
 
-            return check;
+           
         }
     }
 }

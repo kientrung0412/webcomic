@@ -1,5 +1,9 @@
 ﻿
 @{
     ViewBag.Title = "Đăng nhập";
-    Layout = "~/Views/Shared/_User.cshtml";
 }
+<form action="@Url.Action("Login", "User")" method="post">
+    <input type="email" name="mail" required="required">
+    <input type="password" name="password" id="">
+    <input type="submit" value="Guiwr">
+</form>
