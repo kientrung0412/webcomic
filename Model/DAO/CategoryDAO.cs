@@ -50,5 +50,14 @@ namespace Model.DAO
 
             return i == 1;
         }
+
+        public Boolean Edit(int id, String name)
+        {
+            var ctg = WcDbContext.categories.Single(category => category.CategoryId == id);
+            ctg.NameCategory = name;
+            var b = WcDbContext.SaveChanges();
+
+            return b == 1;
+        }
     }
 }

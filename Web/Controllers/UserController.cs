@@ -77,7 +77,7 @@ namespace WebComic.Controllers
 
                 List<int> categorys = new List<int>();
 
-                if (category.Length > 0)
+                if (category != null)
                 {
                     categorys = category.ToList();
                 }
@@ -182,8 +182,14 @@ namespace WebComic.Controllers
         public ActionResult History()
         {
             var str = Request.Cookies["history"]?.Value;
-            var history = MyConvert.StringToListDictionary(str);
 
+            var history = new Dictionary<string, string>{};
+            
+            if (str != null)
+            {
+                 history = MyConvert.StringToListDictionary(str);
+            }
+            
             ViewBag.History = history;
             return View();
         }
@@ -242,7 +248,7 @@ namespace WebComic.Controllers
 
                 StatusComicDAO statusComicDao = new StatusComicDAO();
                 var statusComics = statusComicDao.ListAll();
-                
+
                 ViewBag.Comics = list.Comics;
                 ViewBag.Page = list.Page;
                 ViewBag.Numpage = list.PageSize;
@@ -460,7 +466,27 @@ namespace WebComic.Controllers
         {
             CategoryDAO categoryDao = new CategoryDAO();
             var b = categoryDao.Delete(Convert.ToInt32(id));
-            
+
+            return Content(b.ToString());
+        }
+
+        //sửa tên thể laoi
+        [HttpPost]
+        public Boolean EditCategory(int id, String name)
+        {
+            CategoryDAO categoryDao = new CategoryDAO();
+            var b = categoryDao.Edit(id, name);
+
+            return b;
+        }
+
+        //thay đôi trang thái truyện
+        [HttpPost]
+        public ActionResult ChangeStatusComic(int id, int stt)
+        {
+            ComicDAO comicDao = new ComicDAO();
+            Boolean b = comicDao.ChangeStatusComic(id, stt);
+
             return Content(b.ToString());
         }
     }

@@ -222,7 +222,7 @@
         }
 
         page = 1;
-        
+
         getData();
 
     })
@@ -307,14 +307,32 @@
     $("#requestcomic").click(function () {
         Update();
     })
-    
-    
+
+
     //chuyển chap
     $(window).keydown(function (e) {
-        if (e.which == 37){
+        if (e.which == 37) {
             $('#back').trigger('mouseup');
         }
     })
-    
+
+    //nav-bottom
+
+    // $(window).scroll(function () {
+    //     var start = $(window).scrollTop();
+    //     var end = $('#top-nav').scrollTop();
+    //     console.log(start);
+    //     console.log(end);
+    //
+    //     if (start - end > 0) {
+    //         $('#nav-bottom').fadeOut(300);
+    //     } else {
+    //         $('#nav-bottom').fadeIn(300);
+    //     }
+    //
+    // })
+
+   
+
 });
 

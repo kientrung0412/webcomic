@@ -59,7 +59,7 @@
                                 <td class="col-2">@reDate</td>
                                 <td class="col-2">@updateAt</td>
                                 <td class="col-2">
-                                    <select name="change-status-comic" class="form-control" id-comic="@comic.ComicId">
+                                    <select name="change-status-comic" class="form-control change-status-comic" id-comic="@comic.ComicId">
                                         @foreach (status_comic statusComic in statusComics)
                                         {
                                             if (comic.status_comic.StatusComicId == statusComic.StatusComicId)
@@ -155,3 +155,4 @@
         </div>
     </div>
 </div>
+

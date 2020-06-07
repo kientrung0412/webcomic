@@ -341,5 +341,15 @@ namespace Model.DAO
 
             return list;
         }
+
+        public Boolean ChangeStatusComic(int comicId, int statusId)
+        {
+            comic comic = WcDbContext.comics.Single(c => c.ComicId == comicId);
+            comic.StatusComicId = statusId;
+
+            var i = WcDbContext.SaveChanges();
+
+            return i == 1;
+        }
     }
 }

@@ -608,25 +608,22 @@ footer.container-fluid.bg-main {
     padding-bottom: 20px;
 }
 
-.nav-btm {
-    padding: 5px;
-}
-
-.nav-btm .col-md-1 {
-    padding: 10px 0;
-    transition: all 0.3s ease;
-    border-radius: 5px;
-}
-
-.nav-btm .col-md-1 a {
+#nav-bottom{
+    display: block;
+    background: #006882;
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    left: 0;
     width: 100%;
-    height: 100%;
-    font-size: 20px;
 }
 
-.nav-btm .col-md-1:hover {
+#nav-bottom ul li {
+    padding: 5px 20px;
+}
+
+#nav-bottom ul li:hover i{
     color: #fd7e14;
-    background: #007f8d;
 }
 
 /*#nav-bottom{*/
