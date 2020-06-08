@@ -96,6 +96,10 @@
                 page: page
             },
             success: function (data) {
+                if (page==1){
+                    $('.ajax-show').empty();
+                }
+                
                 var urlNew = this.url;
                 urlNew = urlNew.replace("Test?", "SearchAdvanced?")
                 history.pushState('', 'Search', urlNew);
