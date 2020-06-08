@@ -254,6 +254,7 @@ input.form-control.ip-search {
 }
 
 .list-category {
+    border-radius: 5px;
     position: absolute;
     background: azure;
     width: 100%;
@@ -287,6 +288,7 @@ input.form-control.ip-search {
 }
 
 .item-category a {
+    display: block;
     color: black;
 }
 
@@ -616,17 +618,28 @@ footer.container-fluid.bg-main {
 .list-read-chapter {
     position: fixed;
     top: 0;
-    left: 0;
+    left: -200px;
     width: 200px;
 }
-.list-read-chapter ul{
-    margin: 20px 0;
+
+.list-read-chapter.active{
+    left: 0;
 }
 
-.list-read-chapter ul li {
+.list-read-chapter ul{
+    margin: 20px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.list-read-chapter ul li{
     padding: 8px 10px;
     border-radius: 5px;
     margin: 10px;
+}
+
+.list-read-chapter ul li a{
+    display: block;
 }
 
 .list-read-chapter ul li.active{
@@ -638,7 +651,7 @@ footer.container-fluid.bg-main {
 }
 
 
-    /*.list-chapters ul li a{*/
+/*.list-chapters ul li a{*/
 /*    width: 100%;*/
 /*    height: 100%;*/
 /*}*/
@@ -654,7 +667,7 @@ footer.container-fluid.bg-main {
 }
 
 #nav-bottom ul li {
-    padding: 5px 20px;
+    padding: 5px 15px;
 }
 
 #nav-bottom ul li:hover i {

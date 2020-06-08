@@ -23,16 +23,16 @@
 
     //menu
     $('#show-category').click(function () {
-        $(".list-category").stop().slideToggle("slow");
+        $(".list-category").stop().slideToggle(300);
         event.stopPropagation();
     });
 
     $(".navbar-toggler").click(function () {
-        $(".list-category").stop().slideUp("fast");
+        $(".list-category").stop().slideUp(300);
     });
 
     $(window).click(function () {
-        $(".list-category").stop().slideUp("slow");
+        $(".list-category").stop().slideUp(300);
     });
 
     //cuộn
@@ -223,7 +223,7 @@
 
         page = 1;
 
-        getData();
+        setTimeout(getData(), 2000);
 
     })
 
@@ -233,33 +233,33 @@
     $('#name-seach').stop().keyup(function () {
         $('.ajax-show').children().remove();
         page = 1;
-        getData();
+        setTimeout(getData(), 2000);
 
     });
     $('#author-seach').stop().keyup(function () {
         $('.ajax-show').children().remove();
         page = 1;
-        getData();
+        setTimeout(getData(), 2000);
     });
     $('#name-seach').stop().change(function () {
         $('.ajax-show').children().remove();
         page = 1;
-        getData();
+        setTimeout(getData(), 2000);
     });
     $('#status-search').stop().change(function () {
         $('.ajax-show').children().remove();
         page = 1;
-        getData();
+        setTimeout(getData(), 2000);
     });
     $('#sort-seach').stop().change(function () {
         $('.ajax-show').children().remove();
         page = 1;
-        getData();
+        setTimeout(getData(), 2000);
     });
 
     $('#page-search').click(function () {
         page++;
-        getData();
+        setTimeout(getData(), 2000);
     })
 
     // $('.page-search').click(function () {
@@ -312,27 +312,42 @@
     //chuyển chap
     $(window).keydown(function (e) {
         if (e.which == 37) {
-            $('#back').trigger('mouseup');
+            $('#back').trigger('click');
         }
     })
 
     //nav-bottom
 
-    // $(window).scroll(function () {
-    //     var start = $(window).scrollTop();
-    //     var end = $('#top-nav').scrollTop();
-    //     console.log(start);
-    //     console.log(end);
-    //
-    //     if (start - end > 0) {
-    //         $('#nav-bottom').fadeOut(300);
-    //     } else {
-    //         $('#nav-bottom').fadeIn(300);
-    //     }
-    //
-    // })
+    $(window).scroll(function () {
+        let start = $(window).scrollTop();
 
-    
+        setTimeout(function () {
+
+            var end = $(window).scrollTop();
+            console.log(start - end);
+
+            if (start - end < 0) {
+                $('#nav-bottom').slideUp(100);
+            } else {
+                $('#nav-bottom').slideDown(100);
+            }
+
+        }, 200)
+
+
+    })
+
+
+    //.list-read-chapter
+
+    $("#menu").click(function () {
+        ShowChapter();
+    });
+
+    function ShowChapter() {
+        $(".list-read-chapter").stop().toggleClass('active');
+    }
+
 
 });
 
