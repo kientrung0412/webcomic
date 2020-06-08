@@ -464,6 +464,11 @@ namespace WebComic.Controllers
         //thể loại
         public ActionResult Category()
         {
+            if (CheckStatusUser())
+            {
+                return RedirectToAction("Login");
+            }
+            
             CategoryDAO categoryDao = new CategoryDAO();
             var categorys = categoryDao.List();
 
@@ -473,7 +478,7 @@ namespace WebComic.Controllers
             return View();
         }
 
-        //thêm thể lọa
+        //thêm thể lọai
         [HttpPost]
         public ActionResult Category(String namecategory)
         {
