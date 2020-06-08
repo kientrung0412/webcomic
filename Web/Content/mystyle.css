@@ -88,11 +88,11 @@ h2:after, h3:after, .task-sort:after {
     width: 100%;
     padding: 5px;
 
-    background: rgb(153,153,153);
-    background: -moz-linear-gradient(180deg, rgba(153,153,153,0.7) 0%, rgba(18,18,18,1) 100%);
-    background: -webkit-linear-gradient(180deg, rgba(153,153,153,0.7) 0%, rgba(18,18,18,1) 100%);
-    background: linear-gradient(180deg, rgba(153,153,153,0.7) 0%, rgb(18, 18, 18) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#999999",endColorstr="#121212",GradientType=1);
+    background: rgb(153, 153, 153);
+    background: -moz-linear-gradient(180deg, rgba(153, 153, 153, 0.7) 0%, rgba(18, 18, 18, 1) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(153, 153, 153, 0.7) 0%, rgba(18, 18, 18, 1) 100%);
+    background: linear-gradient(180deg, rgba(153, 153, 153, 0.7) 0%, rgb(18, 18, 18) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#999999", endColorstr="#121212", GradientType=1);
 
 }
 
@@ -613,6 +613,36 @@ footer.container-fluid.bg-main {
     padding-bottom: 20px;
 }
 
+.list-read-chapter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+}
+.list-read-chapter ul{
+    margin: 20px 0;
+}
+
+.list-read-chapter ul li {
+    padding: 8px 10px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.list-read-chapter ul li.active{
+    background: #007f8d;
+}
+
+.list-read-chapter ul li:hover {
+    background: #007f8d;
+}
+
+
+    /*.list-chapters ul li a{*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
+
 #nav-bottom {
     display: block;
     background: #006882;
@@ -813,6 +843,7 @@ tr td span:hover {
     margin-bottom: 13px;
     line-height: 1.5;
 }
+
 
 /*.table-dark.table-hover tbody tr:nth-child(2n):hover{*/
 /*    background: #343a40;*/
