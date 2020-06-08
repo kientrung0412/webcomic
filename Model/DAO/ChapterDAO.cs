@@ -29,7 +29,7 @@ namespace Model.DAO
                     //Cập nhật time
                     comic.UpdateAt = DateTime.Now;
 
-                    ct.FolderImage = String.Format("/Upload/truyen/{0}/{1}", ct.ComicId, ct.ChapterId);
+                    ct.FolderImage = String.Format("/Upload/truyen/{0}/{1}", ct.ComicId, ct.NameChapter.Replace(" ", "_"));
 
                     WcDbContext.SaveChanges();
 

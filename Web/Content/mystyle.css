@@ -85,9 +85,14 @@ h2:after, h3:after, .task-sort:after {
 .new-chapter {
     position: absolute;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
     width: 100%;
     padding: 5px;
+
+    background: rgb(153,153,153);
+    background: -moz-linear-gradient(180deg, rgba(153,153,153,0.7) 0%, rgba(18,18,18,1) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(153,153,153,0.7) 0%, rgba(18,18,18,1) 100%);
+    background: linear-gradient(180deg, rgba(153,153,153,0.7) 0%, rgb(18, 18, 18) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#999999",endColorstr="#121212",GradientType=1);
 
 }
 
@@ -608,7 +613,7 @@ footer.container-fluid.bg-main {
     padding-bottom: 20px;
 }
 
-#nav-bottom{
+#nav-bottom {
     display: block;
     background: #006882;
     position: fixed;
@@ -622,7 +627,7 @@ footer.container-fluid.bg-main {
     padding: 5px 20px;
 }
 
-#nav-bottom ul li:hover i{
+#nav-bottom ul li:hover i {
     color: #fd7e14;
 }
 
@@ -799,7 +804,7 @@ tr td span {
     transition: all 0.3s;
 }
 
-tr td span:hover{
+tr td span:hover {
     color: rgba(253, 126, 20, 0.73);
 }
 
@@ -808,6 +813,7 @@ tr td span:hover{
     margin-bottom: 13px;
     line-height: 1.5;
 }
+
 /*.table-dark.table-hover tbody tr:nth-child(2n):hover{*/
 /*    background: #343a40;*/
 /*}*/

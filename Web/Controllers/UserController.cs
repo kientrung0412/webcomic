@@ -14,7 +14,6 @@ namespace WebComic.Controllers
     public class UserController : Controller
     {
         user _user;
-        HttpContext context = System.Web.HttpContext.Current;
 
         public UserController()
         {
@@ -228,7 +227,7 @@ namespace WebComic.Controllers
         //dang xuat
         public ActionResult Logout()
         {
-            context.Session["user"] = null;
+            SessionUser.SetSession(null);
             return Redirect(Url.Action("Index", "Home"));
         }
 
@@ -257,7 +256,7 @@ namespace WebComic.Controllers
 
             if (user != null)
             {
-                context.Session["user"] = user;
+                SessionUser.SetSession(user);
 
                 return Redirect(Url.Action("Index", "User"));
             }
@@ -388,7 +387,7 @@ namespace WebComic.Controllers
                 return RedirectToAction("Login");
             }
 
-            if (CheckViewer())
+            if (!CheckViewer())
             {
                 int id = Convert.ToInt32(comicId);
 
@@ -416,7 +415,7 @@ namespace WebComic.Controllers
                 return RedirectToAction("Login");
             }
 
-            if (CheckViewer())
+            if (!CheckViewer())
             {
                 chapter chapter = new chapter();
                 chapter.NameChapter = namechapter;
@@ -424,13 +423,13 @@ namespace WebComic.Controllers
                 int userId = _user.UserId;
 
                 ChapterDAO chapterDao = new ChapterDAO();
-                var n = chapterDao.Add(chapter, userId);
+                var c = chapterDao.Add(chapter, userId);
 
                 Messenger mss = new Messenger();
 
-                if (n != null)
+                if (c != null)
                 {
-                    String path = String.Format("~{0}", n.FolderImage);
+                    String path = String.Format("~{0}", c.FolderImage);
                     path = Server.MapPath(path);
 
                     int s = 0;
@@ -465,7 +464,7 @@ namespace WebComic.Controllers
                 return View();
             }
 
-            return RedirectToAction("Chapter", "User");
+            return View();
         }
 
 
@@ -513,7 +512,7 @@ namespace WebComic.Controllers
                 return View();
             }
 
-            
+
             return RedirectToAction("Index");
         }
 

@@ -98,7 +98,7 @@
 
                                 @if (comic.chapters.Count > 0)
                                 {
-                                    foreach (chapter chapter in comic.chapters.ToList())
+                                    foreach (chapter chapter in comic.chapters.OrderByDescending(c => c.ChapterId).ToList())
                                     {
                                         <a href="@Url.Action("Index", "Chapter", new {chapterId = chapter.ChapterId})">
                                             <li>

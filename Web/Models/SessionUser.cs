@@ -13,12 +13,10 @@ namespace Model.Models
             return user;
         }
 
-        // public static user SetSession(user user)
-        // {
-        //     HttpContext context = HttpContext.Current;
-        //     context.Session["user"] = user;
-        //
-        //     return context.Session["user"];
-        // }
+        public static void SetSession(user user)
+        {
+            HttpContext context = HttpContext.Current;
+            context.Session["user"] = user;
+        }
     }
 }
