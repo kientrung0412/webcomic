@@ -7,7 +7,7 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("chapter")]
-    public partial class chapter
+    public partial class  chapter
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
             "CA2214:DoNotCallOverridableMethodsInConstructors")]

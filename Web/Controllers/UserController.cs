@@ -614,5 +614,68 @@ namespace WebComic.Controllers
 
             return false;
         }
+
+        //hien thi danh sach user
+        public ActionResult Users()
+        {
+            if (CheckStatusUser())
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (CheckAdmin())
+            {
+                int page = Convert.ToInt32(Request["page"]);
+
+                if (page <= 0)
+                {
+                    page = 1;
+                }
+
+                UserDAO userDao = new UserDAO();
+                RoleDAO roleDao = new RoleDAO();
+                StatusUserDAO statusUserDao = new StatusUserDAO();
+
+                var list = userDao.Users(new Pagination(10, page));
+
+                ViewBag.Users = list.Comics;
+                ViewBag.Page = list.Page;
+                ViewBag.Numpage = list.PageSize;
+                ViewBag.Roles = roleDao.List();
+                ViewBag.StatusUsers = statusUserDao.List();
+
+                return View();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        //thay doi trang thai
+        [HttpPost]
+        public Boolean ChangeSttAndRoles(int roleId, int sttId, int id)
+        {
+            if (CheckStatusUser())
+            {
+                return false;
+            }
+
+            if (CheckAdmin())
+            {
+                user user = new user();
+                user.RoleId = roleId;
+                user.StatusUserId = sttId;
+                user.UserId = id;
+
+                UserDAO userDao = new UserDAO();
+
+                var n = userDao.Update(user);
+
+                return (n > 0);
+            }
+
+            return false;
+        }
+        
+
     }
 }

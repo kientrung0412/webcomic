@@ -620,29 +620,30 @@ footer.container-fluid.bg-main {
     top: 0;
     left: -200px;
     width: 200px;
+    height: 100vh;
 }
 
-.list-read-chapter.active{
+.list-read-chapter.active {
     left: 0;
 }
 
-.list-read-chapter ul{
+.list-read-chapter ul {
     margin: 20px 0;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-.list-read-chapter ul li{
+.list-read-chapter ul li {
     padding: 8px 10px;
     border-radius: 5px;
     margin: 10px;
 }
 
-.list-read-chapter ul li a{
+.list-read-chapter ul li a {
     display: block;
 }
 
-.list-read-chapter ul li.active{
+.list-read-chapter ul li.active {
     background: #007f8d;
 }
 
@@ -861,3 +862,23 @@ tr td span:hover {
 /*.table-dark.table-hover tbody tr:nth-child(2n):hover{*/
 /*    background: #343a40;*/
 /*}*/
+
+/*back to*/
+.btn-top {
+    background: #fd7e14;
+    border: medium none;
+    bottom: 40px;
+    cursor: pointer;
+    display: none;
+    height: 40px;
+    outline: medium none;
+    padding: 0;
+    position: fixed;
+    right: 40px;
+    width: 40px;
+    z-index: 9999;
+    text-align: center;
+    line-height: 40px;
+    font-size: 30px;
+    border-radius: 5px;
+}

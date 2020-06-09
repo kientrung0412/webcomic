@@ -1,0 +1,80 @@
+﻿@using Model.EF
+@using Model.Models
+@{
+    ViewBag.Title = "Thể loại";
+    Layout = "~/Views/Shared/_User.cshtml";
+
+    List<user> users = ViewBag.Users;
+    List<role> roles = ViewBag.Roles;
+    List<status_user> statusUsers = ViewBag.StatusUsers;
+
+}
+<div class="cover bg-main">
+    <div class="title">
+        <h2>Danh sách người dùng</h2>
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+            <div class="data-table bg-main">
+
+                <table id="censorship" class="display table table-hover table-dark">
+                    <thead class="thead-dark">
+                    <tr class="d-flex text-center">
+                        <th class="col-1">Stt</th>
+                        <th class="col-5">Email</th>
+                        <th class="col-3">Quền</th>
+                        <th class="col-3">Trạng thái tài khoản</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if (users.Count > 0)
+                    {
+                        int i = 0;
+                        foreach (user user in users)
+                        {
+                            i++;
+
+                            <tr class="d-flex text-center">
+                                <td class="col-1">@i</td>
+                                <td class="col-5">@user.UserMail</td>
+                                <td class="col-3">
+                                    <select id-user="@user.UserId" name="role" class="form-control change-role-user">
+                                        @foreach (role role in roles)
+                                        {
+                                            if (role.RoleId == user.RoleId)
+                                            {
+                                                <option value="@role.RoleId" selected="selected">@role.RoleName</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@role.RoleId">@role.RoleName</option>
+                                            }
+                                        }
+                                    </select>
+                                </td>
+                                <td class="col-3">
+                                    <select id-user="@user.UserId" name="role"  class="form-control change-status-user">
+                                        @foreach (status_user statusUser in statusUsers)
+                                        {
+                                            if (statusUser.StatusUserId == user.StatusUserId)
+                                            {
+                                                <option value="@statusUser.StatusUserId" selected="selected">@statusUser.StatusUserName</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@statusUser.StatusUserId">@statusUser.StatusUserName</option>
+                                            }
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

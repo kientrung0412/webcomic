@@ -17,21 +17,39 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public async Task<List<SelectUserAll>> ListUser()
+        public PaginationUser ListPage(Pagination pagination, IOrderedQueryable<user> users)
         {
-            var list = await (from user in WcDbContext.users
-                join statusUser in WcDbContext.status_user on user.StatusUserId equals statusUser.StatusUserId
-                join role in WcDbContext.roles on user.RoleId equals role.RoleId
-                select new SelectUserAll()
-                {
-                    UserId = user.UserId,
-                    Username = user.Username,
-                    RoleId = role.RoleId,
-                    RoleName = role.RoleName,
-                    Avatar = user.Avatar,
-                    StatusUserId = statusUser.StatusUserId,
-                    StatusUserName = statusUser.StatusUserName
-                }).ToListAsync();
+            int page = pagination.Page;
+            int size = pagination.Size;
+
+            if (page < 1)
+            {
+                page = 1;
+            }
+
+            int skip = (page - 1) * size;
+
+            int sizePage = users.Count();
+
+            if (sizePage % size > 0)
+            {
+                sizePage = sizePage / size + 1;
+            }
+            else
+            {
+                sizePage = sizePage / size;
+            }
+
+            var sql = users.Skip(skip).Take(size).ToList();
+
+            PaginationUser paginationUser = new PaginationUser(sizePage, page, sql);
+            return paginationUser;
+        }
+
+        public PaginationUser Users(Pagination pagination)
+        {
+            var users = WcDbContext.users.OrderBy(user => user.UserId);
+            PaginationUser list = ListPage(pagination, users);
 
             return list;
         }
@@ -43,15 +61,14 @@ namespace Model.DAO
             return sql;
         }
 
-        public async Task<int> UpdateAS(user user)
+        public int Update(user user)
         {
-            user sql = await WcDbContext.users.SingleAsync(u => u.UserId == user.UserId);
-
-            sql.Username = user.Username;
+            user sql = WcDbContext.users.Single(u => u.UserId == user.UserId);
+            
             sql.RoleId = user.RoleId;
             sql.StatusUserId = user.StatusUserId;
 
-            var n = await WcDbContext.SaveChangesAsync();
+            var n = WcDbContext.SaveChanges();
 
             return n;
         }
@@ -100,7 +117,7 @@ namespace Model.DAO
             var a = WcDbContext.users.Where(user => user.UserMail == mail).Count();
             return a;
         }
-        
+
         public user Login(String email, String password)
         {
             try
@@ -114,8 +131,6 @@ namespace Model.DAO
             {
                 return null;
             }
-
-           
         }
     }
 }

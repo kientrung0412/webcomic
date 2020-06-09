@@ -268,6 +268,49 @@ $(document).ready(function () {
         })
 
     })
+
+    //doi trang thai va quyen
+    function ChangeSttAndRole(btn) {
+        let id = btn.attr("id-user");
+        let roleId = btn.parents("tr").find(".change-role-user").children("option:selected").val();
+        let sttId = btn.parents("tr").find(".change-status-user").children("option:selected").val();
+
+        $.ajax({
+            url: '/User/ChangeSttAndRoles',
+            type: 'POST',
+            data: {id: id, sttId: sttId, roleId: roleId},
+            success: function (data) {
+                if (data == "True") {
+                    $.alert({
+                        theme: 'modern',
+                        icon: 'ion-android-done',
+                        autoClose: 'ok|2000',
+                        title: 'Thông báo',
+                        content: 'Thay đổi thành công',
+                        type: 'green'
+                    })
+                } else {
+                    $.alert({
+                        theme: 'modern',
+                        icon: 'ion-alert-circled',
+                        autoClose: 'ok|2000',
+                        title: 'Thông báo',
+                        content: 'Thay đổi thất bại',
+                        type: 'red'
+                    })
+                }
+
+            }
+        })
+
+    }
+
+    $(".change-role-user").change(function () {
+        ChangeSttAndRole($(this))
+    });
+    $(".change-status-comic").change(function () {
+        ChangeSttAndRole($(this))
+    });
 })
 
 

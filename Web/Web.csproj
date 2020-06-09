@@ -132,6 +132,7 @@
         <Compile Include="Controllers\CategoryController.cs" />
         <Compile Include="Controllers\ChapterController.cs" />
         <Compile Include="Controllers\ComicController.cs" />
+        <Compile Include="Controllers\ErrorController.cs" />
         <Compile Include="Controllers\HomeController.cs" />
         <Compile Include="Controllers\UploadFileController.cs" />
         <Compile Include="Controllers\UserController.cs" />
@@ -179,13 +180,14 @@
         <Content Include="Views\Comic\Home.cshtml" />
         <Content Include="Views\Comic\Index.cshtml" />
         <Content Include="Views\Comic\SearchAdvanced.cshtml" />
+        <Content Include="Views\Error\NotFound.cshtml" />
+        <Content Include="Views\Error\ServerError.cshtml" />
         <Content Include="Views\Shared\_ComicNew.cshtml" />
         <Content Include="Views\Shared\_Footer.cshtml" />
         <Content Include="Views\Shared\_Navbar.cshtml" />
         <Content Include="Views\Shared\_FilterBar.cshtml" />
         <Content Include="Views\Shared\_Slide.cshtml" />
         <Content Include="Views\Shared\_User.cshtml" />
-        <Content Include="Views\UploadFile\Index.cshtml" />
         <Content Include="Views\User\Category.cshtml" />
         <Content Include="Views\User\Censorship.cshtml" />
         <Content Include="Views\User\Chapter.cshtml" />
@@ -195,6 +197,7 @@
         <Content Include="Views\User\ListAllComic.cshtml" />
         <Content Include="Views\User\Login.cshtml" />
         <Content Include="Views\User\UpComic.cshtml" />
+        <Content Include="Views\User\Users.cshtml" />
         <Content Include="Web.config" />
         <Content Include="Web.Debug.config">
             <DependentUpon>Web.config</DependentUpon>

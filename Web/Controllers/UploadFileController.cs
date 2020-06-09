@@ -7,12 +7,6 @@ namespace WebComic.Controllers
 {
     public class UploadFileController : Controller
     {
-        // GET
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult UploadAvatar(HttpPostedFileBase file)
         {
@@ -30,35 +24,6 @@ namespace WebComic.Controllers
 
             return Content("ok");
         }
-
-        [HttpPost]
-        public ActionResult UploadChapterImage(HttpPostedFileBase[] files)
-        {
-            
-            if (files[0]  != null)
-            {
-                int numFile = files.Length;
-                int numDone = 0;
-                
-                String path = Server.MapPath("~/Upload/Truyen");
-
-                foreach (HttpPostedFileBase file in files)
-                {
-                    var fileUpload = UploadFile.Upload(file, path, file.FileName);
-                    if (fileUpload.Code == 1)
-                    {
-                        numDone++;
-                    }
-                }
-
-                int numFall = numFile - numDone;
-
-                return Content(String.Format("Thành công {0}, thất bại {1}", numDone, numFall));
-            }
-            else
-            {
-                return Content("Không có file nào được trọn");
-            }
-        }
+        
     }
 }

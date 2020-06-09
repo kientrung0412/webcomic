@@ -29,7 +29,7 @@ namespace Model.DAO
                     //Cập nhật time
                     comic.UpdateAt = DateTime.Now;
 
-                    ct.FolderImage = String.Format("/Upload/truyen/{0}/{1}", ct.ComicId, ct.NameChapter.Replace(" ", "_"));
+                    ct.FolderImage = String.Format("/Upload/truyen/{0}/{1}", ct.ComicId, comic.UpdateAt);
 
                     WcDbContext.SaveChanges();
 
@@ -62,6 +62,15 @@ namespace Model.DAO
             int? a = chapter.View;
             chapter.View = a + 1;
             WcDbContext.SaveChanges();
+        }
+
+        public int Update(chapter chapter, int userId)
+        {
+            var ct = WcDbContext.chapters.Single(c => c.ChapterId == chapter.ChapterId && c.comic.UserId == userId);
+            ct = chapter;
+            var n = WcDbContext.SaveChanges();
+            
+            return n;
         }
 
         public chapter Select(int id)

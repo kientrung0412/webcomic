@@ -1,7 +1,13 @@
 ﻿@using Model.EF
 @{
     chapter chapter = ViewBag.Chapter;
+    List<chapter> chapters = ViewBag.Chapters;
+
+    int idChapterMax = chapters.Max(c => c.ChapterId);
+    int idChapterMin = chapters.Min(c => c.ChapterId);
+    
     var pathFolder = String.Format("~{0}", chapter.FolderImage);
+
     IEnumerable<String> paths = new List<string>();
     try
     {
@@ -75,12 +81,18 @@
     <nav class="nav " id="nav-bottom">
         <ul class="nav justify-content-center">
             <li class="nav-item" id="back">
-                <a class="nav-link " href="#">
-                    <i class="ion-ios-skipbackward"></i>
-                </a>
+                @if (chapter.ChapterId > idChapterMin)
+                {
+                    int idChapterBack = chapters.Where(c => c.ChapterId < chapter.ChapterId).Max(c => c.ChapterId);
+
+                    <a class="nav-link " href="@Url.Action("Index", "Chapter", new {chapterId = idChapterBack})">
+                        <i class="ion-ios-skipbackward"></i>
+                    </a>
+                }
+
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="@Url.Action("Index", "Comic", new {comicId = chapter.ComicId})">
                     <i class="ion-android-home"></i>
                 </a>
             </li>
@@ -90,9 +102,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="ion-ios-skipforward"></i>
-                </a>
+                @if (chapter.ChapterId < idChapterMax)
+                {
+                    int idChapterNext = chapters.Where(c => c.ChapterId > chapter.ChapterId).Min(c => c.ChapterId);
+
+                    <a class="nav-link " href="@Url.Action("Index", "Chapter", new {chapterId = idChapterNext})">
+                        <i class="ion-ios-skipforward"></i>
+                    </a>
+                }
+
             </li>
 
         </ul>
@@ -102,26 +120,21 @@
 <div class="list-read-chapter bg-main">
     <div class="cover-list">
         <ul>
-            
-            
-            <li class="active">
-                <a href="">Item 1</a>
-            </li>
-            <li>
-                <a href="">Item 2</a>
-            </li>
-            <li>
-                <a href="">Item 3</a>
-            </li>
-            <li>
-                <a href="">Item 4</a>
-            </li>
-            <li>
-                <a href="">Item 5</a>
-            </li>
-            <li>
-                <a href="">Item 6</a>
-            </li>
+            @foreach (chapter c in chapters)
+            {
+                if (c.ChapterId == chapter.ChapterId)
+                {
+                    <li class="active">
+                        <a href="@Url.Action("Index", "Chapter", new {chapterId = c.ChapterId})">@c.NameChapter</a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "Chapter", new {chapterId = c.ChapterId})">@c.NameChapter</a>
+                    </li>
+                }
+            }
         </ul>
     </div>
 </div>

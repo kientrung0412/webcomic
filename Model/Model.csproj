@@ -60,6 +60,7 @@
         <Compile Include="DAO\NationDAO.cs" />
         <Compile Include="DAO\RoleDAO.cs" />
         <Compile Include="DAO\StatusComicDAO.cs" />
+        <Compile Include="DAO\StatusUserDAO.cs" />
         <Compile Include="DAO\UserDAO.cs" />
         <Compile Include="EF\category.cs" />
         <Compile Include="EF\chapter.cs" />
@@ -78,9 +79,9 @@
         <Compile Include="Models\ChangePass.cs" />
         <Compile Include="Models\Pagination.cs" />
         <Compile Include="Models\PaginationComic.cs" />
+        <Compile Include="Models\PaginationUser.cs" />
         <Compile Include="Models\Rating.cs" />
         <Compile Include="Models\RemoveUnicode.cs" />
-        <Compile Include="Models\SelectUserAll.cs" />
         <Compile Include="Models\StringToMd5.cs" />
         <Compile Include="Models\SuperSearch.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

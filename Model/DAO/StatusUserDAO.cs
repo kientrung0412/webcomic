@@ -1,23 +1,22 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using Model.EF;
 
 namespace Model.DAO
 {
-    public class RoleDAO
+    public class StatusUserDAO
     {
         public WCDbContext WcDbContext;
 
-        public RoleDAO()
+        public StatusUserDAO()
         {
             WcDbContext = new WCDbContext();
         }
 
-        public List<role> List()
+        public List<status_user> List()
         {
-            var list = WcDbContext.roles.ToList();
+            var list = WcDbContext.status_user.ToList();
+
             return list;
         }
     }

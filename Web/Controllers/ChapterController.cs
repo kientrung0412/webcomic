@@ -38,17 +38,15 @@ namespace WebComic.Controllers
                 {
                     history.Add(comicId.ToString(), now);
                 }
-                
+
                 var strCookie = MyConvert.ListDictionaryToString(history);
-                
+
                 var cookie = new HttpCookie("history");
                 cookie.Expires = DateTime.Now.AddDays(30);
 
                 cookie.Value = strCookie;
 
                 Response.AppendCookie(cookie);
-                
-                
             }
             else
             {
@@ -69,6 +67,7 @@ namespace WebComic.Controllers
             ViewBag.Title = String.Format("{0} {1}", chapter.comic.NameComic, chapter.NameChapter);
             ViewBag.Home = comicId;
             ViewBag.Chapter = chapter;
+            ViewBag.Chapters = chapterDao.ListChapterComic(Convert.ToInt32(chapter.ComicId));
 
             return View();
         }

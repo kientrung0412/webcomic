@@ -96,10 +96,10 @@
                 page: page
             },
             success: function (data) {
-                if (page==1){
+                if (page == 1) {
                     $('.ajax-show').empty();
                 }
-                
+
                 var urlNew = this.url;
                 urlNew = urlNew.replace("Test?", "SearchAdvanced?")
                 history.pushState('', 'Search', urlNew);
@@ -115,7 +115,7 @@
                     $('.more-comic').show("slow");
                 }
 
-                // $('.pagination').children().remove();
+                // $('.pagination').empty;
                 //
                 //
                 // if (page > 1) {
@@ -208,7 +208,7 @@
 
     check.change(function () {
 
-        $('.ajax-show').children().remove();
+        $('.ajax-show').empty();
 
         var dataCheck = $(this).children("input").attr("data-check");
 
@@ -235,28 +235,28 @@
     //even bộ lọc
 
     $('#name-seach').stop().keyup(function () {
-        $('.ajax-show').children().remove();
+        $('.ajax-show').empty();
         page = 1;
         setTimeout(getData(), 2000);
 
     });
     $('#author-seach').stop().keyup(function () {
-        $('.ajax-show').children().remove();
+        $('.ajax-show').empty();
         page = 1;
         setTimeout(getData(), 2000);
     });
     $('#name-seach').stop().change(function () {
-        $('.ajax-show').children().remove();
+        $('.ajax-show').empty();
         page = 1;
         setTimeout(getData(), 2000);
     });
     $('#status-search').stop().change(function () {
-        $('.ajax-show').children().remove();
+        $('.ajax-show').empty();
         page = 1;
         setTimeout(getData(), 2000);
     });
     $('#sort-seach').stop().change(function () {
-        $('.ajax-show').children().remove();
+        $('.ajax-show').empty();
         page = 1;
         setTimeout(getData(), 2000);
     });
@@ -327,7 +327,7 @@
 
         setTimeout(function () {
 
-            var end = $(window).scrollTop();
+            let end = $(window).scrollTop();
             console.log(start - end);
 
             if (start - end < 0) {
@@ -351,6 +351,26 @@
     function ShowChapter() {
         $(".list-read-chapter").stop().toggleClass('active');
     }
+
+    //go top
+
+    function GoTop() {
+        $(window).scroll(function () {
+            let e = $(window).scrollTop();
+            if (e > 300) {
+                $(".btn-top").show(300)
+            } else {
+                $(".btn-top").hide(300)
+            }
+        });
+        $(".btn-top").click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            })
+        })
+    }
+
+    GoTop();
 
 
 });

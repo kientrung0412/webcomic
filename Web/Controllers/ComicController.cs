@@ -92,13 +92,6 @@ namespace WebComic.Controllers
                 Convert.ToInt32(status),
                 nameComic, author);
 
-            // String url = "";
-            //
-            // if (superSearch.NameComic != null)
-            // {
-            //     url = url + String.Format("{0}={1}", nameof(superSearch.NameComic), nameComic);
-            // }
-
             ComicDAO comicDao = new ComicDAO();
             CategoryDAO categoryDao = new CategoryDAO();
             StatusComicDAO statusComicDao = new StatusComicDAO();
@@ -135,7 +128,7 @@ namespace WebComic.Controllers
             return View();
         }
 
-        public ActionResult Test(String[] arrayIn, String[] arrayNotIn, String nameComic, String status, String author,
+        public String Test(String[] arrayIn, String[] arrayNotIn, String nameComic, String status, String author,
             String nation, String page, String sort)
         {
             List<String> listIn = new List<string>();
@@ -165,7 +158,7 @@ namespace WebComic.Controllers
 
             String json = JsonConvert.SerializeObject(paginationComic, Formatting.Indented);
 
-            return Content(json);
+            return json;
         }
     }
 }
