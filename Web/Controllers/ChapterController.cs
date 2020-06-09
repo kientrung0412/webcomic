@@ -14,11 +14,13 @@ namespace WebComic.Controllers
 {
     public class ChapterController : Controller
     {
+
+
         // GET
         public ActionResult Index(int chapterId)
         {
             int page = Convert.ToInt32(Request["page"]);
-            
+
             if (page < 1)
             {
                 page = 1;
@@ -85,5 +87,7 @@ namespace WebComic.Controllers
 
             return View();
         }
+
+       
     }
 }

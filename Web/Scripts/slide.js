@@ -345,17 +345,17 @@
                         });
                     } else {
 
-                        
+
                         console.log(data);
-                        
+
                         $('.show-cmt').children().before(
                             '<div class="item-comment d-flex"> <div class="avatar"> <img src=" ' +
                             data.Avatar +
                             ' " alt=""> </div> <div class="body-comment"> <div class="title-comment"> <p>' +
                             data.Username +
-                            '</p> </div> <div class="content-comment"> <p>' + 
-                            data.CommentConten + 
-                            '</p> </div> <div class="footer-comment"> <p>'+
+                            '</p> </div> <div class="content-comment"> <p>' +
+                            data.CommentConten +
+                            '</p> </div> <div class="footer-comment"> <p>' +
                             data.CommentTime +
                             '</p> </div> </div> </div>');
                     }
@@ -372,6 +372,49 @@
                 type: "red"
             });
         }
+    })
+
+
+    //ẩn bình luận
+
+    $('.block-cmt').click(function () {
+        let id = $(this).attr("id-comment");
+        
+        var btn = $(this);
+        
+        $.ajax({
+            url: '/User/ChangeStatusCmt',
+            type: 'POST',
+            data: {id: id},
+            success: function (data) {
+
+                if (data == "True") {
+
+                    var a = btn.parents('.item-comment').removeClass("d-flex").hide(300);
+
+
+                    $.alert({
+                        theme: 'modern',
+                        icon: 'ion-android-done',
+                        autoClose: 'ok|2000',
+                        title: 'Thông báo',
+                        content: 'Thay đổi thành công',
+                        type: 'green'
+                    })
+                } else {
+                    $.alert({
+                        theme: 'modern',
+                        icon: 'ion-alert-circled',
+                        autoClose: 'ok|2000',
+                        title: 'Thông báo',
+                        content: 'Thay đổi thất bại',
+                        type: 'red'
+                    })
+                }
+
+            }
+        })
+
     })
 
 });

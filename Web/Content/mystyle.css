@@ -728,6 +728,7 @@ button.float-right.btn-cmt {
 }
 
 .body-comment {
+    position: relative;
     width: -webkit-fill-available;
     background: #585858;
     border-radius: 5px;
@@ -745,6 +746,22 @@ button.float-right.btn-cmt {
 
 .item-comment.d-flex {
     margin-top: 35px;
+}
+
+.band-cmt {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+
+.band-cmt p {
+    cursor: pointer;
+    font-size: 12px;
+    display: block;
+}
+
+.band-cmt p:hover {
+    color: #ff3b3b;
 }
 
 /*slidebar*/

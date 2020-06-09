@@ -1,8 +1,20 @@
 ﻿@using Model.EF
+@using Model.Models
 @{
     chapter chapter = ViewBag.Chapter;
     List<chapter> chapters = ViewBag.Chapters;
     List<comment> comments = ViewBag.Comments;
+
+    int roleId;
+    
+    try
+    {
+         roleId = Convert.ToInt32(SessionUser.GetSession().RoleId) ;
+    }
+    catch
+    {
+        roleId = 0;
+    }
 
     int idChapterMax = chapters.Max(c => c.ChapterId);
     int idChapterMin = chapters.Min(c => c.ChapterId);
@@ -79,8 +91,13 @@
                             <div class="footer-comment">
                                 <p>@date.ToString("dd/MM/yy hh:mm")</p>
                             </div>
-                            
-                            <div class="band-cmt">Ẩn</div>
+
+                            @if (roleId == 1)
+                            {
+                                <div class="band-cmt">
+                                    <p id-comment="@comment.CommentId" class="block-cmt">Ẩn</p>
+                                </div>
+                            }
                             
                         </div>
                     </div>

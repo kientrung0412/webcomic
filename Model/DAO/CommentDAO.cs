@@ -22,13 +22,13 @@ namespace Model.DAO
             var cmt = WcDbContext.comments.Add(comment);
             var n = WcDbContext.SaveChanges();
 
-            if (n>0)
+            if (n > 0)
             {
                 cmt.user = WcDbContext.users.Single(user => user.UserId == cmt.UserId);
 
                 return cmt;
             }
-            
+
             return null;
         }
 
@@ -42,7 +42,7 @@ namespace Model.DAO
             PaginationComment paginationComment = ListPage(pagination, list);
             return paginationComment;
         }
-        
+
         public PaginationComment ListPage(Pagination pagination, IOrderedQueryable<comment> comments)
         {
             int page = pagination.Page;
@@ -72,5 +72,14 @@ namespace Model.DAO
             return paginationComment;
         }
 
+        public Boolean ChangeStatus(int id)
+        {
+            var comment = WcDbContext.comments.Single(c => c.CommentId == id);
+            comment.StatusCommentId = 2;
+
+            var n = WcDbContext.SaveChanges();
+
+            return n > 0;
+        }
     }
 }

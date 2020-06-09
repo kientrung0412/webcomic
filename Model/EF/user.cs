@@ -15,6 +15,8 @@ namespace Model.EF
         {
             comics = new HashSet<comic>();
             comments = new HashSet<comment>();
+            RoleId = 1;
+            StatusUserId = 1;
         }
 
         //thêm mới

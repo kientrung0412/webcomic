@@ -15,6 +15,7 @@ namespace Model.DAO
         public UserDAO()
         {
             WcDbContext = new WCDbContext();
+            
         }
 
         public PaginationUser ListPage(Pagination pagination, IOrderedQueryable<user> users)

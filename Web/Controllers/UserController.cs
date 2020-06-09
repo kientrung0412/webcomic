@@ -686,21 +686,42 @@ namespace WebComic.Controllers
             {
                 return null;
             }
+
             comment comment = new comment();
-            
+
             comment.ChapterId = chapterId;
             comment.CommentConten = content;
             comment.UserId = _user.UserId;
-            
-            
+
+
             CommentDAO commentDao = new CommentDAO();
 
             var cmt = commentDao.Add(comment);
 
             var json = JsonConvert.SerializeObject(cmt);
-            
-            return json;
 
+            return json;
+        }
+
+        //doi trang thai binh luan
+        [HttpPost]
+        public Boolean ChangeStatusCmt(int id)
+        {
+            if (CheckStatusUser())
+            {
+                return false;
+            }
+
+            if (CheckAdmin())
+            {
+                CommentDAO commentDao = new CommentDAO();
+
+                var b = commentDao.ChangeStatus(id);
+
+                return b;
+            }
+
+            return false;
         }
     }
 }
