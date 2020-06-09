@@ -2,10 +2,11 @@
 @{
     chapter chapter = ViewBag.Chapter;
     List<chapter> chapters = ViewBag.Chapters;
+    List<comment> comments = ViewBag.Comments;
 
     int idChapterMax = chapters.Max(c => c.ChapterId);
     int idChapterMin = chapters.Min(c => c.ChapterId);
-    
+
     var pathFolder = String.Format("~{0}", chapter.FolderImage);
 
     IEnumerable<String> paths = new List<string>();
@@ -54,26 +55,85 @@
             <div class="cover-comment">
 
                 <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
-                <button id-chapter = "@chapter.ChapterId" class="float-right btn-cmt">Đăng</button>
+                <button id-chapter="@chapter.ChapterId" class="float-right btn-cmt">Đăng</button>
 
             </div>
 
             <div class="show-cmt">
-                <div class="item-comment">
-                    <div class="cover-comment-user">
-                        <div class="row">
 
+                @foreach (comment comment in comments)
+                {
+                    var date = (DateTime) comment.CommentTime;
+
+                    <div class="item-comment d-flex">
+                        <div class="avatar">
+                            <img src="@comment.user.Avatar" alt="">
                         </div>
-
-
+                        <div class="body-comment">
+                            <div class="title-comment">
+                                <p>@comment.user.Username</p>
+                            </div>
+                            <div class="content-comment">
+                                <p>@comment.CommentConten</p>
+                            </div>
+                            <div class="footer-comment">
+                                <p>@date.ToString("dd/MM/yy hh:mm")</p>
+                            </div>
+                            
+                            <div class="band-cmt">Ẩn</div>
+                            
+                        </div>
                     </div>
+                }
 
-                </div>
+
 
             </div>
+
+            <nav aria-label="Page navigation example" class="page">
+                <ul class="pagination justify-content-end">
+
+                    @if (ViewBag.Page > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("Index", new {page = ViewBag.Page - 1, chapterId = chapter.ChapterId})" tabindex="-1" aria-disabled="true">
+                                <i class="ion-chevron-left"></i>
+                            </a>
+                        </li>
+                    }
+
+
+                    @for (var i = 1; i <= ViewBag.Numpage; i++)
+                    {
+                        if (ViewBag.Page == i)
+                        {
+                            <li class="page-item active">
+                                <a class="page-link active" href="@Url.Action("Index", new {page = i, chapterId = chapter.ChapterId})">@i</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link active" href="@Url.Action("Index", new {page = i, chapterId = chapter.ChapterId})">@i</a>
+                            </li>
+                        }
+                    }
+
+                    @if (ViewBag.Page < ViewBag.Numpage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("Index", new {page = ViewBag.Page + 1, chapterId = chapter.ChapterId})">
+                                <i class="ion-chevron-right"></i>
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+            </nav>
+
+
         </div>
     </div>
-
 </div>
 
 
@@ -101,7 +161,7 @@
                     <i class="ion-android-menu"></i>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-flex">
                 @if (chapter.ChapterId < idChapterMax)
                 {
                     int idChapterNext = chapters.Where(c => c.ChapterId > chapter.ChapterId).Min(c => c.ChapterId);
@@ -137,4 +197,6 @@
             }
         </ul>
     </div>
+
+
 </div>

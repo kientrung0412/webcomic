@@ -33,8 +33,7 @@ namespace Model.EF
 
         [JsonIgnore]
         public virtual status_comment status_comment { get; set; }
-
-        [JsonIgnore]
+        
         public virtual user user { get; set; }
     }
 }

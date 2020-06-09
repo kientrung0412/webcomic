@@ -79,6 +79,7 @@
         <Compile Include="Models\ChangePass.cs" />
         <Compile Include="Models\Pagination.cs" />
         <Compile Include="Models\PaginationComic.cs" />
+        <Compile Include="Models\PaginationComment.cs" />
         <Compile Include="Models\PaginationUser.cs" />
         <Compile Include="Models\Rating.cs" />
         <Compile Include="Models\RemoveUnicode.cs" />

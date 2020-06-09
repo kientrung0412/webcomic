@@ -8,6 +8,7 @@ using Microsoft.Ajax.Utilities;
 using Model.DAO;
 using Model.EF;
 using Model.Models;
+using Newtonsoft.Json;
 
 namespace WebComic.Controllers
 {
@@ -679,11 +680,11 @@ namespace WebComic.Controllers
         //Đăng bình luận
 
         [HttpPost]
-        public Boolean Comment(int chapterId, String content)
+        public String Comment(int chapterId, String content)
         {
             if (CheckStatusUser())
             {
-                return false;
+                return null;
             }
             comment comment = new comment();
             
@@ -696,7 +697,9 @@ namespace WebComic.Controllers
 
             var cmt = commentDao.Add(comment);
 
-            return cmt;
+            var json = JsonConvert.SerializeObject(cmt);
+            
+            return json;
 
         }
     }

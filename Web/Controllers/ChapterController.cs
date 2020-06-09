@@ -17,12 +17,23 @@ namespace WebComic.Controllers
         // GET
         public ActionResult Index(int chapterId)
         {
+            int page = Convert.ToInt32(Request["page"]);
+            
+            if (page < 1)
+            {
+                page = 1;
+            }
+
             ChapterDAO chapterDao = new ChapterDAO();
+            CommentDAO commentDao = new CommentDAO();
+
             chapterDao.UpdateView(chapterId);
 
             var chapter = chapterDao.Select(chapterId);
             var comicId = chapter.comic.ComicId;
             var now = DateTime.Now.ToString("dd/MM/yyyy hh:mm");
+
+            var list = commentDao.List(new Pagination(7, page), chapterId);
 
             if (Request.Cookies["history"] != null)
             {
@@ -68,6 +79,9 @@ namespace WebComic.Controllers
             ViewBag.Home = comicId;
             ViewBag.Chapter = chapter;
             ViewBag.Chapters = chapterDao.ListChapterComic(Convert.ToInt32(chapter.ComicId));
+            ViewBag.Comments = list.Comments;
+            ViewBag.Page = list.Page;
+            ViewBag.Numpage = list.PageSize;
 
             return View();
         }

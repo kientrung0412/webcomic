@@ -5,9 +5,8 @@
 * {
     margin: 0;
     padding: 0;
-    line-height: 1.5;
+    line-height: 1.25;
     transition: all 0.3s;
-
 }
 
 body {
@@ -689,6 +688,7 @@ textarea#comment {
 }
 
 .cover-comment {
+    display: block;
     margin-top: 25px;
     padding: 10px 5px 25px 5px;
 }
@@ -702,23 +702,49 @@ button.float-right.btn-cmt {
     border-radius: 5px;
 }
 
+
 /*cmt*/
 
 .avatar {
-    width: 40px;
-    border-radius: 50%;
-    height: 40px;
     overflow: hidden;
+    float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
 }
 
 .avatar img {
     width: 100%;
     height: 100%;
     display: block;
+    padding: 0;
+    background-color: #fff;
 }
 
-.task-sort {
-    margin-top: 25px;
+.show-cmt {
+    display: block;
+    margin-top: 50px;
+}
+
+.body-comment {
+    width: -webkit-fill-available;
+    background: #585858;
+    border-radius: 5px;
+    padding: 5px 17px;
+}
+
+.title-comment {
+    margin-bottom: 10px;
+}
+
+.footer-comment {
+    color: rgba(228, 228, 228, 0.59);
+    margin-top: 10px;
+}
+
+.item-comment.d-flex {
+    margin-top: 35px;
 }
 
 /*slidebar*/

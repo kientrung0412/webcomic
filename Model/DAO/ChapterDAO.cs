@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Model.EF;
+using Model.Models;
 
 namespace Model.DAO
 {
@@ -85,5 +86,6 @@ namespace Model.DAO
                 .ToList();
             return chapters;
         }
+        
     }
 }

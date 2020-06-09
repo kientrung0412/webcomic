@@ -333,8 +333,9 @@
                 url: 'User/Comment',
                 type: 'POST',
                 data: {content: content, chapterId: id},
+                dataType: "json",
                 success: function (data) {
-                    if (data == "False"){
+                    if (data == "null") {
                         $.alert({
                             theme: 'modern',
                             icon: 'ion-alert-circled',
@@ -342,6 +343,21 @@
                             content: "Đăng bình luận thất bại",
                             type: "red"
                         });
+                    } else {
+
+                        
+                        console.log(data);
+                        
+                        $('.show-cmt').children().before(
+                            '<div class="item-comment d-flex"> <div class="avatar"> <img src=" ' +
+                            data.Avatar +
+                            ' " alt=""> </div> <div class="body-comment"> <div class="title-comment"> <p>' +
+                            data.Username +
+                            '</p> </div> <div class="content-comment"> <p>' + 
+                            data.CommentConten + 
+                            '</p> </div> <div class="footer-comment"> <p>'+
+                            data.CommentTime +
+                            '</p> </div> </div> </div>');
                     }
                 }
 
