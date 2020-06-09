@@ -91,6 +91,17 @@
                                             </li>
                                             <li class="row">
                                                 <div class="col-2">
+                                                    Thể loại:
+                                                </div>
+                                                <div class="col-10 d-flex">
+                                                    @foreach (comic_category comicCategory in @comic.comic_category)
+                                                    {
+                                                        <p class="mr-3">@comicCategory.category.NameCategory</p>
+                                                    }
+                                                </div>
+                                            </li>
+                                            <li class="row">
+                                                <div class="col-2">
                                                     Cập nhật lần cuối:
                                                 </div>
                                                 <div class="col-10">

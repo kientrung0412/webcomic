@@ -311,6 +311,10 @@ $(document).ready(function () {
     $(".change-status-comic").change(function () {
         ChangeSttAndRole($(this))
     });
+
+   
+
+  
 })
 
 

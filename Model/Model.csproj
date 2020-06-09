@@ -56,7 +56,7 @@
         <Compile Include="DAO\CategoryDAO.cs" />
         <Compile Include="DAO\ChapterDAO.cs" />
         <Compile Include="DAO\ComicDAO.cs" />
-        <Compile Include="DAO\ComnentDAO.cs" />
+        <Compile Include="DAO\CommentDAO.cs" />
         <Compile Include="DAO\NationDAO.cs" />
         <Compile Include="DAO\RoleDAO.cs" />
         <Compile Include="DAO\StatusComicDAO.cs" />

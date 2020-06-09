@@ -650,7 +650,7 @@ namespace WebComic.Controllers
             return RedirectToAction("Index");
         }
 
-        //thay doi trang thai
+        //thay doi trang thai user
         [HttpPost]
         public Boolean ChangeSttAndRoles(int roleId, int sttId, int id)
         {
@@ -675,7 +675,29 @@ namespace WebComic.Controllers
 
             return false;
         }
-        
 
+        //Đăng bình luận
+
+        [HttpPost]
+        public Boolean Comment(int chapterId, String content)
+        {
+            if (CheckStatusUser())
+            {
+                return false;
+            }
+            comment comment = new comment();
+            
+            comment.ChapterId = chapterId;
+            comment.CommentConten = content;
+            comment.UserId = _user.UserId;
+            
+            
+            CommentDAO commentDao = new CommentDAO();
+
+            var cmt = commentDao.Add(comment);
+
+            return cmt;
+
+        }
     }
 }

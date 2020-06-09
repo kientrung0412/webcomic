@@ -88,6 +88,17 @@
                                                 <div class="col-10"> @comic.SummaryComic</div>
                                             </li>
                                             <li class="row">
+                                                <div class="col-2">
+                                                    Thể loại:
+                                                </div>
+                                                <div class="col-10 d-flex">
+                                                    @foreach (comic_category comicCategory in @comic.comic_category)
+                                                    {
+                                                        <p class="mr-3">@comicCategory.category.NameCategory</p>
+                                                    }
+                                                </div>
+                                            </li>
+                                            <li class="row">
                                                 <div class="col-2"> Tổng số chương: </div>
                                                 <div class="col-10">@chapters.Count</div>
                                             </li>
@@ -155,4 +166,3 @@
         </div>
     </div>
 </div>
-

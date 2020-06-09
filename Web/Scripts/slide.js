@@ -115,51 +115,6 @@
                     $('.more-comic').show("slow");
                 }
 
-                // $('.pagination').empty;
-                //
-                //
-                // if (page > 1) {
-                //     $('.pagination').append(
-                //         '<li class="page-item">' +
-                //         '<a class="page-link page-search" page="' +
-                //         (page - 1) + '" tabindex="-1" aria-disabled="true"  >' +
-                //         '<i class="ion-chevron-left"></i>' +
-                //         '</a>' +
-                //         '</li>'
-                //     );
-                // }
-                //
-                // for (i = 1; i <= data.PageSize; i++) {
-                //
-                //     if (i == page) {
-                //         $('.pagination').append(
-                //             '<li class="page-item active">' +
-                //             '<a class="page-link page-search" page="' + i + '" tabindex="-1">' +
-                //             i +
-                //             '</a>' +
-                //             '</li>'
-                //         );
-                //     } else {
-                //         $('.pagination').append(
-                //             '<li class="page-item">' +
-                //             '<a class="page-link page-search" page="' + i + '" tabindex="-1" aria-disabled="true">' +
-                //             i +
-                //             '</a>' +
-                //             '</li>'
-                //         );
-                //     }
-                // }
-                //
-                // if (page < data.PageSize) {
-                //     $('.pagination').append(
-                //         '<li class="page-item">' +
-                //         '<a class="page-link page-search" href="' + (page + 1) + '" tabindex="-1" aria-disabled="true">' +
-                //         '<i class="ion-chevron-right"></i>' +
-                //         '</a>' +
-                //         '</li>'
-                //     );
-                // }
-
                 $(data.Comics).each(function (index, comic) {
 
                     var newChapter = "";
@@ -266,12 +221,6 @@
         setTimeout(getData(), 2000);
     })
 
-    // $('.page-search').click(function () {
-    //     page = $(this).attr('page');
-    //     console.log(page);
-    //     getData();
-    // })
-
 
     //select sort search
 
@@ -328,7 +277,6 @@
         setTimeout(function () {
 
             let end = $(window).scrollTop();
-            console.log(start - end);
 
             if (start - end < 0) {
                 $('#nav-bottom').slideUp(100);
@@ -372,6 +320,43 @@
 
     GoTop();
 
+    //comment
+
+    $(".btn-cmt").click(function () {
+
+        let content = $("#comment").val();
+        let id = $(this).attr("id-chapter");
+
+        if (content.trim().length > 5) {
+
+            $.ajax({
+                url: 'User/Comment',
+                type: 'POST',
+                data: {content: content, chapterId: id},
+                success: function (data) {
+                    if (data == "False"){
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Lỗi',
+                            content: "Đăng bình luận thất bại",
+                            type: "red"
+                        });
+                    }
+                }
+
+            })
+
+        } else {
+            $.alert({
+                theme: 'modern',
+                icon: 'ion-alert-circled',
+                title: 'Lỗi',
+                content: "Nội dung bình luận quá ngắn học bị để trống",
+                type: "red"
+            });
+        }
+    })
 
 });
 

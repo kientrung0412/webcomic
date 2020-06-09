@@ -8,6 +8,13 @@ namespace Model.EF
     [Table("comment")]
     public partial class comment
     {
+
+        public comment()
+        {
+            CommentTime = DateTime.Now;
+            StatusCommentId = 1;
+        }
+        
         public int CommentId { get; set; }
 
         public int? UserId { get; set; }
