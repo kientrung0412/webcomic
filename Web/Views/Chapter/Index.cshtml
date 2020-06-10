@@ -5,11 +5,13 @@
     List<chapter> chapters = ViewBag.Chapters;
     List<comment> comments = ViewBag.Comments;
 
+    user user = Session["user"] as user;
+
     int roleId;
-    
+
     try
     {
-         roleId = Convert.ToInt32(SessionUser.GetSession().RoleId) ;
+        roleId = Convert.ToInt32(SessionUser.GetSession().RoleId);
     }
     catch
     {
@@ -64,11 +66,17 @@
     <div class="col-12">
         <div class="main bg-main">
             <h3>Bình luận</h3>
+
             <div class="cover-comment">
-
-                <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
-                <button id-chapter="@chapter.ChapterId" class="float-right btn-cmt">Đăng</button>
-
+                @if (user != null)
+                {
+                    <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
+                    <button id-chapter="@chapter.ChapterId" class="float-right btn-cmt">Đăng</button>
+                }
+                else
+                {
+                    <p>Bạn phải <a href="/User/Login" class="text-info">đăng nhập</a> để bình luận</p>
+                }
             </div>
 
             <div class="show-cmt">
@@ -98,7 +106,7 @@
                                     <p id-comment="@comment.CommentId" class="block-cmt">Ẩn</p>
                                 </div>
                             }
-                            
+
                         </div>
                     </div>
                 }

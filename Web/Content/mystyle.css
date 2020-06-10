@@ -96,6 +96,7 @@ h2:after, h3:after, .task-sort:after {
 }
 
 .new-chapter a {
+    display: block;
     color: #f0f0f0;
     font-weight: bold;
 }
