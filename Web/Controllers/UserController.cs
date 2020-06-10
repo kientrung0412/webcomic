@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.SessionState;
-using Microsoft.Ajax.Utilities;
 using Model.DAO;
 using Model.EF;
 using Model.Models;
@@ -210,20 +208,7 @@ namespace WebComic.Controllers
         }
 
         //lich su doc
-        public ActionResult History()
-        {
-            var str = Request.Cookies["history"]?.Value;
 
-            var history = new Dictionary<string, string> { };
-
-            if (str != null)
-            {
-                history = MyConvert.StringToListDictionary(str);
-            }
-
-            ViewBag.History = history;
-            return View();
-        }
 
         //dang xuat
         public ActionResult Logout()

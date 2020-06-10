@@ -362,5 +362,12 @@ namespace Model.DAO
 
             return i == 1;
         }
+
+        public List<comic> Histories(int[] list)
+        {
+            var histories = WcDbContext.comics.Where(comic => list.Contains(comic.ComicId)).ToList();
+            return histories;
+        }
+        
     }
 }

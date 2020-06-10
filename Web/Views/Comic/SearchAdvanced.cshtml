@@ -2,8 +2,6 @@
 @{
     ViewBag.Title = "Tìm kiếm nâng cao";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    // int pageBack = ViewBag.Page - 1;
-    // int pageNext = ViewBag.Page + 1;
     List<comic> comics = ViewBag.Comics;
 }
 <div class="row">
@@ -14,7 +12,7 @@
             <div class="task-sort">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="text-search ">
+                        <div class="text-search mb-md-0 mb-3">
                             <input type="text" id="name-seach" class="form-control" name="name" value="@ViewBag.Search" placeholder="Nhập tên chuyện">
                         </div>
                     </div>
@@ -30,7 +28,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div>k
 
             <div class="row ajax-show">
 

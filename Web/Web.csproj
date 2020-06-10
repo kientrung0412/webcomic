@@ -177,6 +177,7 @@
         <Content Include="Views\Category\Index.cshtml" />
         <Content Include="Views\Chapter\Index.cshtml" />
         <Content Include="Views\Comic\ComicCategory.cshtml" />
+        <Content Include="Views\Comic\History.cshtml" />
         <Content Include="Views\Comic\Home.cshtml" />
         <Content Include="Views\Comic\Index.cshtml" />
         <Content Include="Views\Comic\SearchAdvanced.cshtml" />
@@ -192,7 +193,6 @@
         <Content Include="Views\User\Censorship.cshtml" />
         <Content Include="Views\User\Chapter.cshtml" />
         <Content Include="Views\User\ComicsUser.cshtml" />
-        <Content Include="Views\User\History.cshtml" />
         <Content Include="Views\User\Index.cshtml" />
         <Content Include="Views\User\ListAllComic.cshtml" />
         <Content Include="Views\User\Login.cshtml" />

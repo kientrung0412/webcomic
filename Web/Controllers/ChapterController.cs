@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Web;
 using System.Web.Mvc;
 using Model.DAO;
-using Model.EF;
 using Model.Models;
 
 namespace WebComic.Controllers

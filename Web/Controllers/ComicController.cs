@@ -160,5 +160,24 @@ namespace WebComic.Controllers
 
             return json;
         }
+        
+        public ActionResult History()
+        {
+            var str = Request.Cookies["history"]?.Value;
+
+            List<comic> list = new List<comic>();
+            
+            if (str != null)
+            {
+                var history = MyConvert.StringToListDictionary(str);
+                int[] comicIds = Array.ConvertAll(history.Keys.ToArray(), s => int.Parse(s));
+
+                list  = new ComicDAO().Histories(comicIds);
+            }
+
+            ViewBag.History = list;
+            return View();
+        }
+        
     }
 }
