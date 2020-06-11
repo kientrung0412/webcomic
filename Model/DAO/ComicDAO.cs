@@ -48,12 +48,32 @@ namespace Model.DAO
 
         public int Update(comic comic)
         {
-            var a = WcDbContext.comics.Single(c => c.ComicId == comic.ComicId);
+            var cm = WcDbContext.comics.Single(c => c.ComicId == comic.ComicId);
 
-            a = comic;
+            cm = comic;
 
             var i = WcDbContext.SaveChanges();
             return i;
+        }
+
+        public comic Update(comic comic, int[] categoryId)
+        {
+            var single = WcDbContext.comics.Single(c => c.ComicId == comic.ComicId && c.UserId == comic.UserId);
+            single.NameComic = comic.NameComic;
+            single.AuthorComic = comic.AuthorComic;
+            single.SummaryComic = comic.SummaryComic;
+            single.NationId = comic.NationId;
+
+            var removeCategory = WcDbContext.comic_category.Where(cc => cc.ComicId == comic.ComicId);
+            var a = WcDbContext.comic_category.RemoveRange(removeCategory);
+
+            for (int j = 0; j < categoryId.Length; j++)
+            {
+                WcDbContext.comic_category.Add(new comic_category(comic.ComicId, categoryId[j]));
+            }
+
+            var i = WcDbContext.SaveChanges();
+            return single;
         }
 
         public int Delete(comic cm)
@@ -368,6 +388,5 @@ namespace Model.DAO
             var histories = WcDbContext.comics.Where(comic => list.Contains(comic.ComicId)).ToList();
             return histories;
         }
-        
     }
 }

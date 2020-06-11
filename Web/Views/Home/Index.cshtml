@@ -1,8 +1,9 @@
-﻿@{
+﻿@using Do_an.Controllers.ultis
+@using Model.EF
+@{
     ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using Model.EF
 @{
     Html.RenderAction("_Slide", "Comic");
 }
@@ -25,18 +26,16 @@
                             </div>
                             @if (comic.chapters.Count > 0)
                             {
-                                
                                 <div class="new-chapter">
                                     <a href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Max(chapter => chapter.ChapterId)})">@comic.chapters.Max(chapter => chapter.NameChapter)</a>
                                 </div>
-                                
+
                                 if (comic.chapters.ToList().Sum(chapter => chapter.View) / comic.chapters.Count > 2000)
                                 {
                                     <div class="chpter-hot">
                                         Hot
                                     </div>
                                 }
-                                
                             }
 
                         </div>
@@ -62,7 +61,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" href="@Url.Action("Home", "Comic", new {page = ViewBag.Page - 1})" tabindex="-1" aria-disabled="true">
-                       <i class="ion-chevron-left"></i>
+                        <i class="ion-chevron-left"></i>
                     </a>
                 </li>
             }
@@ -101,4 +100,3 @@
 @{
     Html.RenderAction("_ComicNew", "Comic");
 }
-

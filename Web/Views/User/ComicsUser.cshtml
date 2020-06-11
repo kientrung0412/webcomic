@@ -14,7 +14,6 @@
         <div class="col-12">
 
             <div class="data-table bg-main">
-
                 <table id="censorship" class="display table table-hover table-dark">
                     <thead class="thead-dark">
                     <tr class="d-flex text-center">
@@ -37,7 +36,6 @@
                         foreach (comic comic in comics)
                         {
                             i++;
-
                             var chapters = comic.chapters;
 
                             var date1 = (DateTime) comic.ReleaseDate;
@@ -66,9 +64,9 @@
                                     </a>
                                 </td>
                                 <td class="col-1">
-                                    <button id-comic="@comic.ComicId" class="btn btn-info btn-edit-comic" type="button">
+                                    <a href="/User/UpdateComic?comicId=@comic.ComicId" id-comic="@comic.ComicId" class="btn btn-info btn-edit-comic" type="button">
                                         <i class="ion-edit"></i>
-                                    </button>
+                                    </a>
                                 </td>
                                 <td class="col-1">
                                     <button id-comic="@comic.ComicId" class="btn btn-danger btn-delete-comic" type="button">

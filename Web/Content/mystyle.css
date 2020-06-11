@@ -65,6 +65,7 @@ h2:after, h3:after, .task-sort:after {
 }
 
 .col-lg-2.col-sm-3.col-6 {
+    padding: 0 7px;
     margin-top: 10px;
 }
 
@@ -529,6 +530,10 @@ ul.list-chapters li:hover {
 
 /*name ajax search*/
 
+.col-sm-3.col-6 {
+    padding: 0 7px;
+}
+
 .form-search input[type=text] {
     position: relative;
     width: 100%;
@@ -608,7 +613,7 @@ footer {
 }
 
 .img-main img {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 footer.container-fluid.bg-main {
@@ -730,7 +735,7 @@ button.float-right.btn-cmt {
 
 .body-comment {
     position: relative;
-    width: -webkit-fill-available;
+    width:100%;
     background: #585858;
     border-radius: 5px;
     padding: 5px 17px;
@@ -909,7 +914,8 @@ tr td span:hover {
 
 /*back to*/
 .btn-top {
-    background: #fd7e14;
+    color: #ffffffab;
+    background: #fd7e149c;
     border: medium none;
     bottom: 40px;
     cursor: pointer;
@@ -927,4 +933,12 @@ tr td span:hover {
     border-radius: 5px;
 }
 
-.task-sort {margin-top: 20px;}
+.task-sort {
+    margin-top: 20px;
+}
+
+@media (max-width: 577px) {
+    h2, h3 {
+        font-size: 21px;
+    }
+}

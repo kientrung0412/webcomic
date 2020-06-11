@@ -1,11 +1,7 @@
 ﻿@using Model.EF
 @using Model.Models
 @{
-    user user = new user();
-    user.UserId = 1;
-    user.RoleId = 1;
-
-    user = SessionUser.GetSession();
+    user user = Session["user"] as user;
 
 }
 
@@ -69,6 +65,9 @@
                     <a class="nav-link" href="@Url.Action("Users", "User")">
                         Danh sách tài khoản
                     </a>
+                    <a class="nav-link" href="@Url.Action("Users", "User")">
+                        Danh sách bình luận bị ẩn
+                    </a>
                 }
 
 
@@ -99,7 +98,9 @@
     </div>
 
 </div>
-<a class="btn-top" href="javascript:void(0);" title="Top" style="display: inline;"><i class="ion-arrow-up-c"></i></a>
+<a class="btn-top" href="javascript:void(0);" title="Lên" style="display: inline;">
+    <i class="ion-arrow-up-c"></i>
+</a>
 
 
 <script src="~/Scripts/jquery-3.5.1.min.js"></script>

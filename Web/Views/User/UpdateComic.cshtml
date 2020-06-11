@@ -1,0 +1,110 @@
+﻿@using Model.EF
+@{
+    ViewBag.Title = "Cập nhật truyện";
+    Layout = "~/Views/Shared/_User.cshtml";
+
+    comic comic = ViewBag.Comics;
+    List<category> categories = ViewBag.Categories;
+    List<nation> nations = ViewBag.Nations;
+
+    int?[] comicCategory = Array.ConvertAll(comic.comic_category.ToArray(), input => input.CategoryId);
+
+    int mss = ViewBag.Mss;
+
+}
+<div class="bg-main cover">
+    <div class="title">
+        <h2>Cập nhật thông tin: @comic.NameComic</h2>
+    </div>
+    <div class="from-add-comic">
+
+        @switch (mss)
+        {
+            case 1:
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Thành công !</strong> Cập nhật ảnh nền thành công
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                break;
+
+            case 0:
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Thất bại!</strong> Cập nhật ảnh nền thất bại
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                break;
+        }
+
+        <form action="@Url.Action("UpdateComic")" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6 col-12 form-group">
+                    <label>Tên truyện</label>
+                    <input type="text" class="form-control" name="nameComic" value="@comic.NameComic" placeholder="Tên truyện">
+                </div>
+                <div class="col-md-6 col-12 form-group">
+                    <label>Tác giả</label>
+                    <input type="text" class="form-control" name="author" value="@comic.AuthorComic" placeholder="Tên tác giả">
+                </div>
+                <div class="col-md-12 form-group">
+                    <p class="mb-2">Thể loại</p>
+                    @if (categories != null)
+                    {
+                        foreach (category category in categories)
+                        {
+                            if (comicCategory.Contains(category.CategoryId))
+                            {
+                                <label class="mr-4">
+                                    <input type="checkbox" value="@category.CategoryId" name="category" checked="checked">
+                                    @category.NameCategory
+                                </label>
+                            }
+                            else
+                            {
+                                <label class="mr-4">
+                                    <input type="checkbox" value="@category.CategoryId" name="category">
+                                    @category.NameCategory
+                                </label>
+                            }
+                        }
+                    }
+
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="">Tóm tắt nội dung</label>
+                    <textarea name="summary" class="form-control" rows="7">@comic.SummaryComic</textarea>
+                </div>
+                <div class="col-md-6 col-12 form-group">
+                    <label>Quốc gia</label>
+                    @if (nations != null)
+                    {
+                        <select name="nation" class="form-control">
+                            @foreach (nation nation in nations)
+                            {
+                                if (comic.NationId == nation.NationId)
+                                {
+                                    <option value="@nation.NationId" selected="selected">@nation.NameNation</option>
+                                }
+                                else
+                                {
+                                    <option value="@nation.NationId">@nation.NameNation</option>
+                                }
+                            }
+                        </select>
+                    }
+
+                </div>
+                <div class="col-md-6 col-12 form-group">
+                    <label>Ảnh bìa</label>
+                    <input type="file" class=" form-control" name="file" accept="image/*">
+                </div>
+                <div class="col-md-3 col-6 float-right">
+                    <button name="comicId" class="btn btn-success" value="@comic.ComicId" type="submit">Cập nhật</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

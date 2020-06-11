@@ -139,6 +139,7 @@
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
+        <Compile Include="Models\MailHelper.cs" />
         <Compile Include="Models\Messenger.cs" />
         <Compile Include="Models\MyConvert.cs" />
         <Compile Include="Models\SessionUser.cs" />
@@ -197,6 +198,7 @@
         <Content Include="Views\User\ListAllComic.cshtml" />
         <Content Include="Views\User\Login.cshtml" />
         <Content Include="Views\User\UpComic.cshtml" />
+        <Content Include="Views\User\UpdateComic.cshtml" />
         <Content Include="Views\User\Users.cshtml" />
         <Content Include="Web.config" />
         <Content Include="Web.Debug.config">

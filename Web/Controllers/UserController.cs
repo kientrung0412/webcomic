@@ -708,5 +708,74 @@ namespace WebComic.Controllers
 
             return false;
         }
+
+        //form sửa chuyện
+
+        public ActionResult UpdateComic(int comicId)
+        {
+            if (CheckStatusUser())
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (!CheckViewer())
+            {
+                ViewBag.Comics = new ComicDAO().GetComicAs(comicId).Result;
+                ViewBag.Nations = new NationDAO().List();
+                ViewBag.Categories = new CategoryDAO().List();
+                ViewBag.Mss = -1;
+
+                return View();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        //sửa chuyện
+
+        [HttpPost]
+        public ActionResult UpdateComic(String nameComic, String author, int[] category, int nation,
+            HttpPostedFileBase file, String summary, int comicId)
+        {
+            if (CheckStatusUser())
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (!CheckViewer())
+            {
+                ComicDAO comicDao = new ComicDAO();
+
+                comic comic = new comic();
+                comic.ComicId = comicId;
+                comic.NameComic = nameComic;
+                comic.AuthorComic = author;
+                comic.NationId = nation;
+                comic.SummaryComic = summary;
+                comic.UserId = _user.UserId;
+
+                var b = comicDao.Update(comic, category);
+
+                ViewBag.Mss = -1;
+
+                if (file != null)
+                {
+                    String path = String.Format("~/Upload/Truyen/{0}", comicId);
+                    path = Server.MapPath(path);
+                    var messenger = UploadFile.Upload(file, path, "baner.jpg");
+                    ViewBag.Mss = messenger.Code;
+                }
+
+                ViewBag.Comics = new ComicDAO().GetComicAs(comicId).Result;
+                ViewBag.Nations = new NationDAO().List();
+                ViewBag.Categories = new CategoryDAO().List();
+                
+                // return RedirectToAction("UpdateComic", new {comicId = comicId});
+                return View();
+            }
+
+
+            return RedirectToAction("Index");
+        }
     }
 }
