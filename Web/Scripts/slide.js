@@ -345,7 +345,7 @@
                         });
                     } else {
                         
-                        $('.show-cmt').children().before(
+                        $('.show-cmt').prepend(
                             
                             '<div class="item-comment d-flex"> <div class="avatar"> <img src=" ' +
                             data.user.Avatar +
