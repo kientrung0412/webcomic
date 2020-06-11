@@ -344,20 +344,20 @@
                             type: "red"
                         });
                     } else {
-
-
-                        console.log(data);
-
+                        
                         $('.show-cmt').children().before(
+                            
                             '<div class="item-comment d-flex"> <div class="avatar"> <img src=" ' +
-                            data.Avatar +
+                            data.user.Avatar +
                             ' " alt=""> </div> <div class="body-comment"> <div class="title-comment"> <p>' +
-                            data.Username +
+                            data.user.Username +
                             '</p> </div> <div class="content-comment"> <p>' +
                             data.CommentConten +
                             '</p> </div> <div class="footer-comment"> <p>' +
-                            data.CommentTime +
-                            '</p> </div> </div> </div>');
+                            getNow() +
+                            '</p> </div> </div> </div>'
+                        
+                        );
                     }
                 }
 
@@ -379,9 +379,9 @@
 
     $('.block-cmt').click(function () {
         let id = $(this).attr("id-comment");
-        
+
         var btn = $(this);
-        
+
         $.ajax({
             url: '/User/ChangeStatusCmt',
             type: 'POST',
@@ -416,6 +416,19 @@
         })
 
     })
+
+    function getNow() {
+        let d = new Date();
+
+        let year = d.getFullYear();
+        let month = d.getMonth();
+        let day = d.getDay();
+        let hours = d.getHours()
+        let min = d.getMinutes();
+
+        return day + '/' + month + '/' + year + ' ' + hours + ':' + min;
+
+    }
 
 });
 
