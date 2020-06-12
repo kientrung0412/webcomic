@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Đăng nhập";
+    String mss = ViewBag.Mss;
 }
 
 <div class="bg-main main">
@@ -7,6 +8,16 @@
         <form action="@Url.Action("Login")" method="post">
             <h4>Đăng nhập</h4>
 
+            @if (mss != null)
+            {
+                <div class="alert alert-warning alert-danger fade show" role="alert">
+                    <strong>Lỗi!</strong> @mss.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            
             <div class="form-group row">
                 <input type="email" class="form-control" name="mail" placeholder="Email" required="required">
             </div>

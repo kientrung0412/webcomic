@@ -432,7 +432,7 @@
 
     $('#forgot-password').click(function () {
         let username = $('input[name=username]').val();
-        let email = $('input[name=email]').val();
+        let email = $('input[name=mail]').val();
 
 
         $.ajax({
@@ -466,7 +466,7 @@
         })
     })
 
-    //lay mail
+    //lay code xác nhận
     $('#send-code').on('click',function () {
         let email = $('input[name=email]').val();
 

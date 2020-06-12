@@ -296,12 +296,12 @@ namespace Model.DAO
                 }
                 case 3:
                 {
-                    comics = comics.OrderBy(comic => comic.UpdateAt);
+                    comics = comics.OrderByDescending(comic => comic.UpdateAt);
                     break;
                 }
                 case 4:
                 {
-                    comics = comics.OrderBy(comic => comic.ReleaseDate);
+                    comics = comics.OrderByDescending(comic => comic.ReleaseDate);
                     break;
                 }
             }

@@ -228,6 +228,8 @@ namespace WebComic.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Mss = null;
+            
             return View();
         }
 
@@ -251,7 +253,7 @@ namespace WebComic.Controllers
             }
 
             ViewBag.Mss = "Thông tin tài khoản hoặc mật khẩu không chính xác";
-            return Redirect(Url.Action("Login", "User"));
+            return View();
         }
 
         //tat ca chuyen

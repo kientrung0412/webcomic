@@ -111,7 +111,7 @@ namespace Model.DAO
         //lấy lại mật khẩu
         public string ForgotPassword(String email, String username)
         {
-            var user = WcDbContext.users.Single(u => u.UserMail == email && u.Username == username);
+            var user = WcDbContext.users.Single(u => u.UserMail.Equals(email) && u.Username.Equals(username));
 
             if (user != null)
             {
