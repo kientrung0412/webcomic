@@ -1,13 +1,39 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width"/>
-    <title>Error</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>500</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <style type="text/css" media="screen">
+            h1{
+                font-size: 120px;
+            }
+            .col.text-center.rela {
+                position: relative;
+                top: 50%;
+                right: 50%;
+                transform: translate(50%,50%)
+            }
+            .btn.btn-success{
+                margin-top: 1em;
+                padding: 15px;
+                font-size: 23px;
+            }
+        </style>
 </head>
 <body>
-<hgroup>
-    <h1>Error.</h1>
-    <h2>An error occurred while processing your request.</h2>
-</hgroup>
+<div class="container">
+    <div class="row">
+        <div class="col text-center rela">
+            <h1 class="font-weight-bold mb-5 fontbold">Lỗi yêu cầu</h1>
+            <p class="h1 mb-5">Có lỗi xẩy ra khi thực hiện yêu cầu</p>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-success">Quay chở lại trang chủ</a>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

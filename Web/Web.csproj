@@ -139,6 +139,7 @@
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
+        <Compile Include="Models\CheckEmail.cs" />
         <Compile Include="Models\MailHelper.cs" />
         <Compile Include="Models\Messenger.cs" />
         <Compile Include="Models\MyConvert.cs" />
@@ -194,9 +195,11 @@
         <Content Include="Views\User\Censorship.cshtml" />
         <Content Include="Views\User\Chapter.cshtml" />
         <Content Include="Views\User\ComicsUser.cshtml" />
+        <Content Include="Views\User\ForgotPassword.cshtml" />
         <Content Include="Views\User\Index.cshtml" />
         <Content Include="Views\User\ListAllComic.cshtml" />
         <Content Include="Views\User\Login.cshtml" />
+        <Content Include="Views\User\Registration.cshtml" />
         <Content Include="Views\User\UpComic.cshtml" />
         <Content Include="Views\User\UpdateComic.cshtml" />
         <Content Include="Views\User\Users.cshtml" />

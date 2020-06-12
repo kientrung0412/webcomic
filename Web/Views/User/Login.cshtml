@@ -1,9 +1,24 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Đăng nhập";
 }
-<form action="@Url.Action("Login", "User")" method="post">
-    <input type="email" name="mail" required="required">
-    <input type="password" name="password" id="">
-    <input type="submit" value="Guiwr">
-</form>
+
+<div class="bg-main main">
+    <div class="signup-form">
+        <form action="@Url.Action("Login")" method="post">
+            <h4>Đăng nhập</h4>
+
+            <div class="form-group row">
+                <input type="email" class="form-control" name="mail" placeholder="Email" required="required">
+            </div>
+            <div class="form-group row">
+                <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required="required">
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-success btn-lg btn-block">Đăng nhập</button>
+            </div>
+        </form>
+        <div class="text-center">
+            <span>Bạn chưa có tài khoản?</span> <a href="@Url.Action("Registration")" class="text-info">Đăng ký</a>
+        </div>
+    </div>
+</div>

@@ -15,7 +15,6 @@ namespace Model.DAO
         public UserDAO()
         {
             WcDbContext = new WCDbContext();
-            
         }
 
         public PaginationUser ListPage(Pagination pagination, IOrderedQueryable<user> users)
@@ -56,16 +55,11 @@ namespace Model.DAO
         }
 
         //Lấy ra 1 người dùng
-        public user OneUser(int userId)
-        {
-            user sql = WcDbContext.users.Single(u => u.UserId == userId);
-            return sql;
-        }
 
         public int Update(user user)
         {
             user sql = WcDbContext.users.Single(u => u.UserId == user.UserId);
-            
+
             sql.RoleId = user.RoleId;
             sql.StatusUserId = user.StatusUserId;
 
@@ -73,46 +67,26 @@ namespace Model.DAO
 
             return n;
         }
+        
 
-
-        public async Task<int> ChangePassAs(ChangePass changePass)
-        {
-            user user = OneUser(changePass.UserId);
-            String oldPass = StringToMd5.GetMd5Hash(changePass.OldPass);
-
-            if (user.UserPass == oldPass)
-            {
-                user.UserPass = StringToMd5.GetMd5Hash(changePass.NewPass);
-                var n = await WcDbContext.SaveChangesAsync();
-                return n;
-            }
-            else
-            {
-                //mật khẩu cũ không khóp
-                return -1;
-            }
-        }
-
-        //đăng ký
-        public int SignUp(user user)
-        {
-            var a = CheckMail(user.UserMail);
-
-            if (a == 0)
-            {
-                var sql = WcDbContext.users.Add(user);
-                var n = WcDbContext.SaveChanges();
-                //cho phép đăng ký
-                return n;
-            }
-            else
-            {
-                //email đã tồn tại
-                return -1;
-            }
-        }
-
-
+        // public async Task<int> ChangePassAs(ChangePass changePass)
+        // {
+        //     user user = OneUser(changePass.UserId);
+        //     String oldPass = StringToMd5.GetMd5Hash(changePass.OldPass);
+        //
+        //     if (user.UserPass == oldPass)
+        //     {
+        //         user.UserPass = StringToMd5.GetMd5Hash(changePass.NewPass);
+        //         var n = await WcDbContext.SaveChangesAsync();
+        //         return n;
+        //     }
+        //     else
+        //     {
+        //         //mật khẩu cũ không khóp
+        //         return -1;
+        //     }
+        // }
+        
         public int CheckMail(String mail)
         {
             var a = WcDbContext.users.Where(user => user.UserMail == mail).Count();
@@ -132,6 +106,36 @@ namespace Model.DAO
             {
                 return null;
             }
+        }
+
+        public string ForgotPassword(String email, String username)
+        {
+            var user = WcDbContext.users.Single(u => u.UserMail == email && u.Username == username);
+
+            if (user != null)
+            {
+                Random random = new Random();
+                String pass = random.Next(10000000, 999999999).ToString();
+
+                user.UserPass = StringToMd5.GetMd5Hash(pass);
+
+                if (WcDbContext.SaveChanges() > 0)
+                {
+                    return pass;
+                }
+
+                return null;
+            }
+
+            return null;
+        }
+
+        public Boolean Registration(user user)
+        {
+            var rq = WcDbContext.users.Add(user);
+            var b = WcDbContext.SaveChanges();
+
+            return (b > 0);
         }
     }
 }

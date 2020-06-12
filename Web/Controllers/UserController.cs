@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Do_an.Controllers.ultis;
 using Model.DAO;
 using Model.EF;
 using Model.Models;
 using Newtonsoft.Json;
+using Web.Models;
 
 namespace WebComic.Controllers
 {
@@ -769,13 +772,140 @@ namespace WebComic.Controllers
                 ViewBag.Comics = new ComicDAO().GetComicAs(comicId).Result;
                 ViewBag.Nations = new NationDAO().List();
                 ViewBag.Categories = new CategoryDAO().List();
-                
+
                 // return RedirectToAction("UpdateComic", new {comicId = comicId});
                 return View();
             }
 
 
             return RedirectToAction("Index");
+        }
+
+        //Form quyên
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        //quen mat khau
+        [HttpPost]
+        public String ForgotPassword(String email, String username)
+        {
+            UserDAO userDao = new UserDAO();
+
+            if (new CheckEmail().isEmail(email))
+            {
+                var pass = userDao.ForgotPassword(email, username);
+                if (pass != null)
+                {
+                    MailHelper mailHelper = new MailHelper();
+                    mailHelper.SendMail(email, "Mật khẩu mới Của bạn là", pass);
+
+                    return true.ToString();
+                }
+            }
+
+            return false.ToString();
+        }
+
+        //dăng ký
+        public ActionResult Registration()
+        {
+            return View();
+        }
+
+        //send code
+        public int SendCode(String email)
+        {
+            var delayTime = 0;
+
+            if (Session["code"] != null)
+            {
+                var now = ((DateTime) Session["time"]);
+                delayTime = Convert.ToInt32((DateTime.Now - now).TotalMinutes);
+            }
+
+            if (Session["code"] == null || delayTime > 5)
+            {
+                if (new CheckEmail().isEmail(email))
+                {
+                    if (new UserDAO().CheckMail(email) < 1)
+                    {
+                        Random random = new Random();
+                        String code = random.Next(100000, 999999).ToString();
+
+                        MailHelper mailHelper = new MailHelper();
+                        var send = mailHelper.SendMail(email, "Mã xác thực của bạn là", code);
+
+
+                        Session["code"] = code;
+                        Session["email"] = email;
+                        Session["time"] = DateTime.Now;
+
+                        return Convert.ToInt32(send);
+                    }
+
+                    // mail đã dùng
+                    return -6;
+                }
+
+                //không khớp định dạng mail
+                return -1;
+            }
+
+            //vùa gửi mail xong
+            return -2;
+        }
+
+        //đăng ký
+        [HttpPost]
+        public int Registration(String email, String username, String password, String rePassword, String code)
+        {
+            if (Session["code"] != null)
+            {
+                if (Session["code"].Equals(code))
+                {
+                    if (Session["email"].Equals(email))
+                    {
+                        if (password.Equals(rePassword))
+                        {
+                            if (password.Trim().Length < 4)
+                            {
+                                if (username.Trim().Length < 2)
+                                {
+                                    UserDAO userDao = new UserDAO();
+                                    user user = new user();
+                                    user.UserMail = email;
+                                    user.UserPass = StringToMd5.GetMd5Hash(password);
+                                    user.Username = username;
+
+                                    var a = userDao.Registration(user);
+
+                                    return Convert.ToInt32(a);
+                                }
+                                
+                                // user quá ngắn
+                                return -8;
+                            }
+
+                            //mật khẩu quá ngắn
+                            return -7;
+                        }
+
+                        //Hai mật khẩu không khớp
+                        return -5;
+                    }
+
+                    //Không đúng mail
+                    return -4;
+                }
+
+                //mã code ko khớp
+                return -2;
+            }
+
+            //Chưa có mã
+            return -3;
         }
     }
 }

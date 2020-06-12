@@ -272,11 +272,11 @@
     //nav-bottom
 
     $(window).scroll(function () {
-        let start = $(window).scrollTop();
+        let start = $(window).stop().scrollTop();
 
         setTimeout(function () {
 
-            let end = $(window).scrollTop();
+            let end = $(window).stop().scrollTop();
 
             if (start - end < 0) {
                 $('#nav-bottom').slideUp(100);
@@ -344,9 +344,8 @@
                             type: "red"
                         });
                     } else {
-                        
+
                         $('.show-cmt').prepend(
-                            
                             '<div class="item-comment d-flex"> <div class="avatar"> <img src=" ' +
                             data.user.Avatar +
                             ' " alt=""> </div> <div class="body-comment"> <div class="title-comment"> <p>' +
@@ -356,7 +355,6 @@
                             '</p> </div> <div class="footer-comment"> <p>' +
                             getNow() +
                             '</p> </div> </div> </div>'
-                        
                         );
                     }
                 }
@@ -429,6 +427,200 @@
         return day + '/' + month + '/' + year + ' ' + hours + ':' + min;
 
     }
+
+    // quyên mật khẩu (Chưa test)
+
+    $('#forgot-password').click(function () {
+        let username = $('input[name=username]').val();
+        let email = $('input[name=email]').val();
+
+
+        $.ajax({
+            url: '/User/ForgotPassword',
+            type: 'POST',
+            data: {username: username, email: email},
+            success: function (data) {
+
+                if (data == "True") {
+
+                    $.alert({
+                        theme: 'modern',
+                        icon: 'ion-android-done',
+                        autoClose: 'ok|2000',
+                        title: 'Thông báo',
+                        content: 'Mật khẩu mới đã được gửi đến mail của bạn',
+                        type: 'green'
+                    })
+                } else {
+                    $.alert({
+                        theme: 'modern',
+                        icon: 'ion-alert-circled',
+                        autoClose: 'ok|2000',
+                        title: 'Thông báo',
+                        content: 'Email hoặc tên tài khoản không chính xác',
+                        type: 'red'
+                    })
+                }
+
+            }
+        })
+    })
+
+    //lay mail
+    $('#send-code').click(function () {
+        let email = $('input[name=email]').val();
+
+        $.ajax({
+            url: '/User/SendCode',
+            type: 'POST',
+            data: {email: email},
+            success: function (data) {
+
+                switch (data) {
+                    case "1":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-android-done',
+                            title: 'Thông báo',
+                            content: 'Gửi mã xác nhận thành công',
+                            type: 'green'
+                        })
+                        break
+                    case "0":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Gửi mã xác nhận thất bại',
+                            type: 'red'
+                        })
+                        break
+                    case "-1":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Định dạng mail không chính xác',
+                            type: 'red'
+                        })
+                        break
+                    case "-2":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Bạn chỉ có thể nhận lại code sau 5 phút nữa',
+                            type: 'red'
+                        })
+                        break
+                    case "-6":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Email đã tồn tại',
+                            type: 'red'
+                        })
+                        break
+                }
+
+
+            }
+        })
+
+    })
+
+    // dăng ký
+    $('#btn-regi').click(function () {
+        let email = $('input[name=email]').val();
+        let password = $('input[name=password]').val();
+        let rePassword = $('input[name=rePassword]').val();
+        let username = $('input[name=username]').val();
+        let code = $('input[name=code]').val();
+
+        $.ajax({
+            url: '/User/Registration',
+            type: 'POST',
+            data: {email: email, password: password, rePassword: rePassword, username: username, code: code},
+            success: function (data) {
+
+                switch (data) {
+                    case "1":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-android-done',
+                            title: 'Thông báo',
+                            content: 'Đăng ký thành công',
+                            type: 'green'
+                        })
+                        break
+                    case "0":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Đăng ký thất bại',
+                            type: 'red'
+                        })
+                        break
+                    case "-3":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Bạn chưa gửi mã xác thực',
+                            type: 'red'
+                        })
+                        break
+                    case "-2":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Mã xác thực không khớp',
+                            type: 'red'
+                        })
+                        break
+                    case "-4":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Email bạn nhập không đúng',
+                            type: 'red'
+                        })
+                        break
+                    case "-5":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Hai mật khẩu nhập không khớp',
+                            type: 'red'
+                        })
+                        break
+                    case "-7":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Mật khẩu pahir dài hơn 4 ký tự',
+                            type: 'red'
+                        })
+                        break
+                    case"-8":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Tên phải dài hơi 2 ký tự',
+                            type: 'red'
+                        })
+                        break
+                }
+            }
+        })
+    })
 
 });
 
