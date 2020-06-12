@@ -467,7 +467,7 @@
     })
 
     //lay mail
-    $('#send-code').click(function () {
+    $('#send-code').on('click',function () {
         let email = $('input[name=email]').val();
 
         $.ajax({
@@ -509,7 +509,7 @@
                             theme: 'modern',
                             icon: 'ion-alert-circled',
                             title: 'Thông báo',
-                            content: 'Bạn chỉ có thể nhận lại code sau 5 phút nữa',
+                            content: 'Bạn chỉ có thể nhận lại code sau 1 phút nữa',
                             type: 'red'
                         })
                         break
@@ -604,7 +604,7 @@
                             theme: 'modern',
                             icon: 'ion-alert-circled',
                             title: 'Thông báo',
-                            content: 'Mật khẩu pahir dài hơn 4 ký tự',
+                            content: 'Mật khẩu phải dài hơn 4 ký tự',
                             type: 'red'
                         })
                         break

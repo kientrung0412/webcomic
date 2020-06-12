@@ -308,7 +308,7 @@ $(document).ready(function () {
     $(".change-role-user").change(function () {
         ChangeSttAndRole($(this))
     });
-    $(".change-status-comic").change(function () {
+    $(".change-status-user").change(function () {
         ChangeSttAndRole($(this))
     });
 

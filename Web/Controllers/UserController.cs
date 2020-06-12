@@ -825,7 +825,7 @@ namespace WebComic.Controllers
                 delayTime = Convert.ToInt32((DateTime.Now - now).TotalMinutes);
             }
 
-            if (Session["code"] == null || delayTime > 5)
+            if (Session["code"] == null || delayTime > 1)
             {
                 if (new CheckEmail().isEmail(email))
                 {
@@ -869,9 +869,9 @@ namespace WebComic.Controllers
                     {
                         if (password.Equals(rePassword))
                         {
-                            if (password.Trim().Length < 4)
+                            if (password.Trim().Length > 4)
                             {
-                                if (username.Trim().Length < 2)
+                                if (username.Trim().Length > 2)
                                 {
                                     UserDAO userDao = new UserDAO();
                                     user user = new user();
@@ -881,6 +881,12 @@ namespace WebComic.Controllers
 
                                     var a = userDao.Registration(user);
 
+                                    if (a)
+                                    {
+                                        Session["code"] = null;
+                                        Session["email"] = null;
+                                    }
+                                    
                                     return Convert.ToInt32(a);
                                 }
                                 
@@ -907,5 +913,8 @@ namespace WebComic.Controllers
             //Chưa có mã
             return -3;
         }
+        
+       
+       
     }
 }
