@@ -108,10 +108,16 @@
                     @*                         </li> *@
                     @*                     } *@
 
-                    @if (comics.Count > 0)
+                    @if (comics.Count > 16)
                     {
                         <li id="page-search" class="page-item">
                             <span class="more-comic">Xem thêm</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li id="page-search" class="page-item">
+                            <span class="more-comic d-none">Xem thêm</span>
                         </li>
                     }
 

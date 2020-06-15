@@ -5,7 +5,7 @@ function Delete(urlPost, id, btn) {
         icon: 'ion-alert-circled',
         theme: 'modern',
         title: 'Xác thực ?',
-        content: 'Bạn có chắc trắn muốn xóa',
+        content: 'Bạn có chắc chắn muốn xóa',
         autoClose: 'no|5000',
         type: 'orange',
         buttons: {
@@ -312,9 +312,79 @@ $(document).ready(function () {
         ChangeSttAndRole($(this))
     });
 
-   
+    $('#btn-change-pass').click(function () {
 
-  
+        console.log($(this));
+
+        let oldPass = $('#oldPass').val();
+        let newPass = $('#newPass').val();
+        let reNewPass = $('#reNewPass').val();
+
+        $.ajax({
+            url: '/User/ChangePass',
+            type: 'POST',
+            data: {oldPass: oldPass, newPass: newPass, reNewPass: reNewPass},
+            success: function (data) {
+
+                switch (data) {
+
+                    case "1":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-android-done',
+                            title: 'Thông báo',
+                            content: 'Thay đổi mật khẩu thành công',
+                            type: 'green'
+                        })
+                        break
+
+                    case "0":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Thay đổi mật khẩu thất bại',
+                            type: 'red'
+                        })
+                        break
+                    case "-4":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Mật khẩu cũ không khớp',
+                            type: 'red'
+                        })
+                        break
+                    case "-3":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Mật khẩu phải dài hơn 4 ký tự',
+                            type: 'red'
+                        })
+                        break
+                    case "-2":
+                        $.alert({
+                            theme: 'modern',
+                            icon: 'ion-alert-circled',
+                            title: 'Thông báo',
+                            content: 'Nhập lại mặt khẩu mới không khớp',
+                            type: 'red'
+                        })
+                        break
+                }
+
+            }
+        })
+
+    })
+
 })
+
+
+
+
 
 

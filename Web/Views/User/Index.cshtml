@@ -27,7 +27,7 @@
 
         <div class="col-md-8 col-12">
             <div class="cover bg-main">
-                <form action="" method="post">
+                <div>
                     <div class="form-group row">
                         <label for="input_email" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
@@ -37,13 +37,51 @@
                     <div class="form-group row">
                         <label for="input_name" class="col-sm-2 col-form-label">Tên</label>
                         <div class="col-sm-10">
-                            <input id="input_name" value="@user.Username" type="text" name="username" placeholder="Tên" disabled="disabled"  class="form-control">
+                            <input id="input_name" value="@user.Username" type="text" name="username" placeholder="Tên" disabled="disabled" class="form-control">
                         </div>
                     </div>
-                    @* <div class="form-group row"> *@
-                    @*     <button type="submit" class="btn float-right last-chapter">Lưu</button> *@
-                    @* </div> *@
+                </div>
+            </div>
+            <div class="cover bg-main">
+                <form action="@Url.Action("ChangerAvatar")" method="post" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <label for="avatar" class="col-sm-2 col-form-label">Thay đổi avatar</label>
+                        <div class="col-sm-8 col-8">
+                            <input id="avatar" type="file" name="file" class="form-control">
+                        </div>
+                        <div class="col-sm-2 col-4">
+                            <button type="submit" class="btn btn-success form-control">Lưu</button>
+                        </div>
+                    </div>
                 </form>
+            </div>
+            <div class="cover bg-main">
+                <div>
+                    <div class="form-group row">
+                        <label for="oldPass" class="col-sm-2 col-form-label">Mật khẩu cũ</label>
+                        <div class="col-sm-10">
+                            <input id="oldPass" type="password" name="oldPass" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="newPass" class="col-sm-2 col-form-label">Mật khẩu mới</label>
+                        <div class="col-sm-10">
+                            <input id="newPass" type="password" name="newPass" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="reNewPass" class="col-sm-2 col-form-label">Nhập lại mật khẩu mới</label>
+                        <div class="col-sm-10">
+                            <input id="reNewPass" type="password" name="reNewPass" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3 offset-md-9">
+                            <button id="btn-change-pass" type="submit" class="btn btn-success form-control">Thay đổi mật khẩu</button>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

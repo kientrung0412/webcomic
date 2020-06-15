@@ -54,18 +54,18 @@
 
     function getData() {
 
-        var listIn = new Array();
-        var listNotIn = new Array();
-        var nameComic = $('#name-seach').val();
-        var author = $('#author-seach').val();
-        var nation = $('#nation-search').children('option:selected').val();
-        var status = $('#status-search').children('option:selected').val();
-        var sort = $('#sort-seach').children('option:selected').val();
+        let listIn = new Array();
+        let listNotIn = new Array();
+        let nameComic = $('#name-seach').val();
+        let author = $('#author-seach').val();
+        let nation = $('#nation-search').children('option:selected').val();
+        let status = $('#status-search').children('option:selected').val();
+        let sort = $('#sort-seach').children('option:selected').val();
 
 
         $(".category-search").each(function () {
-            var idCategorey = $(this).val();
-            var status = $(this).attr("data-check");
+            let idCategorey = $(this).val();
+            let status = $(this).attr("data-check");
 
             switch (status) {
                 case "1":
@@ -110,9 +110,9 @@
                 history.pushState({key: url}, '', url);
 
                 if (data.PageSize - 1 < page) {
-                    $('.more-comic').hide("slow");
+                    $('.more-comic').addClass("d-none");
                 } else {
-                    $('.more-comic').show("slow");
+                    $('.more-comic').removeClass("d-none");
                 }
 
                 $(data.Comics).each(function (index, comic) {
@@ -345,17 +345,8 @@
                         });
                     } else {
 
-                        $('.show-cmt').prepend(
-                            '<div class="item-comment d-flex"> <div class="avatar"> <img src=" ' +
-                            data.user.Avatar +
-                            ' " alt=""> </div> <div class="body-comment"> <div class="title-comment"> <p>' +
-                            data.user.Username +
-                            '</p> </div> <div class="content-comment"> <p>' +
-                            data.CommentConten +
-                            '</p> </div> <div class="footer-comment"> <p>' +
-                            getNow() +
-                            '</p> </div> </div> </div>'
-                        );
+                        location.reload();
+                        
                     }
                 }
 
@@ -376,15 +367,22 @@
     //ẩn bình luận
 
     $('.block-cmt').click(function () {
-        let id = $(this).attr("id-comment");
+        hideComment($(this));
+    })
 
-        var btn = $(this);
+    //fun an
+
+    function hideComment(btna) {
+        let id = btna.attr("id-comment");
+
+        var btn = btna;
 
         $.ajax({
             url: '/User/ChangeStatusCmt',
             type: 'POST',
             data: {id: id},
             success: function (data) {
+
 
                 if (data == "True") {
 
@@ -413,22 +411,9 @@
             }
         })
 
-    })
-
-    function getNow() {
-        let d = new Date();
-
-        let year = d.getFullYear();
-        let month = d.getMonth();
-        let day = d.getDay();
-        let hours = d.getHours()
-        let min = d.getMinutes();
-
-        return day + '/' + month + '/' + year + ' ' + hours + ':' + min;
-
     }
-
-    // quyên mật khẩu (Chưa test)
+    
+    // quyên mật khẩu 
 
     $('#forgot-password').click(function () {
         let username = $('input[name=username]').val();
@@ -467,7 +452,7 @@
     })
 
     //lay code xác nhận
-    $('#send-code').on('click',function () {
+    $('#send-code').on('click', function () {
         let email = $('input[name=email]').val();
 
         $.ajax({

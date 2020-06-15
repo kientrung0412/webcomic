@@ -160,8 +160,6 @@
         <Content Include="favicon.ico" />
         <Content Include="Global.asax" />
         <Content Include="Scripts\alert.js" />
-        <Content Include="Scripts\all.js" />
-        <Content Include="Scripts\all.min.js" />
         <Content Include="Scripts\boostrap.min.js" />
         <Content Include="Scripts\font.min.js" />
         <Content Include="Scripts\jquery-3.5.1.js" />
@@ -198,6 +196,7 @@
         <Content Include="Views\User\ForgotPassword.cshtml" />
         <Content Include="Views\User\Index.cshtml" />
         <Content Include="Views\User\ListAllComic.cshtml" />
+        <Content Include="Views\User\ListComment.cshtml" />
         <Content Include="Views\User\Login.cshtml" />
         <Content Include="Views\User\Registration.cshtml" />
         <Content Include="Views\User\UpComic.cshtml" />

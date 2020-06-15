@@ -76,7 +76,7 @@ namespace Model.DAO
 
         public chapter Select(int id)
         {
-            var chapter = WcDbContext.chapters.Single(c => c.ChapterId == id);
+            var chapter = WcDbContext.chapters.Single(c => c.ChapterId == id && c.comic.StatusComicId < 4);
             return chapter;
         }
 

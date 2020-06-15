@@ -200,19 +200,34 @@ namespace WebComic.Controllers
 
         //thay doi mat khau
         [HttpPost]
-        public ActionResult ChangePass(String oldPass, String newPass)
+        public int ChangePass(String oldPass, String newPass, String reNewPass)
         {
             if (CheckStatusUser())
             {
-                return RedirectToAction("Login");
+                //Chưa đăng nhập hoặc đã bị ban
+                return 0;
             }
 
-            return Content("ghgs");
+            if (reNewPass.Trim().Equals(newPass.Trim()))
+            {
+                if (newPass.Trim().Length > 4)
+                {
+                    var b = new UserDAO().ChangePass(new ChangePass(_user.UserId, oldPass, newPass));
+
+                    //b=-4 maạt khẩu không chính xác
+                    //b=1 thành công
+                    return b;
+
+                }
+
+                //mật khẩu ngắn hơn 4 ký tự
+                return -3;
+            }
+
+            //Hai mật khẩu không khớp
+            return -2;
         }
-
-        //lich su doc
-
-
+        
         //dang xuat
         public ActionResult Logout()
         {
@@ -229,7 +244,7 @@ namespace WebComic.Controllers
             }
 
             ViewBag.Mss = null;
-            
+
             return View();
         }
 
@@ -322,7 +337,7 @@ namespace WebComic.Controllers
 
         //thong qua truyen
         [HttpPost]
-        public Boolean UpdateCensorship()
+        public Boolean UpdateCensorship(int id)
         {
             if (CheckStatusUser())
             {
@@ -331,15 +346,11 @@ namespace WebComic.Controllers
 
             if (CheckAdmin())
             {
-                String id = Request["id"];
-
                 ComicDAO comicDao = new ComicDAO();
 
-                var comic = comicDao.GetComicAs(Convert.ToInt32(id)).Result;
-                comic.StatusComicId = 1;
-                var n = comicDao.Update(comic);
+                var comic = comicDao.UpdateCensorship(id);
 
-                return n == 1;
+                return comic;
             }
 
             return false;
@@ -725,7 +736,7 @@ namespace WebComic.Controllers
 
             if (!CheckViewer())
             {
-                ViewBag.Comics = new ComicDAO().GetComicAs(comicId).Result;
+                ViewBag.Comics = new ComicDAO().GetComic(comicId);
                 ViewBag.Nations = new NationDAO().List();
                 ViewBag.Categories = new CategoryDAO().List();
                 ViewBag.Mss = -1;
@@ -771,7 +782,7 @@ namespace WebComic.Controllers
                     ViewBag.Mss = messenger.Code;
                 }
 
-                ViewBag.Comics = new ComicDAO().GetComicAs(comicId).Result;
+                ViewBag.Comics = new ComicDAO().GetComic(comicId);
                 ViewBag.Nations = new NationDAO().List();
                 ViewBag.Categories = new CategoryDAO().List();
 
@@ -888,10 +899,10 @@ namespace WebComic.Controllers
                                         Session["code"] = null;
                                         Session["email"] = null;
                                     }
-                                    
+
                                     return Convert.ToInt32(a);
                                 }
-                                
+
                                 // user quá ngắn
                                 return -8;
                             }
@@ -915,8 +926,49 @@ namespace WebComic.Controllers
             //Chưa có mã
             return -3;
         }
+
+        //thay đổi avatar
+        [HttpPost]
+        public ActionResult ChangerAvatar(HttpPostedFileBase file)
+        {
+            if (file != null)
+            {
+                String filePath = Server.MapPath("~/Upload/Avatar");
+                String fileName = String.Format("{0}.jpg", _user.UserId);
+
+                var a = UploadFile.Upload(file, filePath, fileName);
+            }
+
+            return RedirectToAction("Index");
+        }
         
-       
-       
+        //Quản lý cmt ẩn
+
+        public ActionResult ListComment(int page = 1)
+        {
+            if (CheckStatusUser())
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (!CheckAdmin())
+            {
+                return RedirectToAction("Index");
+            }
+
+            if (page < 1)
+            {
+                page = 1;
+            }
+            
+            var list = new CommentDAO().ListHide(new Pagination(10,page));
+
+            ViewBag.Cmts = list.Comments;
+            ViewBag.Numpage = list.PageSize;
+            ViewBag.Page = list.Page;
+
+            return View();
+        }
+        
     }
 }

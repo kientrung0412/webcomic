@@ -1,0 +1,107 @@
+﻿@using Model.EF
+
+@{
+    ViewBag.Title = "Danh sách bình luận bị ẩn";
+    Layout = "~/Views/Shared/_User.cshtml";
+
+    List<comment> comments = ViewBag.Cmts;
+}
+
+<div class="cover bg-main">
+    <div class="title">
+        <h2>Danh sánh bình luận bị ẩn</h2>
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+            <div class="data-table bg-main">
+
+                <table id="censorship" class="display table table-hover table-dark">
+                    <thead class="thead-dark">
+                    <tr class="d-flex text-center">
+                        <th class="col-1">Stt</th>
+                        <th class="col-2">Email người dùng</th>
+                        <th class="col-3">Nội dung bình luận</th>
+                        <th class="col-2">Tên truyện bình luận</th>
+                        <th class="col-2">Tên chương bình luận</th>
+                        <th class="col-1">Thời bình luận</th>
+                        <th class="col-1">Xóa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if (comments.Count > 0)
+                    {
+                        int i = 0;
+                        foreach (comment comment in comments)
+                        {
+                            i++;
+
+                            var date1 = (DateTime) comment.CommentTime;
+                            var date = date1.ToString("dd/MM/yy hh:mm");
+
+                            <tr class="d-flex text-center">
+                                <td class="col-1">
+                                    @i
+                                </td>
+                                <td class="col-2">@comment.user.UserMail</td>
+                                <td class="col-3">@comment.CommentConten</td>
+                                <td class="col-2">@comment.chapter.comic.NameComic</td>
+                                <td class="col-2">@comment.chapter.NameChapter</td>
+                                <td class="col-1">@date</td>
+                                <td class="col-1">
+                                    <button id-cmt="@comment.CommentId" class="btn btn-danger btn-delete-cmt" type="button">
+                                        <i class="ion-android-delete"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+
+
+                <nav aria-label="Page navigation example" class="page">
+                    <ul class="pagination justify-content-end">
+
+                        @if (ViewBag.Page > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("ListComment",  new {page = ViewBag.Page - 1})" tabindex="-1" aria-disabled="true">
+                                    <i class="ion-chevron-left"></i>
+                                </a>
+                            </li>
+                        }
+
+
+                        @for (var i = 1; i <= ViewBag.Numpage; i++)
+                        {
+                            if (ViewBag.Page == i)
+                            {
+                                <li class="page-item active">
+                                    <a class="page-link active" href="@Url.Action("ListComment",  new {page = i})">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link active" href="@Url.Action("ListComment",  new {page = i})">@i</a>
+                                </li>
+                            }
+                        }
+
+                        @if (ViewBag.Page < ViewBag.Numpage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("ListComment",  new {page = ViewBag.Page + 1})">
+                                    <i class="ion-chevron-right"></i>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>

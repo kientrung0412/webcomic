@@ -67,26 +67,24 @@ namespace Model.DAO
 
             return n;
         }
-        
 
-        // public async Task<int> ChangePassAs(ChangePass changePass)
-        // {
-        //     user user = OneUser(changePass.UserId);
-        //     String oldPass = StringToMd5.GetMd5Hash(changePass.OldPass);
-        //
-        //     if (user.UserPass == oldPass)
-        //     {
-        //         user.UserPass = StringToMd5.GetMd5Hash(changePass.NewPass);
-        //         var n = await WcDbContext.SaveChangesAsync();
-        //         return n;
-        //     }
-        //     else
-        //     {
-        //         //mật khẩu cũ không khóp
-        //         return -1;
-        //     }
-        // }
-        
+
+        public int ChangePass(ChangePass changePass)
+        {
+            String oldPass = StringToMd5.GetMd5Hash(changePass.OldPass);
+            var user = WcDbContext.users.Single(user1 => user1.UserId == changePass.UserId);
+
+            if (user.UserPass == oldPass)
+            {
+                user.UserPass = StringToMd5.GetMd5Hash(changePass.NewPass);
+                var n = WcDbContext.SaveChanges();
+                return n;
+            }
+
+            //mật khẩu cũ không khóp
+            return -4;
+        }
+
         public int CheckMail(String mail)
         {
             var a = WcDbContext.users.Where(user => user.UserMail == mail).Count();

@@ -205,8 +205,25 @@ namespace Model.DAO
         public async Task<comic> GetComicAs(int comicId)
 #pragma warning restore 1998
         {
+            var comic = WcDbContext.comics.Single(c => c.ComicId == comicId && c.StatusComicId < 4);
+            return comic;
+        }
+
+        public comic GetComic(int comicId)
+        {
             var comic = WcDbContext.comics.Single(c => c.ComicId == comicId);
             return comic;
+        }
+        
+        public Boolean UpdateCensorship(int id)
+        {
+            var comic = WcDbContext.comics.Single(c => c.ComicId == id);
+            comic.StatusComicId = 1;
+            
+            var b = WcDbContext.SaveChanges() > 0;
+            
+            return b;
+
         }
 
         public PaginationComic SearchAdvanced(SuperSearch search, Pagination pagination, String sort)

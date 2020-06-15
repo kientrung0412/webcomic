@@ -81,5 +81,14 @@ namespace Model.DAO
 
             return n > 0;
         }
+
+        public PaginationComment ListHide(Pagination pagination)
+        {
+            var list = WcDbContext.comments.Where(comment => comment.StatusCommentId == 2)
+                .OrderByDescending(comment => comment.CommentTime);
+            
+            PaginationComment paginationComment = ListPage(pagination, list);
+            return paginationComment;
+        }
     }
 }
