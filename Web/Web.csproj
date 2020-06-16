@@ -175,7 +175,6 @@
         <Content Include="Upload\Config\logo.png" />
         <Content Include="Views\Category\Index.cshtml" />
         <Content Include="Views\Chapter\Index.cshtml" />
-        <Content Include="Views\Comic\ComicCategory.cshtml" />
         <Content Include="Views\Comic\History.cshtml" />
         <Content Include="Views\Comic\Home.cshtml" />
         <Content Include="Views\Comic\Index.cshtml" />

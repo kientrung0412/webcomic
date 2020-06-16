@@ -133,12 +133,12 @@ $(document).ready(function () {
         let id = $(this).attr("id-comic");
         let b = Update("/User/UpdateCensorship", id, true, $(this));
     });
-    
+
     //xóa comment
-    
+
     $('.btn-delete-cmt').click(function () {
         let id = $(this).attr("id-cmt");
-        let b =Delete("/User/DeleteCmt", id, $(this));
+        let b = Delete("/User/DeleteCmt", id, $(this));
     })
 
     //xoa chuyeenj
@@ -387,6 +387,47 @@ $(document).ready(function () {
         })
 
     })
+
+
+    $('#sortable').sortable({
+        placeholder: "ui-state-highlight"
+    });
+
+    $("#sortable").disableSelection();
+
+    $('#save-sort').click(function () {
+
+        let list = [];
+
+        $('#sortable').find('tr').each(function (i) {
+            let n = $(this).attr("chapter-id");
+            list[i] = n;
+        })
+
+        $.ajax({
+            url: '/User/SortChapter',
+            type: 'POST',
+            data: {list: list},
+            success: function (data) {
+                if (data == "True") {
+                    
+                   location.reload();
+
+                } else {
+                    $.alert({
+                        theme: 'modern',
+                        icon: 'ion-alert-circled',
+                        autoClose: 'ok|2000',
+                        title: 'Thông báo',
+                        content: 'Thay đổi thất bại thất bại',
+                        type: 'red'
+                    })
+                }
+            }
+        })
+        
+    })
+
 
 })
 

@@ -13,7 +13,7 @@
                 <div class="row detail-comic">
                     <div class="col-md-3">
                         <div class="comic-item">
-                            <a href="@Url.Action("Index", "Comic", new {comicId = @comic.ComicId})">
+                            <a href="@Url.Action("Index", new {comicId = @comic.ComicId})">
                                 <div class="item-main">
                                     <div class="img-cover">
                                         <div class="img-bg bg-img-full" url-bg="@comic.CommicBanner"></div>
@@ -23,7 +23,7 @@
                         </div>
                         @if (comic.chapters.Count > 0)
                         {
-                            <a class="" href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Min(chapter => chapter.ChapterId)})">
+                            <a class="" href="@Url.Action("Index", new {chapterId = comic.chapters.Min(chapter => chapter.ChapterId)})">
                                 <button type="button" class="last-chapter">
                                     Đọc từ đầu
                                 </button>
@@ -52,7 +52,7 @@
                             <span class="properti-comic">Trạng thái: @comic.status_comic.StatusComicName</span>
 
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="extra-comic">
@@ -96,7 +96,7 @@
 
                                 @if (comic.chapters.Count > 0)
                                 {
-                                    foreach (chapter chapter in comic.chapters.OrderByDescending(c => c.ChapterId).ToList())
+                                    foreach (chapter chapter in comic.chapters.OrderByDescending(c => c.NumChapter).ToList())
                                     {
                                         <a href="@Url.Action("Index", "Chapter", new {chapterId = chapter.ChapterId})">
                                             <li>
@@ -114,5 +114,5 @@
             </div>
         </div>
     </div>
-    
+
 </div>

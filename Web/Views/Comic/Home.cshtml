@@ -25,8 +25,13 @@
                             </div>
                             @if (comic.chapters.Count > 0)
                             {
+                                var numNewChapter = comic.chapters.Max(chapter => chapter.NumChapter);
+                                var newChapter = comic.chapters.LastOrDefault(chapter => chapter.NumChapter == numNewChapter);
+                                var idNewChapter = newChapter.ChapterId;
+                                var nameNewChapter = newChapter.NameChapter;
+
                                 <div class="new-chapter">
-                                    <a href="@Url.Action("Index", "Chapter", new {chapterId = comic.chapters.Max(chapter => chapter.ChapterId)})">@comic.chapters.Max(chapter => chapter.NameChapter)</a>
+                                    <a href="@Url.Action("Index", "Chapter", new {chapterId = idNewChapter})">@nameNewChapter</a>
                                 </div>
 
                                 if (comic.chapters.ToList().Sum(chapter => chapter.View) / comic.chapters.Count > 2000)
@@ -59,7 +64,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" href="@Url.Action("Home", "Comic", new {page = ViewBag.Page - 1})" tabindex="-1" aria-disabled="true">
-                         <i class="ion-chevron-left"></i>
+                        <i class="ion-chevron-left"></i>
                     </a>
                 </li>
             }
@@ -85,7 +90,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" href="@Url.Action("Home", "Comic", new {page = ViewBag.Page + 1})">
-                         <i class="ion-chevron-right"></i>
+                        <i class="ion-chevron-right"></i>
                     </a>
                 </li>
             }

@@ -120,12 +120,17 @@
                     var newChapter = "";
 
                     if (comic.chapters.length > 0) {
+
+                        comic.chapters =  comic.chapters.sort(function (a,b) {
+                            return a.NumChapter - b.NumChapter;
+                        })
+                        
                         var chapter = comic.chapters[comic.chapters.length - 1];
                         var ChapterId = chapter.ChapterId;
                         var NameChapter = chapter.NameChapter;
 
-                        newChapter = '<div class="new-chapter"><a href="/Comic?comicId=1">' +
-                            '</a><a href="/Chapter?chapterId=' + ChapterId + '">' + NameChapter + '</a>' +
+                        newChapter = '<div class="new-chapter">' +
+                            '<a href="/Chapter?chapterId=' + ChapterId + '">' + NameChapter + '</a>' +
                             '</div>';
                     }
 
@@ -141,7 +146,7 @@
                         '</div>' +
                         '</a>' +
                         '<div class="name-comic text-light">' +
-                        '<a href="/Comic?comicId=10">' + comic.NameComic + '</a>' +
+                        '<a href="/Comic?comicId=' + comic.ComicId + '">' + comic.NameComic + '</a>' +
                         '</div>' +
                         '</div>' +
                         '</div>'
@@ -617,7 +622,7 @@
         if (point.length > 2) {
             point = point[0] + point[1];
         }
-        
+
         $(this).val(point);
     })
 

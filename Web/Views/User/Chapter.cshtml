@@ -79,7 +79,7 @@
                                 <th class="col-2">Xóa</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="sortable">
                             @if (chapters.Count > 0)
                             {
                                 int i = 0;
@@ -87,7 +87,7 @@
                                 {
                                     i++;
 
-                                    <tr class="d-flex text-center">
+                                    <tr chapter-id="@chapter.ChapterId" class="d-flex text-center">
                                         <td class="col-1">@i</td>
                                         <td class="col-3">@chapter.NameChapter</td>
                                         <td class="col-2">@chapter.View</td>
@@ -102,7 +102,9 @@
                             }
                             </tbody>
                         </table>
-
+                        <div class="form-group">
+                            <button class="btn btn-success" id="save-sort">Lưu thứ tự</button>
+                        </div>
                     </div>
                 </div>
             </div>

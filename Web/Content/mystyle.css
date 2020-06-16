@@ -2,7 +2,6 @@
 /*reset*/
 
 
-
 /*all*/
 
 * {
@@ -1014,7 +1013,7 @@ tr td span:hover {
 
 .signup-form form a:hover, .signup-form .form a:hover {
     text-decoration: underline;
-}  
+}
 
 /*rating*/
 .cover-rating {
@@ -1023,5 +1022,11 @@ tr td span:hover {
 
 .cover-rating i {
     color: yellow;
-    
+
 }
+
+.ui-state-highlight {
+    background: #007f8d;
+    height: 1.5em;
+    line-height: 1.2em;
+} 

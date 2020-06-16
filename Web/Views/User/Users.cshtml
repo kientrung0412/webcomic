@@ -54,7 +54,7 @@
                                     </select>
                                 </td>
                                 <td class="col-3">
-                                    <select id-user="@user.UserId" name="role"  class="form-control change-status-user">
+                                    <select id-user="@user.UserId" name="role" class="form-control change-status-user">
                                         @foreach (status_user statusUser in statusUsers)
                                         {
                                             if (statusUser.StatusUserId == user.StatusUserId)

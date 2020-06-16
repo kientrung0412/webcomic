@@ -49,11 +49,6 @@ namespace WebComic.Controllers
             return View();
         }
 
-        public ActionResult ComicCategory()
-        {
-            return View();
-        }
-
         public ActionResult _Slide()
         {
             ComicDAO comicDao = new ComicDAO();

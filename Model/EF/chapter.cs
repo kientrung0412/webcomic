@@ -15,6 +15,7 @@ namespace Model.EF
         {
             comments = new HashSet<comment>();
             View = 0;
+            NumChapter = 0;
         }
 
         public int ChapterId { get; set; }

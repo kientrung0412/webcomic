@@ -995,5 +995,25 @@ namespace WebComic.Controllers
             return false;
         }
         
+        //sort chapter
+
+        [HttpPost]
+        public Boolean SortChapter(int[] list)
+        {
+            if (CheckStatusUser())
+            {
+                return false;
+            }
+
+            if (CheckViewer())
+            {
+                return false;
+            }
+
+            var b = new ChapterDAO().SortChapter(list, _user.UserId);
+            
+            return b;
+        }
+        
     }
 }

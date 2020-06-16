@@ -24,13 +24,17 @@ namespace Model.DAO
                     c.UserId == userId && c.user.RoleId < 3 && c.StatusComicId < 4 && c.ComicId == chapter.ComicId);
                 if (comic != null)
                 {
+                    chapter.NumChapter = WcDbContext.chapters.Where(chapter1 => chapter1.ComicId == chapter.ComicId)
+                        .Max(chapter1 => chapter1.NumChapter) + 1;
+
                     //thêm chapter
                     var ct = WcDbContext.chapters.Add(chapter);
 
                     //Cập nhật time
                     comic.UpdateAt = DateTime.Now;
 
-                    ct.FolderImage = String.Format("/Upload/truyen/{0}/{1}_{2}", ct.ComicId, ct.NameChapter.Replace(" ", "_"), DateTime.Now.ToString("ddMMyy_hhmm"));
+                    ct.FolderImage = String.Format("/Upload/truyen/{0}/{1}_{2}", ct.ComicId,
+                        ct.NameChapter.Replace(" ", "_"), DateTime.Now.ToString("ddMMyy_hhmm"));
 
                     WcDbContext.SaveChanges();
 
@@ -65,13 +69,18 @@ namespace Model.DAO
             WcDbContext.SaveChanges();
         }
 
-        public int Update(chapter chapter, int userId)
+        public Boolean SortChapter(int[] sort, int userId)
         {
-            var ct = WcDbContext.chapters.Single(c => c.ChapterId == chapter.ChapterId && c.comic.UserId == userId);
-            ct = chapter;
+            for (int i = 0; i < sort.Length; i++)
+            {
+                int id = sort[i];
+                var ct = WcDbContext.chapters.Single(c => c.ChapterId == id && c.comic.UserId == userId);
+                ct.NumChapter = i;
+            }
+
             var n = WcDbContext.SaveChanges();
-            
-            return n;
+
+            return n >0;
         }
 
         public chapter Select(int id)
@@ -82,10 +91,9 @@ namespace Model.DAO
 
         public List<chapter> ListChapterComic(int id)
         {
-            var chapters = WcDbContext.chapters.Where(c => c.ComicId == id).OrderBy(c => c.ChapterId)
+            var chapters = WcDbContext.chapters.Where(c => c.ComicId == id).OrderBy(c => c.NumChapter)
                 .ToList();
             return chapters;
         }
-        
     }
 }

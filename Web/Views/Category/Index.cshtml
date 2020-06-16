@@ -31,8 +31,11 @@
                             </div>
                             @if (comic.Chapters.Count > 0)
                             {
+                                var numNewChapter = comic.Chapters.Max(chapter => chapter.NumChapter);
+                                var nameNewChapter = comic.Chapters.LastOrDefault(chapter => chapter.NumChapter == numNewChapter)?.NameChapter;
+
                                 <div class="new-chapter">
-                                    <a href="@Url.Action("Index", "Chapter", new {chapterId = comic.Chapters.Max(chapter => chapter.ChapterId)})">@comic.Chapters.Max(chapter => chapter.NameChapter)</a>
+                                    <a href="@Url.Action("Index", "Chapter", new {chapterId = numNewChapter})">@nameNewChapter</a>
                                 </div>
 
                                 if (comic.Chapters.ToList().Sum(chapter => chapter.View) / comic.Chapters.Count > 2000)
