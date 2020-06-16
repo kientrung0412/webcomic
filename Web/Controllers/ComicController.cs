@@ -114,7 +114,7 @@ namespace WebComic.Controllers
             ViewBag.Nations = nationDao.List();
 
             ViewBag.ListInAc = listIn;
-            
+
             ViewBag.ListNotInAc = listNotIn;
 
             ViewBag.AuthorAc = author;
@@ -124,7 +124,7 @@ namespace WebComic.Controllers
             ViewBag.StatusAc = status;
 
             ViewBag.NationAc = nation;
-            
+
             return View();
         }
 
@@ -160,24 +160,25 @@ namespace WebComic.Controllers
 
             return json;
         }
-        
+
         public ActionResult History()
         {
             var str = Request.Cookies["history"]?.Value;
 
             List<comic> list = new List<comic>();
-            
+
             if (str != null)
             {
                 var history = MyConvert.StringToListDictionary(str);
                 int[] comicIds = Array.ConvertAll(history.Keys.ToArray(), s => int.Parse(s));
 
-                list  = new ComicDAO().Histories(comicIds);
+                list = new ComicDAO().Histories(comicIds);
             }
 
             ViewBag.History = list;
             return View();
         }
-        
+
+        //rate
     }
 }

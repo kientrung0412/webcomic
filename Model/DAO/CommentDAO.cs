@@ -86,9 +86,19 @@ namespace Model.DAO
         {
             var list = WcDbContext.comments.Where(comment => comment.StatusCommentId == 2)
                 .OrderByDescending(comment => comment.CommentTime);
-            
+
             PaginationComment paginationComment = ListPage(pagination, list);
             return paginationComment;
+        }
+
+        public Boolean Delete(int id)
+        {
+            var cmt = WcDbContext.comments.Single(comment => comment.CommentId == id);
+            WcDbContext.comments.Remove(cmt);
+
+            var n = WcDbContext.SaveChanges();
+
+            return n > 0;
         }
     }
 }

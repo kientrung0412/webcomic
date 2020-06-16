@@ -1015,3 +1015,13 @@ tr td span:hover {
 .signup-form form a:hover, .signup-form .form a:hover {
     text-decoration: underline;
 }  
+
+/*rating*/
+.cover-rating {
+    padding: 20px;
+}
+
+.cover-rating i {
+    color: yellow;
+    
+}

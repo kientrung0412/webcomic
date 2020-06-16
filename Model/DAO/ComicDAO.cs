@@ -17,20 +17,6 @@ namespace Model.DAO
             WcDbContext = new WCDbContext();
         }
 
-        public async Task<int> RatingAs(Rating rating)
-        {
-            comic comic = await WcDbContext.comics.SingleAsync(c => c.ComicId == rating.ComicId);
-            var numRating = comic.NumRating;
-
-            comic.Rating = ((comic.Rating * numRating) + rating.Point) / numRating++;
-            comic.NumRating = numRating++;
-
-            var n = await WcDbContext.SaveChangesAsync();
-
-            return n;
-        }
-
-
         public comic Add(comic comic, List<int> category)
         {
             var rs = WcDbContext.comics.Add(comic);
@@ -214,16 +200,15 @@ namespace Model.DAO
             var comic = WcDbContext.comics.Single(c => c.ComicId == comicId);
             return comic;
         }
-        
+
         public Boolean UpdateCensorship(int id)
         {
             var comic = WcDbContext.comics.Single(c => c.ComicId == id);
             comic.StatusComicId = 1;
-            
-            var b = WcDbContext.SaveChanges() > 0;
-            
-            return b;
 
+            var b = WcDbContext.SaveChanges() > 0;
+
+            return b;
         }
 
         public PaginationComic SearchAdvanced(SuperSearch search, Pagination pagination, String sort)

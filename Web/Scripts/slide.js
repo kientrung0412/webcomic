@@ -346,7 +346,7 @@
                     } else {
 
                         location.reload();
-                        
+
                     }
                 }
 
@@ -412,7 +412,7 @@
         })
 
     }
-    
+
     // quyên mật khẩu 
 
     $('#forgot-password').click(function () {
@@ -607,5 +607,20 @@
         })
     })
 
+    //Check point
+    $('#point-rate').keyup(function () {
+        let re = new RegExp("[^0-9]", "g");
+        let point = $(this).val();
+
+        point = point.replace(re, "");
+
+        if (point.length > 2) {
+            point = point[0] + point[1];
+        }
+        
+        $(this).val(point);
+    })
+
+    //rate
 });
 

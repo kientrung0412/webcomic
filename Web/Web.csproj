@@ -172,7 +172,6 @@
         <Content Include="Scripts\slide.js" />
         <Content Include="Scripts\slide.min.js" />
         <Content Include="Upload\Config\bg.jpg" />
-        <Content Include="Upload\Config\bg_user.jpg" />
         <Content Include="Upload\Config\logo.png" />
         <Content Include="Views\Category\Index.cshtml" />
         <Content Include="Views\Chapter\Index.cshtml" />

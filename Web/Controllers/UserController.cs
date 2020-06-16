@@ -115,6 +115,11 @@ namespace WebComic.Controllers
                 comic.AuthorComic = author;
                 comic.SummaryComic = summary;
 
+                if (CheckAdmin())
+                {
+                    comic.StatusComicId = 1;
+                }
+
                 try
                 {
                     ComicDAO comicDao = new ComicDAO();
@@ -968,6 +973,26 @@ namespace WebComic.Controllers
             ViewBag.Page = list.Page;
 
             return View();
+        }
+        
+        //delete cmt
+        [HttpPost]
+        public Boolean DeleteCmt(int id)
+        {
+            if (CheckStatusUser())
+            {
+                return false;
+            }
+
+            if (CheckAdmin())
+            {
+
+                var b = new CommentDAO().Delete(id);
+                
+                return b;
+            }
+
+            return false;
         }
         
     }

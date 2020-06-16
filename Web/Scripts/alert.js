@@ -133,6 +133,13 @@ $(document).ready(function () {
         let id = $(this).attr("id-comic");
         let b = Update("/User/UpdateCensorship", id, true, $(this));
     });
+    
+    //xóa comment
+    
+    $('.btn-delete-cmt').click(function () {
+        let id = $(this).attr("id-cmt");
+        let b =Delete("/User/DeleteCmt", id, $(this));
+    })
 
     //xoa chuyeenj
 
