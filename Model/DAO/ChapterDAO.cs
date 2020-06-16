@@ -24,21 +24,28 @@ namespace Model.DAO
                     c.UserId == userId && c.user.RoleId < 3 && c.StatusComicId < 4 && c.ComicId == chapter.ComicId);
                 if (comic != null)
                 {
-                    chapter.NumChapter = WcDbContext.chapters.Where(chapter1 => chapter1.ComicId == chapter.ComicId)
-                        .Max(chapter1 => chapter1.NumChapter) + 1;
+                    var checkeName =
+                        WcDbContext.chapters.Single(chapter1 => chapter1.NameChapter.Equals(chapter.NameChapter)) ==
+                        null;
+                    
+                    if (checkeName)
+                    {
+                        chapter.NumChapter = WcDbContext.chapters.Where(chapter1 => chapter1.ComicId == chapter.ComicId)
+                            .Max(chapter1 => chapter1.NumChapter) + 1;
 
-                    //thêm chapter
-                    var ct = WcDbContext.chapters.Add(chapter);
+                        //thêm chapter
+                        var ct = WcDbContext.chapters.Add(chapter);
 
-                    //Cập nhật time
-                    comic.UpdateAt = DateTime.Now;
+                        //Cập nhật time
+                        comic.UpdateAt = DateTime.Now;
 
-                    ct.FolderImage = String.Format("/Upload/truyen/{0}/{1}_{2}", ct.ComicId,
-                        ct.NameChapter.Replace(" ", "_"), DateTime.Now.ToString("ddMMyy_hhmm"));
+                        ct.FolderImage = String.Format("/Upload/truyen/{0}/{1}_{2}", ct.ComicId,
+                            ct.NameChapter.Replace(" ", "_"), DateTime.Now.ToString("ddMMyy_hhmm"));
 
-                    WcDbContext.SaveChanges();
+                        WcDbContext.SaveChanges();
 
-                    return ct;
+                        return ct;
+                    }
                 }
             }
             catch
@@ -80,7 +87,7 @@ namespace Model.DAO
 
             var n = WcDbContext.SaveChanges();
 
-            return n >0;
+            return n > 0;
         }
 
         public chapter Select(int id)
