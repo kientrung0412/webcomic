@@ -631,11 +631,16 @@
     //sticker
     $('#show-sticker').click(function () {
         $('.item-stick').toggleClass("d-none");
+        event.stopPropagation();
     })
     
     $('.item-stick img').click(function () {
         $('#comment').append(this.outerHTML);
     })
+
+    $(window).click(function () {
+        $(".item-stick").stop().addClass("d-none");
+    });
     
 });
 

@@ -410,9 +410,16 @@ $(document).ready(function () {
             data: {list: list},
             success: function (data) {
                 if (data == "True") {
-                    
-                   history.back();
-                   
+
+                    $.alert({
+                        theme: 'modern',
+                        icon: 'ion-android-done',
+                        title: 'Thông báo',
+                        content: 'Thay đổi thành công',
+                        type: 'green'
+                    })
+
+
                 } else {
                     $.alert({
                         theme: 'modern',
@@ -425,7 +432,7 @@ $(document).ready(function () {
                 }
             }
         })
-        
+
     })
 
 

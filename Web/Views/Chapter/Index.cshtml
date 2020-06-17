@@ -35,8 +35,6 @@
 
 }
 
-<div id="read-chapter" class="ok"></div>
-
 <div class="row">
     <div class="col-12">
         <div class="completed bg-main">
@@ -56,8 +54,8 @@
     <div class="col-12 text-center img-main">
         @foreach (String path in paths)
         {
-            var a = path.Substring(42);
-            <img src="@a" class="img-fluid" alt="">
+            var path1 = path.Substring(path.IndexOf("Upload"));
+            <img src="@path1" class="img-fluid" alt="">
         }
     </div>
 </div>
@@ -76,12 +74,21 @@
                             <div class="item-stick bg-dark d-none">
 
                                 @{
-                                    var stickerPaths = Directory.EnumerateFiles(Server.MapPath("~/Upload/Sticker/Cat")).OrderBy(s => s.Length);
+                                    
+                                    String[] link = Directory.GetDirectories(Server.MapPath("~/Upload/Sticker"));
 
-                                    foreach (string path in stickerPaths)
+                                    foreach (string s in link)
                                     {
-                                        <img src="@path.Substring(42)" width="auto" height="50px" alt="">
+                                        var stickerPaths = Directory.EnumerateFiles(s);
+
+                                        foreach (string path in stickerPaths)
+                                        {
+                                            var path1 = path.Substring(path.IndexOf("Upload"));
+
+                                            <img src="@path1" width="auto" height="50px" alt="">
+                                        }
                                     }
+                                    
                                 }
                             </div>
                         </div>

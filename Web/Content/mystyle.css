@@ -692,6 +692,7 @@ footer.container-fluid.bg-main {
     resize: none;
     background: rgb(68, 68, 68);
     color: #FFFFFF;
+    overflow-y: auto;
 }
 
 .cover-comment {
@@ -1040,4 +1041,17 @@ i.ion-android-menu {
 }
 .item-stick img {
     cursor: pointer;
+}
+.item-stick.bg-dark {
+    position: absolute;
+    overflow-y: auto;
+    max-height: 160px;
+    max-width: 340px;
+    padding: 5px;
+    border-radius: 5px;
+    top: 10px;
+}
+
+.cover-sticker {
+    position: relative;
 }
