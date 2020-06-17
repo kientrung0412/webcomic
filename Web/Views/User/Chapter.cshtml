@@ -102,9 +102,12 @@
                             }
                             </tbody>
                         </table>
-                        <div class="form-group">
-                            <button class="btn btn-success" id="save-sort">Lưu thứ tự</button>
-                        </div>
+                        @if (chapters.Count > 1)
+                        {
+                            <div class="form-group">
+                                <button class="btn btn-success" id="save-sort">Lưu thứ tự</button>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

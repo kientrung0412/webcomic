@@ -411,8 +411,8 @@ $(document).ready(function () {
             success: function (data) {
                 if (data == "True") {
                     
-                   location.reload();
-
+                   history.back();
+                   
                 } else {
                     $.alert({
                         theme: 'modern',

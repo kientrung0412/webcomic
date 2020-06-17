@@ -23,7 +23,7 @@
                         </div>
                         @if (comic.chapters.Count > 0)
                         {
-                            <a class="" href="@Url.Action("Index", new {chapterId = comic.chapters.Min(chapter => chapter.ChapterId)})">
+                            <a class="" href="@Url.Action("Index", "Chapter",new {chapterId = comic.chapters.Min(chapter => chapter.ChapterId)})">
                                 <button type="button" class="last-chapter">
                                     Đọc từ đầu
                                 </button>

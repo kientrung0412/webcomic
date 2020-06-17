@@ -70,7 +70,24 @@
             <div class="cover-comment">
                 @if (user != null)
                 {
-                    <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
+                    <div class="sticker">
+                        <i class="ion-android-menu" id="show-sticker"></i>
+                        <div class="cover-sticker">
+                            <div class="item-stick bg-dark d-none">
+
+                                @{
+                                    var stickerPaths = Directory.EnumerateFiles(Server.MapPath("~/Upload/Sticker/Cat")).OrderBy(s => s.Length);
+
+                                    foreach (string path in stickerPaths)
+                                    {
+                                        <img src="@path.Substring(42)" width="auto" height="50px" alt="">
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div contentEditable="true" class="form-control" name="comment" id="comment" style="min-height: 160px">
+                    </div>
                     <button id-chapter="@chapter.ChapterId" class="float-right btn-cmt">Đăng</button>
                 }
                 else
@@ -90,11 +107,12 @@
                             <img src="@comment.user.Avatar" alt="">
                         </div>
                         <div class="body-comment">
+
                             <div class="title-comment">
                                 <p>@comment.user.Username</p>
                             </div>
                             <div class="content-comment">
-                                <p>@comment.CommentConten</p>
+                                <p>@Html.Raw(comment.CommentConten)</p>
                             </div>
                             <div class="footer-comment">
                                 <p>@date.ToString("dd/MM/yy hh:mm")</p>

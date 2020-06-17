@@ -693,6 +693,8 @@ namespace WebComic.Controllers
                 return null;
             }
 
+            content = Server.UrlDecode(content);
+
             comment comment = new comment();
 
             comment.ChapterId = chapterId;

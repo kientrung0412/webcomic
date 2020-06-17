@@ -329,9 +329,11 @@
 
     $(".btn-cmt").click(function () {
 
-        let content = $("#comment").val();
+        let content = encodeURIComponent($("#comment").html());
         let id = $(this).attr("id-chapter");
 
+        console.log(content);        
+        
         if (content.trim().length > 5) {
 
             $.ajax({
@@ -626,6 +628,14 @@
         $(this).val(point);
     })
 
-    //rate
+    //sticker
+    $('#show-sticker').click(function () {
+        $('.item-stick').toggleClass("d-none");
+    })
+    
+    $('.item-stick img').click(function () {
+        $('#comment').append(this.outerHTML);
+    })
+    
 });
 

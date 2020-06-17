@@ -18,39 +18,39 @@ namespace Model.DAO
 
         public chapter Add(chapter chapter, int userId)
         {
-            try
+            var comic = WcDbContext.comics.Single(c =>
+                c.UserId == userId && c.user.RoleId < 3 && c.StatusComicId < 4 && c.ComicId == chapter.ComicId);
+
+            if (comic != null)
             {
-                var comic = WcDbContext.comics.Single(c =>
-                    c.UserId == userId && c.user.RoleId < 3 && c.StatusComicId < 4 && c.ComicId == chapter.ComicId);
-                if (comic != null)
+                var checkeName =
+                    WcDbContext.chapters.Where(chapter1 =>
+                            chapter1.NameChapter.Equals(chapter.NameChapter) && chapter1.ComicId == chapter.ComicId)
+                        .Count();
+
+                if (checkeName == 0)
                 {
-                    var checkeName =
-                        WcDbContext.chapters.Single(chapter1 => chapter1.NameChapter.Equals(chapter.NameChapter)) ==
-                        null;
-                    
-                    if (checkeName)
+                    var num = WcDbContext.chapters.Where(chapter1 => chapter1.ComicId == chapter.ComicId)
+                        .Max(chapter1 => chapter1.NumChapter);
+
+                    if (num != null)
                     {
-                        chapter.NumChapter = WcDbContext.chapters.Where(chapter1 => chapter1.ComicId == chapter.ComicId)
-                            .Max(chapter1 => chapter1.NumChapter) + 1;
-
-                        //thêm chapter
-                        var ct = WcDbContext.chapters.Add(chapter);
-
-                        //Cập nhật time
-                        comic.UpdateAt = DateTime.Now;
-
-                        ct.FolderImage = String.Format("/Upload/truyen/{0}/{1}_{2}", ct.ComicId,
-                            ct.NameChapter.Replace(" ", "_"), DateTime.Now.ToString("ddMMyy_hhmm"));
-
-                        WcDbContext.SaveChanges();
-
-                        return ct;
+                        chapter.NumChapter = num + 1;
                     }
+
+                    //thêm chapter
+                    var ct = WcDbContext.chapters.Add(chapter);
+
+                    //Cập nhật time
+                    comic.UpdateAt = DateTime.Now;
+
+                    ct.FolderImage = String.Format("/Upload/truyen/{0}/{1}_{2}", ct.ComicId,
+                        ct.NameChapter.Replace(" ", "_"), DateTime.Now.ToString("ddMMyy_hhmm"));
+
+                    WcDbContext.SaveChanges();
+
+                    return ct;
                 }
-            }
-            catch
-            {
-                return null;
             }
 
             return null;

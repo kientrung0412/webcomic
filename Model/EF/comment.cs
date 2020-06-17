@@ -1,3 +1,4 @@
+using System.Web.Mvc;
 using Newtonsoft.Json;
 
 namespace Model.EF
@@ -20,7 +21,8 @@ namespace Model.EF
         public int? UserId { get; set; }
 
         public int? ChapterId { get; set; }
-
+        
+        [AllowHtml]
         public string CommentConten { get; set; }
 
         [Column(TypeName = "datetime2")]

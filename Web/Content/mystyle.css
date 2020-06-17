@@ -688,7 +688,7 @@ footer.container-fluid.bg-main {
 /*}*/
 
 /*text editer*/
-textarea#comment {
+#comment {
     resize: none;
     background: rgb(68, 68, 68);
     color: #FFFFFF;
@@ -1029,4 +1029,15 @@ tr td span:hover {
     background: #007f8d;
     height: 1.5em;
     line-height: 1.2em;
-} 
+}
+.sticker {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+i.ion-android-menu {
+    cursor: pointer;
+}
+.item-stick img {
+    cursor: pointer;
+}
