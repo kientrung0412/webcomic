@@ -851,9 +851,6 @@ button#menu-toggle:focus {
     transform: translate(-50%, 0);
 }
 
-.avatar-profile {
-    display: block;
-}
 
 .role.bg-main {
     text-align: center;
